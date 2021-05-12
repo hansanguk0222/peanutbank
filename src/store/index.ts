@@ -1,16 +1,25 @@
-import { createWrapper } from 'next-redux-wrapper';
-import { createLogger } from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { compose, applyMiddleware, createStore } from 'redux';
-import rootReducer from '@/src/store/slices';
+/* eslint-disable @typescript-eslint/no-var-requires */
+import { createWrapper, MakeStore } from 'next-redux-wrapper';
+import { reducer } from './slices';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
+import { createStore, applyMiddleware, Middleware, StoreEnhancer } from 'redux';
 
-const configureStore = () => {
-  const logger = createLogger();
-  const enhancer = compose(composeWithDevTools(applyMiddleware(logger)));
-  const store = createStore(rootReducer, enhancer);
+const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
+  if (process.env.NODE_ENV !== 'production') {
+    const { composeWithDevTools } = require('redux-devtools-extension');
+    return composeWithDevTools(applyMiddleware(...middleware));
+  }
+  return applyMiddleware(...middleware);
+};
+
+const makeStore: MakeStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [sagaMiddleware];
+
+  const store = createStore(reducer, {}, bindMiddleware([...middlewares]));
+  sagaMiddleware.run(rootSaga);
   return store;
 };
 
-const wrapper = createWrapper(configureStore, { debug: true });
-
-export default wrapper;
+export const wrapper = createWrapper(makeStore);

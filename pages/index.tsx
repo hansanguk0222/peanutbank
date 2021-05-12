@@ -1,5 +1,8 @@
-import Head from 'next/head'
-import styled from 'styled-components'
+import { wrapper } from '@/src/store';
+import Head from 'next/head';
+import { useTestState } from '@/src/hooks';
+import styled from 'styled-components';
+import { jsonDataRequest } from '@/src/store/slices/test.slice';
 
 const HomeBlock = styled.div`
   border: 1px solid red;
@@ -10,9 +13,10 @@ const HomeBlock = styled.div`
   align-items: center;
   font-size: 100px;
   box-shadow: ${(props) => props.theme.boxShadow.darkgray};
-`
+`;
 
-export default function Home() {
+const Home = () => {
+  const { jsonData } = useTestState();
   return (
     <HomeBlock>
       <Head>
@@ -23,5 +27,12 @@ export default function Home() {
         <h1>Hello World</h1>
       </div>
     </HomeBlock>
-  )
-}
+  );
+};
+
+export const getStaticProps = wrapper.getStaticProps(({ store }) => {
+  console.log('빠끼');
+  store.dispatch(jsonDataRequest({ num: 11 }));
+});
+
+export default Home;
