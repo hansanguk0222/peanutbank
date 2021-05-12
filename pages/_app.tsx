@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '@/src/styles/global-styled';
 import { theme } from '@/src/styles/theme';
 import { NextComponentType } from 'next';
-import wrapper from '@/src/store';
+import { wrapper } from '@/src/store';
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   Component,
