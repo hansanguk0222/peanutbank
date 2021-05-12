@@ -1,8 +1,9 @@
 import { AppContext, AppInitialProps, AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from '../styles/global-styled';
-import { theme } from '../styles/theme';
+import { GlobalStyles } from '@/src/styles/global-styled';
+import { theme } from '@/src/styles/theme';
 import { NextComponentType } from 'next';
+import wrapper from '@/src/store';
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   Component,
@@ -16,4 +17,4 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
