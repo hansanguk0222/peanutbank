@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { reducer } from './slices';
 import createSagaMiddleware from 'redux-saga';
