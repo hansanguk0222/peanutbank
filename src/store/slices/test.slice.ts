@@ -22,18 +22,38 @@ const testSlice = createSlice({
   name: 'test',
   initialState: testState,
   reducers: {
-    jsonDataRequest(state, { payload }: PayloadAction<{ num: number }>) {
-      console.log('hihihihihi');
+    getJsonDataRequest(state, { payload }: PayloadAction<{ num: number }>) {
       state.jsonData.loading = false;
       state.jsonData.res = [];
       state.jsonData.err = null;
     },
-    jsonDataSuccess(state, { payload }: PayloadAction<{ res: any }>) {
+    getJsonDataSuccess(state, { payload }: PayloadAction<{ res: any }>) {
       const { res } = payload;
       state.jsonData.loading = true;
       state.jsonData.res = res;
     },
-    jsonDataFailure(state, { payload }: PayloadAction<{ err: AxiosError }>) {
+    getJsonDataFailure(state, { payload }: PayloadAction<{ err: AxiosError }>) {
+      const { err } = payload;
+      state.jsonData.loading = false;
+      state.jsonData.err = err;
+    },
+    updateJsonDataRequest(
+      state,
+      { payload }: PayloadAction<{ id: number; title: string; body: string; userId: number }>
+    ) {
+      state.jsonData.loading = false;
+      state.jsonData.res = [];
+      state.jsonData.err = null;
+    },
+    updateJsonDataSuccess(
+      state,
+      { payload }: PayloadAction<{ id: number; title: string; body: string; userId: number }>
+    ) {
+      const { id, title, body, userId } = payload;
+      state.jsonData.res = { id, title, body, userId };
+      state.jsonData.err = null;
+    },
+    updateJsonDataFailure(state, { payload }: PayloadAction<{ err: AxiosError }>) {
       const { err } = payload;
       state.jsonData.loading = false;
       state.jsonData.err = err;
@@ -45,6 +65,13 @@ const selectTestState = (state: RootState) => state.test;
 
 export const selectTest = createSelector(selectTestState, (test) => test);
 export const TEST = testSlice.name;
-export const { jsonDataRequest, jsonDataSuccess, jsonDataFailure } = testSlice.actions;
+export const {
+  getJsonDataRequest,
+  getJsonDataSuccess,
+  getJsonDataFailure,
+  updateJsonDataRequest,
+  updateJsonDataSuccess,
+  updateJsonDataFailure,
+} = testSlice.actions;
 
 export default testSlice.reducer;
