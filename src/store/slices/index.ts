@@ -14,7 +14,7 @@ export interface State {
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export const reducer = (state: State, action) => {
+export const reducer = (state: State | undefined, action) => {
   if (action.type === HYDRATE) {
     return {
       ...state,
