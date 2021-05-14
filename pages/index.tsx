@@ -17,7 +17,7 @@ const HomeBlock = styled.div`
   box-shadow: ${(props) => props.theme.boxShadow.darkgray};
 `;
 
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useDispatch();
   const { jsonData } = useTestState();
   return (
