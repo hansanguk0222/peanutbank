@@ -1,6 +1,5 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { RootState } from '@/src/store/slices';
 
 export interface TestState {
   jsonData: {
