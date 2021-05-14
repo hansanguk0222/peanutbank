@@ -29,7 +29,7 @@ const testSlice = createSlice({
     },
     getJsonDataSuccess(state, { payload }: PayloadAction<{ res: any }>) {
       const { res } = payload;
-      state.jsonData.loading = true;
+      state.jsonData.loading = false;
       state.jsonData.res = res;
     },
     getJsonDataFailure(state, { payload }: PayloadAction<{ err: AxiosError }>) {
@@ -61,9 +61,6 @@ const testSlice = createSlice({
   },
 });
 
-const selectTestState = (state: RootState) => state.test;
-
-export const selectTest = createSelector(selectTestState, (test) => test);
 export const TEST = testSlice.name;
 export const {
   getJsonDataRequest,
