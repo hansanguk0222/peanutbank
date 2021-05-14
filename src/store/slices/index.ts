@@ -1,4 +1,3 @@
-// /lib/slices/index.js
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from '@reduxjs/toolkit';
 
