@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useTestState } from '@/src/hooks';
 import styled from 'styled-components';
 import { jsonDataRequest } from '@/src/store/slices/test.slice';
-import { Button } from '@/src/components/atoms/Button';
 
 const HomeBlock = styled.div`
   border: 1px solid red;
@@ -26,13 +25,6 @@ const Home = () => {
       </Head>
       <div>
         <h1>Hello World</h1>
-        <Button
-          buttonType={'leftSideBarButton'}
-          label={'사이드바'}
-          onClick={() => {
-            console.log('hi');
-          }}
-        />
       </div>
     </HomeBlock>
   );
