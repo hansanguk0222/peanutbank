@@ -58,6 +58,7 @@ declare module 'styled-components' {
       darkBlue1: string;
       darkBlue2: string;
       lightBlue: string;
+      coralBlue: string;
 
       jade: string;
     };
@@ -89,7 +90,13 @@ declare module 'styled-components' {
         m: string;
       };
       border: {
+        defaultThick: string;
+        defaultBorderRadius: string;
         BorderRightleftSideBarItem: string;
+      };
+      shadow: {
+        blur: string;
+        spread: string;
       };
     };
   }

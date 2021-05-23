@@ -57,6 +57,7 @@ export const theme: DefaultTheme = {
     darkBlue1: '#2D353C',
     darkBlue2: '#4F5B69',
     lightBlue: '#BEDFEC',
+    coralBlue: '#70B2E6',
 
     jade: '#36ACAC',
   },
@@ -87,7 +88,13 @@ export const theme: DefaultTheme = {
       m: calcRem(40),
     },
     border: {
+      defaultThick: calcRem(1),
+      defaultBorderRadius: calcRem(5),
       BorderRightleftSideBarItem: calcRem(16),
+    },
+    shadow: {
+      blur: calcRem(3),
+      spread: calcRem(1),
     },
   },
 };
