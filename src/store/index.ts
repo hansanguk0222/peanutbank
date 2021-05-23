@@ -4,6 +4,12 @@ import { reducer } from './slices';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import { createStore, applyMiddleware, Middleware, StoreEnhancer } from 'redux';
+import { Store } from 'redux';
+import { Task } from 'redux-saga';
+
+export interface SagaStore extends Store {
+  sagaTask: Task;
+}
 
 const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
   if (process.env.NODE_ENV !== 'production') {
@@ -18,7 +24,7 @@ const makeStore: MakeStore = () => {
   const middlewares = [sagaMiddleware];
 
   const store = createStore(reducer, {}, bindMiddleware([...middlewares]));
-  sagaMiddleware.run(rootSaga);
+  (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };
 
