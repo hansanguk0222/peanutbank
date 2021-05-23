@@ -1,6 +1,6 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components';
 
-const calcRem = (size: number) => `${size / 16}rem`
+const calcRem = (size: number) => `${size / 16}rem`;
 
 export const theme: DefaultTheme = {
   boxShadow: {
@@ -53,16 +53,48 @@ export const theme: DefaultTheme = {
     channelBorder: 'rgb(82,38,83)',
     threadHover: '#faf9f9',
     googleColor: '#4285f4',
+
+    darkBlue1: '#2D353C',
+    darkBlue2: '#4F5B69',
+    lightBlue: '#BEDFEC',
+    coralBlue: '#70B2E6',
+
+    jade: '#36ACAC',
   },
   size: {
-    xxxs: calcRem(8),
-    xxs: calcRem(10),
-    xs: calcRem(12),
-    s: calcRem(14),
-    m: calcRem(16),
-    l: calcRem(18),
-    xl: calcRem(20),
-    xxl: calcRem(22),
-    xxxl: calcRem(24),
+    font: {
+      xxxs: calcRem(8),
+      xxs: calcRem(10),
+      xs: calcRem(12),
+      s: calcRem(14),
+      m: calcRem(16),
+      l: calcRem(18),
+      xl: calcRem(20),
+      xxl: calcRem(22),
+      xxxl: calcRem(24),
+    },
+    padding: {
+      xxxs: calcRem(8),
+      xxs: calcRem(10),
+      xs: calcRem(12),
+      s: calcRem(14),
+      m: calcRem(16),
+      l: calcRem(18),
+      xl: calcRem(20),
+      xxl: calcRem(22),
+      xxxl: calcRem(24),
+    },
+    height: {
+      m: calcRem(40),
+    },
+    border: {
+      defaultThick: calcRem(1),
+      defaultBorderRadius: calcRem(5),
+      BorderRightleftSideBarItem: calcRem(16),
+    },
+    shadow: {
+      blur: calcRem(3),
+      spread: calcRem(1),
+    },
   },
-}
+};
