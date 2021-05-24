@@ -1,29 +1,30 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-interface ButtonStyleProps {
-  buttonType: 'leftSideBarButton' | 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancleButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
+interface AStyleProps {
+  aType: 'leftSideBarLink' | 'defaultLink';
   isSelected?: boolean;
 }
 
-export interface ButtonProps extends ButtonStyleProps {
+export interface AProps extends AStyleProps {
   onClick: (url: string) => void;
   label: string;
   url?: string;
 }
 
-const StyledButton = styled.button<ButtonStyleProps>`
+const StyledA = styled.a<AStyleProps>`
   border: none;
   position: relative;
   ${(props) =>
-    props.buttonType === 'leftSideBarButton' &&
-    css<ButtonStyleProps>`
+    props.aType === 'leftSideBarLink' &&
+    css<AStyleProps>`
+      display: flex;
+      align-items: center;
       background: ${(props) => (!props.isSelected ? props.theme.color.darkBlue1 : props.theme.color.darkBlue2)};
       color: ${(props) => props.theme.color.lightBlue};
       font-size: ${(props) => props.theme.size.font.m};
       padding: ${(props) => props.theme.size.padding.xxxs};
       align-items: start;
-      height: ${(props) => props.theme.size.height.m};
       &:hover {
         background: ${(props) => props.theme.color.darkBlue2};
         &:before {
@@ -56,10 +57,10 @@ const StyledButton = styled.button<ButtonStyleProps>`
     `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', label, onClick, isSelected, url }) => {
+export const A: React.FC<AProps> = ({ aType = 'defaultLink', label, onClick, isSelected, url }) => {
   return (
-    <StyledButton isSelected={isSelected} onClick={() => onClick(url)} buttonType={buttonType}>
+    <StyledA isSelected={isSelected} onClick={() => onClick(url)} aType={aType}>
       {label}
-    </StyledButton>
+    </StyledA>
   );
 };

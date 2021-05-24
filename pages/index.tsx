@@ -30,18 +30,8 @@ const Home: React.FC = () => {
         <div>
           <h1>Hello World</h1>
         </div>
-        <button
-          onClick={() =>
-            dispatch(
-              updateJsonDataRequest({ id: 11, userId: 333, body: '수정되라', title: '갈치조림' })
-            )
-          }
-        >
-          누르면 id:11이 패치 됨
-        </button>
-        <button onClick={() => dispatch(getJsonDataRequest({ num: 11 }))}>
-          누르면 id:11을 가져옴
-        </button>
+        <button onClick={() => dispatch(updateJsonDataRequest({ id: 11, userId: 333, body: '수정되라', title: '갈치조림' }))}>누르면 id:11이 패치 됨</button>
+        <button onClick={() => dispatch(getJsonDataRequest({ num: 11 }))}>누르면 id:11을 가져옴</button>
       </HomeBlock>
       <span>{JSON.stringify(jsonData)}</span>
     </>

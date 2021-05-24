@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 
-const calcRem = (size: number) => `${size / 16}rem`;
+export const calcRem = (size: number) => `${size / 16}rem`;
 
 export const theme: DefaultTheme = {
   boxShadow: {

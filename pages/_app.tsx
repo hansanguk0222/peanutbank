@@ -5,10 +5,7 @@ import { theme } from '@/src/styles/theme';
 import { NextComponentType } from 'next';
 import { wrapper } from '@/src/store';
 
-const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
-  Component,
-  pageProps,
-}: AppProps) => {
+const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
