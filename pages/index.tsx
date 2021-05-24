@@ -7,14 +7,13 @@ import { useDispatch } from 'react-redux';
 import { END } from '@redux-saga/core';
 
 const HomeBlock = styled.div`
-  border: 1px solid red;
+  border: 1px solid rgb(255, 0, 0);
   width: 100%;
-  height: 100%;
+  height: 300px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
   font-size: 100px;
-  box-shadow: ${(props) => props.theme.boxShadow.darkgray};
 `;
 
 const Home: React.FC = () => {
@@ -32,8 +31,19 @@ const Home: React.FC = () => {
         </div>
         <button onClick={() => dispatch(updateJsonDataRequest({ id: 11, userId: 333, body: '수정되라', title: '갈치조림' }))}>누르면 id:11이 패치 됨</button>
         <button onClick={() => dispatch(getJsonDataRequest({ num: 11 }))}>누르면 id:11을 가져옴</button>
+        <span style={{ fontSize: '10px' }}>{JSON.stringify(jsonData)}</span>
       </HomeBlock>
-      <span>{JSON.stringify(jsonData)}</span>
+      <style global jsx>
+        {`
+          html,
+          body,
+          body > div:first-child,
+          div#__next,
+          div#__next > div {
+            height: 100%;
+          }
+        `}
+      </style>
     </>
   );
 };
