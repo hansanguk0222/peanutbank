@@ -7,8 +7,9 @@ interface ButtonStyleProps {
 }
 
 export interface ButtonProps extends ButtonStyleProps {
-  onClick: () => void;
+  onClick: (url: string) => void;
   label: string;
+  url?: string;
 }
 
 const StyledButton = styled.button<ButtonStyleProps>`
@@ -55,9 +56,9 @@ const StyledButton = styled.button<ButtonStyleProps>`
     `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', label, onClick, isSelected }) => {
+export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', label, onClick, isSelected, url }) => {
   return (
-    <StyledButton isSelected={isSelected} onClick={onClick} buttonType={buttonType}>
+    <StyledButton isSelected={isSelected} onClick={() => onClick(url)} buttonType={buttonType}>
       {label}
     </StyledButton>
   );
