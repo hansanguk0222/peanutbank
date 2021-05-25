@@ -24,17 +24,3 @@ const Template: Story<LeftSideBarProps> = () => {
 
 export const LeftSideBarTest: Story<LeftSideBarProps> = Template.bind({});
 LeftSideBarTest.args = {};
-
-// export const AccountInput: Story<InputProps> = Template.bind({});
-// AccountInput.args = {
-//   inputType: 'accountBookInput',
-//   label: '액수를 입력하세요',
-//   readOnly: false,
-// };
-
-// export const DateInput: Story<InputProps> = Template.bind({});
-// DateInput.args = {
-//   inputType: 'dateInput',
-//   label: '2020-01-01',
-//   readOnly: true,
-// };
