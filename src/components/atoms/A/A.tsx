@@ -7,9 +7,8 @@ interface AStyleProps {
 }
 
 export interface AProps extends AStyleProps {
-  onClick: (url: string) => void;
+  onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   label: string;
-  url?: string;
 }
 
 const StyledA = styled.a<AStyleProps>`
@@ -57,10 +56,10 @@ const StyledA = styled.a<AStyleProps>`
     `}
 `;
 
-export const A: React.FC<AProps> = ({ aType = 'defaultLink', label, onClick, isSelected, url }) => {
+export const A = React.forwardRef<HTMLAnchorElement, AProps>(({ onClick, aType, label, isSelected }, ref) => {
   return (
-    <StyledA isSelected={isSelected} onClick={() => onClick(url)} aType={aType}>
+    <StyledA ref={ref} isSelected={isSelected} onClick={onClick} aType={aType}>
       {label}
     </StyledA>
   );
-};
+});

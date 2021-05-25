@@ -39,7 +39,7 @@ export const LeftSideBar: React.FC<LeftSideBarProps> = ({ linkURLAndButtonTypes,
           const { aType, url, label, isSelected } = linkURLAndButtonType;
           return (
             <StyledLi key={url}>
-              <Link href={url}>
+              <Link href={`/${url}`} passHref>
                 <LeftSideBarLink aType={aType} label={label} isSelected={isSelected} onClick={() => onClick(url)} />
               </Link>
             </StyledLi>
