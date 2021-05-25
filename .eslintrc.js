@@ -48,6 +48,7 @@ module.exports = {
           },
         ],
         'prettier/prettier': ['off', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
+        'react/display-name': ['off', { ignoreTranspilerName: true }],
       },
     },
   ],
