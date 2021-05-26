@@ -15,3 +15,9 @@ leftSideBarLink.args = {
   aType: 'leftSideBarLink',
   label: '왼쪽 사이드바 버튼',
 };
+
+export const headerBarLink = Template.bind({});
+headerBarLink.args = {
+  aType: 'headerBarLink',
+  label: 'PeanutBank',
+};
