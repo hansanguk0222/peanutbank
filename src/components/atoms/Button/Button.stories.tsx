@@ -10,8 +10,8 @@ export default {
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
-export const leftSideBarButton = Template.bind({});
-leftSideBarButton.args = {
-  buttonType: 'leftSideBarButton',
-  label: '왼쪽 사이드바 버튼',
+export const profileButton = Template.bind({});
+profileButton.args = {
+  buttonType: 'profileButton',
+  children: '프로필 버튼',
 };

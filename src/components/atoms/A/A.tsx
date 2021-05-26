@@ -2,18 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface AStyleProps {
-  aType: 'leftSideBarLink' | 'defaultLink';
+  aType: 'leftSideBarLink' | 'headerBarLink' | 'defaultLink';
   isSelected?: boolean;
 }
 
 export interface AProps extends AStyleProps {
-  onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   label: string;
 }
 
 const StyledA = styled.a<AStyleProps>`
   border: none;
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
   ${(props) =>
     props.aType === 'leftSideBarLink' &&
     css<AStyleProps>`
@@ -53,6 +56,12 @@ const StyledA = styled.a<AStyleProps>`
             height: 100%;
           }
         `}
+    `}
+  ${(props) =>
+    props.aType === 'headerBarLink' &&
+    css`
+      color: ${(props) => props.theme.color.black1};
+      font-size: ${(props) => props.theme.size.font.xxxl};
     `}
 `;
 

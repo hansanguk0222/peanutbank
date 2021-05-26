@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { calcRem } from '@/src/styles/theme';
 
 interface ButtonStyleProps {
   buttonType: 'leftSideBarButton' | 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancleButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
@@ -7,59 +8,42 @@ interface ButtonStyleProps {
 }
 
 export interface ButtonProps extends ButtonStyleProps {
-  onClick: (url: string) => void;
-  label: string;
-  url?: string;
+  onClick: (args: any) => void;
 }
 
 const StyledButton = styled.button<ButtonStyleProps>`
-  border: none;
-  position: relative;
   ${(props) =>
-    props.buttonType === 'leftSideBarButton' &&
-    css<ButtonStyleProps>`
-      background: ${(props) => (!props.isSelected ? props.theme.color.darkBlue1 : props.theme.color.darkBlue2)};
-      color: ${(props) => props.theme.color.lightBlue};
-      font-size: ${(props) => props.theme.size.font.m};
-      padding: ${(props) => props.theme.size.padding.xxxs};
-      align-items: start;
-      height: ${(props) => props.theme.size.height.m};
+    props.buttonType === 'profileButton' &&
+    css`
+      position: relative;
+      border-radius: 50%;
+      width: ${calcRem(50)};
+      height: ${calcRem(50)};
+      border: none;
+      outline-color: white;
       &:hover {
-        background: ${(props) => props.theme.color.darkBlue2};
-        &:before {
-          box-sizing: border-box;
-          position: absolute;
+        cursor: pointer;
+      }
+      padding: 0;
+      &:hover {
+        &: after {
           content: '';
+          position: absolute;
           top: 0;
           left: 0;
-          border-left: ${(props) => props.theme.size.border.BorderRightleftSideBarItem} solid ${(props) => props.theme.color.jade};
-          border: 2px solid;
-          border-color: ${(props) => props.theme.color.jade};
-          height: 100%;
+          width: ${calcRem(50)};
+          height: ${calcRem(50)};
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.5);
         }
       }
-      ${(props) =>
-        props.isSelected &&
-        css`
-          &:before {
-            box-sizing: border-box;
-            position: absolute;
-            content: '';
-            top: 0;
-            left: 0;
-            border-left: ${(props) => props.theme.size.border.BorderRightleftSideBarItem} solid ${(props) => props.theme.color.jade};
-            border: 2px solid;
-            border-color: ${(props) => props.theme.color.jade};
-            height: 100%;
-          }
-        `}
     `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', label, onClick, isSelected, url }) => {
+export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children }) => {
   return (
-    <StyledButton isSelected={isSelected} onClick={() => onClick(url)} buttonType={buttonType}>
-      {label}
+    <StyledButton isSelected={isSelected} onClick={onClick} buttonType={buttonType}>
+      {children}
     </StyledButton>
   );
 };
