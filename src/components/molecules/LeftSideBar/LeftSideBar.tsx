@@ -19,11 +19,14 @@ export interface LeftSideBarProps {
 const StyledDiv = styled.div`
   width: ${calcRem(150)};
   background: ${(props) => props.theme.color.darkBlue1};
+  display: flex;
+  flex-direction: column;
   height: 100%;
 `;
 
 const StyledUl = styled.ul`
   padding: 0;
+  margin: 0;
 `;
 
 const StyledLi = styled.li`
