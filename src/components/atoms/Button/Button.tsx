@@ -24,7 +24,6 @@ const StyledButton = styled.button<ButtonStyleProps>`
       &:hover {
         cursor: pointer;
       }
-      padding: 0;
       &:hover {
         &: after {
           content: '';

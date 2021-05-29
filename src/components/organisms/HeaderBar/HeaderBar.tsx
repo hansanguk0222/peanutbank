@@ -9,13 +9,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: ${calcRem(10)};
+  padding: ${calcRem(22)};
   box-sizing: border-box;
 `;
 
 const RightSideContainer = styled.div`
   position: absolute;
   right: 0;
+  padding: ${calcRem(20)};
 `;
 
 export const HeaderBar: React.FC<ProfileButtonProps> = ({ buttonType, onClick, src }) => (
