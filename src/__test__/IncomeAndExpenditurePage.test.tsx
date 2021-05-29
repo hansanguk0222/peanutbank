@@ -1,13 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-
-import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { getPage } from 'next-page-tester';
 import 'setimmediate';
-import { NextRouter } from 'next/router';
 
 describe('수입 지출 화면 테스트', () => {
   it('헤더바와 좌측 사이드가 잘 보이는지 테스트', async () => {

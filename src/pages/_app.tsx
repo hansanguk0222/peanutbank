@@ -30,7 +30,6 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Compo
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Container>
-          {console.log(router)}
           {router.pathname.startsWith('/income-and-expenditure') || router.pathname.startsWith('/calendar') || router.pathname.startsWith('/detail') || router.pathname.startsWith('/mypage') ? (
             <CommonLayout
               buttonType="profileButton"
