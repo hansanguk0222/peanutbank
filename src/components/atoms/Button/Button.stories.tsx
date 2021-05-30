@@ -20,5 +20,9 @@ profileButton.args = {
 export const changeBackMonthButton = Template.bind({});
 changeBackMonthButton.args = {
   buttonType: 'changeMonthButton',
-  children: <BackMonthButton />,
+  children: (
+    <div>
+      <BackMonthButton />
+    </div>
+  ),
 };
