@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { calcRem } from '@/src/styles/theme';
 
 interface ButtonStyleProps {
-  buttonType: 'leftSideBarButton' | 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancleButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
+  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
   isSelected?: boolean;
 }
 
@@ -37,6 +37,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
         }
       }
     `}
+  ${(props) => props.buttonType === 'changeMonthButton' && css``}
 `;
 
 export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children }) => {
