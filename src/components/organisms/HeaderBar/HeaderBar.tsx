@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ProfileButton, ProfileButtonProps } from '@/src/components/molecules/ProfileButton';
+import { ButtonWithIcon, ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
 import { A as StyledA } from '@/src/components/atoms/A';
 import { calcRem } from '@/src/styles/theme';
 
@@ -19,11 +19,11 @@ const RightSideContainer = styled.div`
   padding: ${calcRem(20)};
 `;
 
-export const HeaderBar: React.FC<ProfileButtonProps> = ({ buttonType, onClick, src }) => (
+export const HeaderBar: React.FC<ButtonWithIconProps> = ({ buttonType, onClick, src }) => (
   <Container>
     <StyledA aType="headerBarLink" label="PeanutBank" />
     <RightSideContainer>
-      <ProfileButton buttonType={buttonType} onClick={onClick} src={src} />
+      <ButtonWithIcon buttonType={buttonType} onClick={onClick} src={src} />
     </RightSideContainer>
   </Container>
 );
