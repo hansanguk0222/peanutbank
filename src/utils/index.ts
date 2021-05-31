@@ -1,14 +1,14 @@
-export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { date: number; day: number }[][] = ({ year, month }) => {
-  const datesWithDays: { date: number; day: number }[][] = [];
+export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { date: number; day: number; thisMonth: boolean }[][] = ({ year, month }) => {
+  const datesWithDays: { date: number; day: number; thisMonth: boolean }[][] = [];
   const startDay = new Date(`${year}-${month}-01`).getDay();
   const lean = findLeanYear(year);
   const endDate = endOfMonth({ month, lean });
   const weekCnt = howManyWeeksInThisMonth({ endDate, startDay });
 
-  for (let i = 0; i < weekCnt; i++) {
+  for (let i = 0; i < 6; i++) {
     datesWithDays.push([]);
     for (let j = 0; j < 7; j++) {
-      datesWithDays[i].push({ date: 0, day: j });
+      datesWithDays[i].push({ date: 0, day: j, thisMonth: false });
     }
   }
 
@@ -18,13 +18,46 @@ export const makeDatesWithDays: ({ year, month }: { year: number; month: number 
   for (let i = 0; i < weekCnt; i++) {
     while (rotateDay < 7 && rotateDate <= endDate) {
       const { day } = datesWithDays[i][rotateDay];
-      datesWithDays[i][rotateDay] = { date: rotateDate, day };
+      datesWithDays[i][rotateDay] = { date: rotateDate, day, thisMonth: true };
       rotateDate += 1;
       rotateDay += 1;
     }
     rotateDay = 0;
   }
-  console.log(datesWithDays);
+
+  let lastYear = year;
+  let lastMonth = month - 1;
+  let nextYear = year;
+  let nextMonth = month + 1;
+
+  if (month === 1) {
+    lastYear -= 1;
+    lastMonth = 12;
+  }
+
+  if (month === 12) {
+    nextYear += 1;
+    nextMonth = 1;
+  }
+
+  const lastLean = findLeanYear(lastYear);
+  let lastMonthEndOfDateRotate = endOfMonth({ month: lastMonth, lean: lastLean });
+  let nextMonthDayRotate = 1;
+
+  for (let i = 6; i >= 0; i--) {
+    if (datesWithDays[0][i].date === 0) {
+      datesWithDays[0][i] = { date: lastMonthEndOfDateRotate, day: i, thisMonth: false };
+      lastMonthEndOfDateRotate -= 1;
+    }
+  }
+  for (let i = weekCnt - 1; i < 6; i++) {
+    for (let j = 0; j < 7; j++) {
+      if (datesWithDays[i][j].date === 0) {
+        datesWithDays[i][j] = { date: nextMonthDayRotate, day: j, thisMonth: false };
+        nextMonthDayRotate += 1;
+      }
+    }
+  }
   return datesWithDays;
 };
 
