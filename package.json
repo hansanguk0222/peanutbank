@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public, ./static -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --watchAll"
   },
@@ -55,11 +55,15 @@
     "@types/styled-components": "^5.1.9",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-named-asset-import": "^0.3.7",
     "babel-plugin-styled-components": "^1.12.0",
+    "babel-preset-react-app": "^10.0.0",
     "enzyme": "^3.11.0",
     "jest": "^27.0.1",
+    "react-docgen-typescript-loader": "^3.7.2",
     "setimmediate": "^1.0.5",
     "storybook-addon-styled-component-theme": "^2.0.0",
+    "storybook-svgr-react-component": "^1.0.1",
     "typescript": "^4.2.4"
   },
   "jest": {
