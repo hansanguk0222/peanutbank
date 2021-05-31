@@ -37,7 +37,13 @@ const StyledButton = styled.button<ButtonStyleProps>`
         }
       }
     `}
-  ${(props) => props.buttonType === 'changeMonthButton' && css``}
+  ${(props) =>
+    props.buttonType === 'changeMonthButton' &&
+    css`
+      background: none;
+      height: ${calcRem(25)};
+      width: ${calcRem(15)};
+    `}
 `;
 
 export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children }) => {

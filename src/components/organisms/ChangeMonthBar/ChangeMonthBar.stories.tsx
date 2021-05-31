@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Calendar, CalendarProps } from './Calendar';
-import { makeDatesWithDays } from '@/src/utils/index';
+import { ChangeMonthBar, ChangeMonthBarProps } from './ChangeMonthBar';
 
 export default {
-  title: 'organisms/Calendar',
-  component: Calendar,
+  title: 'organisms/ChangeMonthBar',
+  component: ChangeMonthBar,
   argTypes: {},
 } as Meta;
 
-const Template: Story<CalendarProps> = () => {
-  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2021, month: 6 });
-  const [datesWithDays, setDatesWithDays] = useState<{ date: number; day: number; thisMonth: boolean }[][]>([]);
-  useEffect(() => {
-    const { year, month } = yearAndMonth;
-    setDatesWithDays(makeDatesWithDays({ year, month }));
-    console.log(datesWithDays);
-  }, [yearAndMonth]);
+const Template: Story<ChangeMonthBarProps> = () => {
+  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2020, month: 1 });
   const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
     const { year, month } = yearAndMonth;
     if (upOrDown === 'down') {
@@ -34,20 +27,17 @@ const Template: Story<CalendarProps> = () => {
     }
   };
   return (
-    <Calendar
+    <ChangeMonthBar
       buttonType="changeMonthButton"
-      datesWithDays={datesWithDays}
       inputType="dateInput"
       leftArrowOnClick={() => changeYearAndMonth({ upOrDown: 'down' })}
-      leftIconSrc="./leftarrow.png"
-      onDateClick={() => {}}
-      readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
+      leftIconSrc="./leftarrow.png"
       rightIconSrc="./rightarrow.png"
-      spanType="calendarDate"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      readOnly
     />
   );
 };
 
-export const CalendarOnlyDateTest = Template.bind({});
+export const ChangeMonthBarTest = Template.bind({});

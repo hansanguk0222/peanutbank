@@ -39,6 +39,8 @@ export const theme: DefaultTheme = {
     green2: '#008a6a',
     white: '#fff',
 
+    red1: '#f07362',
+
     blue1: '#0073c6',
     blue2: '#1164a3',
     blue3: '#0b4c8c',

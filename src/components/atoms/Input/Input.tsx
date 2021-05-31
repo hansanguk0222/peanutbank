@@ -1,3 +1,4 @@
+import { calcRem } from '@/src/styles/theme';
 import React, { ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -7,7 +8,7 @@ interface InputStyleProps {
 
 export interface InputProps extends InputStyleProps {
   onChange: (e: ChangeEvent) => void | undefined;
-  label: string;
+  label?: string;
   text: string;
   readOnly: boolean;
 }
@@ -29,6 +30,8 @@ const StyledInput = styled.input<InputStyleProps>`
     css`
       font-size: ${(props) => props.theme.size.font.xl};
       text-align: center;
+      margin-left: ${calcRem(20)};
+      margin-right ${calcRem(20)};
     `}
   border: ${(props) => props.theme.size.border.defaultThick} solid ${(props) => props.theme.color.gray1};
   padding: ${(props) => props.theme.size.padding.xxxs};

@@ -31,6 +31,6 @@ AccountInput.args = {
 export const DateInput: Story<InputProps> = Template.bind({});
 DateInput.args = {
   inputType: 'dateInput',
-  label: '2020-01-01',
+  label: '2020-01',
   readOnly: true,
 };

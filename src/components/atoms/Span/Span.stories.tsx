@@ -15,6 +15,7 @@ Week.args = {
   spanType: 'calendarDate',
   day: 1,
   children: 'Mon',
+  thisMonth: true,
 };
 
 export const Sat = Template.bind({});
@@ -22,6 +23,7 @@ Sat.args = {
   spanType: 'calendarDate',
   day: 6,
   children: 'Sat',
+  thisMonth: true,
 };
 
 export const Sun = Template.bind({});
@@ -29,4 +31,13 @@ Sun.args = {
   spanType: 'calendarDate',
   day: 0,
   children: 'Sun',
+  thisMonth: true,
+};
+
+export const NotThisMonth = Template.bind({});
+NotThisMonth.args = {
+  spanType: 'calendarDate',
+  day: 0,
+  children: 'Sun',
+  thisMonth: false,
 };
