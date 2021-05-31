@@ -1,10 +1,10 @@
 import { LeftSideBar, LeftSideBarProps } from '@/src/components/molecules/LeftSideBar';
 import { HeaderBar } from '@/src/components/organisms/HeaderBar';
-import { ProfileButtonProps } from '@/src/components/molecules/ProfileButton';
+import { ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
 import styled from 'styled-components';
 
-export interface CommonLayoutProps extends Omit<LeftSideBarProps, 'onClick'>, Omit<ProfileButtonProps, 'onClick'> {
-  headerBarOnClick: (modalVisible: boolean) => void;
+export interface CommonLayoutProps extends Omit<LeftSideBarProps, 'onClick'>, Omit<ButtonWithIconProps, 'onClick'> {
+  headerBarOnClick: () => void;
   leftSideBarOnClick: (menu: string) => void;
 }
 
