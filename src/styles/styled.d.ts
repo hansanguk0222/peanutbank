@@ -46,6 +46,8 @@ declare module 'styled-components' {
       blue2: string;
       blue3: string;
 
+      red1: string;
+
       yellow: string;
       warningRed: string;
       onConnect: string;
