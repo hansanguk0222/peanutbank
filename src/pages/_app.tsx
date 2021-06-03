@@ -5,13 +5,13 @@ import { theme } from '@/src/styles/theme';
 import { NextComponentType } from 'next';
 import { wrapper } from '@/src/store';
 import { CommonLayout } from '@/src/components/organisms/CommonLayout';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LinkURLAndButtonType } from '@/src/components/molecules/LeftSideBar';
 import { useRouter } from 'next/router';
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
-  const [menu, setMenu] = useState<string>('income-and-expenditure');
+  const [menu, setMenu] = useState<string>('');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const leftSideBarOnClick: (url: string) => void = (url: string) => {
     setMenu(url);
@@ -25,6 +25,10 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Compo
     { aType: 'leftSideBarLink', url: 'detail', label: '상세분석', isSelected: menu === 'detail' },
     { aType: 'leftSideBarLink', url: 'mypage', label: '마이페이지', isSelected: menu === 'mypage' },
   ];
+  useEffect(() => {
+    const path = router.asPath.slice(1);
+    setMenu(path);
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
