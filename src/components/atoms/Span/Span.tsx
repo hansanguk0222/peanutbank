@@ -43,7 +43,6 @@ const StyledSpan = styled.span<StyleSpanProps>`
 `;
 
 export const Span: React.FC<SpanProps> = ({ spanType, children, day, onClick, thisMonth }) => {
-  console.log(thisMonth);
   return (
     <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth}>
       {children}
