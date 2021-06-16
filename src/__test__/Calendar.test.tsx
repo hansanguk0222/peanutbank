@@ -11,35 +11,28 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '@/src/styles/theme';
 import { Calendar as UserCalendar } from '@/src/components/organisms/Calendar';
 import { makeDatesWithDays } from '@/src/utils';
+import CalendarBox from '@/src/components/container/CalendarBox';
+
 configure({ adapter: new Adapter() });
 
 const MockTheme = ({ children }) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
-const changeYearAndMonth = jest.fn();
-
 describe('수입 지출 화면 테스트', () => {
   it('달력이 제대로 나오는지 테스트', () => {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
+    const nowYear = new Date().getFullYear();
+    const nowMonth = new Date().getMonth() + 1;
 
-    const datesWithDays = makeDatesWithDays({ year, month });
-
-    render(
+    const Component = render(
       <MockTheme>
-        <UserCalendar
-          buttonType="changeMonthButton"
-          datesWithDays={datesWithDays}
-          inputType="dateInput"
-          onDateClick={() => {}}
-          leftArrowOnClick={() => changeYearAndMonth({ upOrDown: 'down' })}
-          rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
-          readOnly
-          spanType="calendarDate"
-          text={`${year}-${month}`}
-        />
+        <CalendarBox />
       </MockTheme>
     );
+
+    const DateInput = Component.getByTestId('dateInput') as HTMLInputElement;
+
+    screen.getByTestId('beforeMonthButton').click();
+    expect(DateInput.value).toBe(`${nowYear}-${nowMonth - 1}`);
   });
 });
