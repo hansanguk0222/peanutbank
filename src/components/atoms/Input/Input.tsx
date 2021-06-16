@@ -39,5 +39,5 @@ const StyledInput = styled.input<InputStyleProps>`
 `;
 
 export const Input: React.FC<InputProps> = ({ inputType = 'defaultInput', label, text, onChange, readOnly }) => {
-  return <StyledInput inputType={inputType} onChange={onChange} value={text} placeholder={label} readOnly={readOnly} />;
+  return <StyledInput data-testid={inputType} inputType={inputType} onChange={onChange} value={text} placeholder={label} readOnly={readOnly} />;
 };
