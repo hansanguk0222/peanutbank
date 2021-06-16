@@ -1,7 +1,7 @@
 import React from 'react';
-
-const Calendar: React.FC = () => {
-  return <div>calendar</div>;
-};
+import { Calendar as UserCalendar } from '@/src/components/organisms/Calendar';
+import { makeDatesWithDays } from '@/src/utils';
+import CalendarBox from '@/src/components/container/CalendarBox';
+const Calendar: React.FC = () => <CalendarBox />;
 
 export default Calendar;
