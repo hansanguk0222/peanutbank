@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export interface ImgProps {
   src: string;
+  alt: string;
 }
 
 const StyledImg = styled.img`
@@ -11,6 +12,6 @@ const StyledImg = styled.img`
   border-radius: 50%;
 `;
 
-export const Img: React.FC<ImgProps> = ({ src }) => {
-  return <StyledImg alt={src} src={src} />;
+export const Img: React.FC<ImgProps> = ({ src, alt }) => {
+  return <StyledImg alt={alt} src={src} />;
 };
