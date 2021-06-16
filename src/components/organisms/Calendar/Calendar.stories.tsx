@@ -15,7 +15,6 @@ const Template: Story<CalendarProps> = () => {
   useEffect(() => {
     const { year, month } = yearAndMonth;
     setDatesWithDays(makeDatesWithDays({ year, month }));
-    console.log(datesWithDays);
   }, [yearAndMonth]);
   const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
     const { year, month } = yearAndMonth;
@@ -39,11 +38,9 @@ const Template: Story<CalendarProps> = () => {
       datesWithDays={datesWithDays}
       inputType="dateInput"
       leftArrowOnClick={() => changeYearAndMonth({ upOrDown: 'down' })}
-      leftIconSrc="./leftarrow.png"
       onDateClick={() => {}}
       readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
-      rightIconSrc="./rightarrow.png"
       spanType="calendarDate"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
     />
