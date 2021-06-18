@@ -1,137 +1,41 @@
-export const accountBook = [
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 1,
-        discription: '소주 한 병',
-        amount: 1400,
-        purpose: 'a',
+export const accountBook = {
+  '2021-6': {
+    userId: 'abc-1234',
+    dates: {
+      i: {
+        '15': {
+          ledgers: [{ id: 7, amount: 10000000, discription: '월급', purpose: 'o' }],
+        },
       },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 1,
-        discription: '오징어 말린 것',
-        amount: 5000,
-        purpose: 'b',
+      e: {
+        '1': {
+          ledgers: [
+            { id: 1, amount: 2000, discription: '쭈쭈바', purpose: 'a' },
+            { id: 2, amount: 1000, discription: '김밥', purpose: 'a' },
+            { id: 3, amount: 3000, discription: '탄산', purpose: 'a' },
+          ],
+        },
+        '3': {
+          ledgers: [
+            { id: 4, amount: 5000, discription: '국밥', purpose: 'a' },
+            { id: 5, amount: 3000, discription: '샴푸', purpose: 'f' },
+            { id: 6, amount: 4000, discription: '영화다운로드', purpose: 'c' },
+          ],
+        },
+        '10': {
+          ledgers: [{ id: 8, amount: 20000, discription: '피자', purpose: 'a' }],
+        },
       },
-    ],
+    },
   },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 2,
-        discription: '레슨비',
-        amount: 200000,
-        purpose: 'i',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 10,
-        discription: '보너스',
-        amount: 1400000,
-        purpose: 'n',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 12,
-        discription: '부모님 용돈',
-        amount: 100000,
-        purpose: 'k',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 15,
-        discription: '회사 월급',
-        amount: 2500000,
-        purpose: 'n',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 18,
-        discription: '데이트',
-        amount: 150000,
-        purpose: 'c',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 20,
-        discription: '국밥',
-        amount: 7000,
-        purpose: 'a',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 25,
-        discription: '월세 및 공과금',
-        amount: 500000,
-        purpose: 'g',
-      },
-    ],
-  },
-  {
-    userId: 'abcd-1234',
-    year: 2021,
-    month: 6,
-    dates: [
-      {
-        date: 27,
-        discription: '주식 수익',
-        amount: 150000,
-        purpose: 'n',
-      },
-    ],
-  },
-];
+};
 
-export const PURPOSE = [
+export const maxIncome = 10000000;
+export const maxExpenditure = 20000;
+export const allIncome = 10000000;
+export const allExpenditure = 38000;
+
+export const purpose = [
   {
     id: 'a',
     name: '식비',
