@@ -69,6 +69,7 @@
     "fetch-mock": "^9.11.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
+    "jest-localstorage-mock": "^2.4.14",
     "jest-styled-components": "^7.0.4",
     "jest-svg-transformer": "^1.0.0",
     "jest-transform-stub": "^2.0.0",
@@ -81,6 +82,9 @@
     "typescript": "^4.2.4"
   },
   "jest": {
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/$1",
       "^.+\\.svg$": "<rootDir>/src/__test__/__mocks__/svgMock.js"
