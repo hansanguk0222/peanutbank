@@ -12,10 +12,31 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export const Calendar: React.FC<CalendarProps> = ({ buttonType, datesWithDays, inputType, leftArrowOnClick, readOnly, rightArrowOnClick, spanType, text, onDateClick }) => {
+export const Calendar: React.FC<CalendarProps> = ({
+  buttonType,
+  datesWithDays,
+  inputType,
+  leftArrowOnClick,
+  readOnly,
+  rightArrowOnClick,
+  spanType,
+  text,
+  onDateClick,
+  beforeCalendar,
+  nextCalendar,
+}) => {
   return (
     <Container>
-      <ChangeMonthBar buttonType={buttonType} inputType={inputType} leftArrowOnClick={leftArrowOnClick} readOnly={readOnly} rightArrowOnClick={rightArrowOnClick} text={text} />
+      <ChangeMonthBar
+        buttonType={buttonType}
+        inputType={inputType}
+        leftArrowOnClick={leftArrowOnClick}
+        readOnly={readOnly}
+        rightArrowOnClick={rightArrowOnClick}
+        text={text}
+        beforeCalendar={beforeCalendar}
+        nextCalendar={nextCalendar}
+      />
       <CalendarOnlyDate datesWithDays={datesWithDays} spanType={spanType} onClick={onDateClick} />
     </Container>
   );

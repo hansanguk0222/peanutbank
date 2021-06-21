@@ -19,9 +19,19 @@ export const CommonLayoutBox: React.FC<CommonLayoutBoxPros> = ({ src, children, 
     setModalVisible(!modalVisible);
   };
   const linkURLAndButtonTypes: LinkURLAndButtonType[] = [
-    { aType: 'leftSideBarLink', url: 'income-and-expenditure', label: '수입/지출', isSelected: menu === 'income-and-expenditure' },
-    { aType: 'leftSideBarLink', url: 'calendar', label: '달력', isSelected: menu === 'calendar' },
-    { aType: 'leftSideBarLink', url: 'detail', label: '상세분석', isSelected: menu === 'detail' },
+    {
+      aType: 'leftSideBarLink',
+      url: `income-and-expenditure/${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+      label: '수입/지출',
+      isSelected: menu === `income-and-expenditure/${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+    },
+    {
+      aType: 'leftSideBarLink',
+      url: `calendar/${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+      label: '달력',
+      isSelected: menu === `calendar/${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+    },
+    { aType: 'leftSideBarLink', url: `detail/${new Date().getFullYear()}-${new Date().getMonth() + 1}`, label: '상세분석', isSelected: menu === 'detail' },
     { aType: 'leftSideBarLink', url: 'mypage', label: '마이페이지', isSelected: menu === 'mypage' },
   ];
 

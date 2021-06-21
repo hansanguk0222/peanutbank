@@ -1,30 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar as UserCalendar } from '@/src/components/organisms/Calendar';
-import { makeDatesWithDays } from '@/src/utils';
+import {} from '@/src/store/';
+import { findBeforeAndNextYearAndMonth, makeDatesWithDays } from '@/src/utils';
 
-const CalendarBox: React.FC = () => {
-  const [yearAndMonth, setYearAndMonth] = React.useState<{ year: number; month: number }>({ year: 2021, month: 6 });
-  const [datesWithDays, setDatesWithDays] = React.useState<{ date: number; day: number; thisMonth: boolean }[][]>([]);
-  React.useEffect(() => {
+const CalendarBox: React.FC<{
+  yearAndMonth: { year: number; month: number };
+  datesWithDays: { date: number; day: number; thisMonth: boolean }[][];
+  setDatesWithDays: (datesWithDays: { date: number; day: number; thisMonth: boolean }[][]) => void;
+  changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void;
+}> = ({
+  yearAndMonth,
+  datesWithDays,
+  setDatesWithDays,
+  changeYearAndMonth,
+}: {
+  yearAndMonth: { year: number; month: number };
+  datesWithDays: { date: number; day: number; thisMonth: boolean }[][];
+  setDatesWithDays: (datesWithDays: { date: number; day: number; thisMonth: boolean }[][]) => void;
+  changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void;
+}) => {
+  const [beforeCalendar, setBeforeCalendar] = useState<string>('');
+  const [nextCalendar, setNextCalendar] = useState<string>('');
+
+  useEffect(() => {
     const { year, month } = yearAndMonth;
     setDatesWithDays(makeDatesWithDays({ year, month }));
+    const { lastMonth, lastYear, nextMonth, nextYear } = findBeforeAndNextYearAndMonth({ year, month });
+    setBeforeCalendar(`${lastYear}-${lastMonth}`);
+    setNextCalendar(`${nextYear}-${nextMonth}`);
   }, [yearAndMonth]);
-  const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
-    const { year, month } = yearAndMonth;
-    if (upOrDown === 'down') {
-      if (month === 1) {
-        setYearAndMonth({ year: year - 1, month: 12 });
-      } else {
-        setYearAndMonth({ year, month: month - 1 });
-      }
-    } else {
-      if (month === 12) {
-        setYearAndMonth({ year: year + 1, month: 1 });
-      } else {
-        setYearAndMonth({ year, month: month + 1 });
-      }
-    }
-  };
+
   return (
     <UserCalendar
       buttonType="changeMonthButton"
@@ -36,6 +41,8 @@ const CalendarBox: React.FC = () => {
       readOnly
       spanType="calendarDate"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      beforeCalendar={beforeCalendar}
+      nextCalendar={nextCalendar}
     />
   );
 };
