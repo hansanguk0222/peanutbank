@@ -1,3 +1,28 @@
+export const findBeforeAndNextYearAndMonth: ({ year, month }: { year: number; month: number }) => { lastYear: number; lastMonth: number; nextYear: number; nextMonth: number } = ({
+  year,
+  month,
+}: {
+  year: number;
+  month: number;
+}) => {
+  let lastYear = year;
+  let lastMonth = month - 1;
+  let nextYear = year;
+  let nextMonth = month + 1;
+
+  if (month === 1) {
+    lastYear -= 1;
+    lastMonth = 12;
+  }
+
+  if (month === 12) {
+    nextYear += 1;
+    nextMonth = 1;
+  }
+
+  return { lastYear, lastMonth, nextYear, nextMonth };
+};
+
 export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { date: number; day: number; thisMonth: boolean }[][] = ({ year, month }) => {
   const datesWithDays: { date: number; day: number; thisMonth: boolean }[][] = [];
   const startDay = new Date(`${year}-${month}-01`).getDay();
@@ -25,20 +50,7 @@ export const makeDatesWithDays: ({ year, month }: { year: number; month: number 
     rotateDay = 0;
   }
 
-  let lastYear = year;
-  let lastMonth = month - 1;
-  let nextYear = year;
-  let nextMonth = month + 1;
-
-  if (month === 1) {
-    lastYear -= 1;
-    lastMonth = 12;
-  }
-
-  if (month === 12) {
-    nextYear += 1;
-    nextMonth = 1;
-  }
+  const { lastMonth, lastYear, nextMonth, nextYear } = findBeforeAndNextYearAndMonth({ year, month });
 
   const lastLean = findLeanYear(lastYear);
   let lastMonthEndOfDateRotate = endOfMonth({ month: lastMonth, lean: lastLean });
@@ -101,3 +113,5 @@ const howManyWeeksInThisMonth: ({ endDate, startDay }: { endDate: number; startD
     return 5;
   }
 };
+
+export const checkNotAvailableValue: (arr: any[]) => boolean = (arr: any[]) => arr.every((item) => item !== '' && item !== null && item !== undefined);
