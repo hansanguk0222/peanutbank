@@ -17,6 +17,7 @@
     "@typescript-eslint/parser": "^4.22.1",
     "axios": "^0.21.1",
     "babel-plugin-module-resolver": "^4.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.26.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -77,6 +78,7 @@
     "react-docgen-typescript-loader": "^3.7.2",
     "redux-mock-store": "^1.5.4",
     "redux-saga-test-plan": "^4.0.1",
+    "redux-saga-testing": "^2.0.1",
     "setimmediate": "^1.0.5",
     "storybook-addon-styled-component-theme": "^2.0.0",
     "storybook-svgr-react-component": "^1.0.1",
@@ -91,5 +93,8 @@
       "^@/(.*)$": "<rootDir>/$1",
       "^.+\\.svg$": "<rootDir>/src/__test__/__mocks__/svgMock.js"
     }
+  },
+  "msw": {
+    "workerDirectory": "msw_public"
   }
 }
