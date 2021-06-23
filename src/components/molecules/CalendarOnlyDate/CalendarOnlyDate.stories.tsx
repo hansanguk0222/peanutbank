@@ -2,6 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { CalendarOnlyDateProps, CalendarOnlyDate } from './CalendarOnlyDate';
 import { makeDatesWithDays } from '@/src/utils/index';
+import { accountBook } from '@/src/__test__/__feature__';
 
 export default {
   title: 'molecules/CalendarOnlyDate',
@@ -13,6 +14,8 @@ const Template: Story<CalendarOnlyDateProps> = (args) => <CalendarOnlyDate {...a
 
 export const CalendarOnlyDateTest = Template.bind({});
 CalendarOnlyDateTest.args = {
-  datesWithDays: makeDatesWithDays({ year: 2021, month: 1 }),
+  yearAndMonth: '2021-6',
+  datesWithDays: makeDatesWithDays({ year: 2021, month: 6 }),
   onClick: () => {},
+  accountBook,
 };

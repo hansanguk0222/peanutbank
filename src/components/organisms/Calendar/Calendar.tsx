@@ -24,6 +24,9 @@ export const Calendar: React.FC<CalendarProps> = ({
   onDateClick,
   beforeCalendar,
   nextCalendar,
+  expenditureLabel,
+  incomeLabel,
+  accountBook,
 }) => {
   return (
     <Container>
@@ -36,8 +39,10 @@ export const Calendar: React.FC<CalendarProps> = ({
         text={text}
         beforeCalendar={beforeCalendar}
         nextCalendar={nextCalendar}
+        expenditureLabel={expenditureLabel}
+        incomeLabel={incomeLabel}
       />
-      <CalendarOnlyDate datesWithDays={datesWithDays} spanType={spanType} onClick={onDateClick} />
+      <CalendarOnlyDate datesWithDays={datesWithDays} spanType={spanType} onClick={onDateClick} accountBook={accountBook} />
     </Container>
   );
 };

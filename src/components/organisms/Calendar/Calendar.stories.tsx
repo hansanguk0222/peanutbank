@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Calendar, CalendarProps } from './Calendar';
-import { makeDatesWithDays } from '@/src/utils/index';
+import { makeDatesWithDays, changeNumberForm } from '@/src/utils/index';
+import { accountBook } from '@/src/__test__/__feature__';
 
 export default {
   title: 'organisms/Calendar',
@@ -43,8 +44,13 @@ const Template: Story<CalendarProps> = () => {
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
       spanType="calendarDate"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      beforeCalendar={''}
+      nextCalendar={''}
+      incomeLabel={changeNumberForm(10000)}
+      expenditureLabel={changeNumberForm(500)}
+      accountBook={accountBook}
     />
   );
 };
 
-export const CalendarOnlyDateTest = Template.bind({});
+export const CalendarTest = Template.bind({});
