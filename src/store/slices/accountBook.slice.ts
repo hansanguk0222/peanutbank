@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAccountBookState, IAccountBook } from '@/src/type/store';
 import { Status } from '@/src/utils/constants';
 
-const accountBookState: IAccountBookState = {
+export const accountBookState: IAccountBookState = {
   accountBook: null,
   errMessage: null,
   loading: false,
@@ -14,6 +14,7 @@ const accountBookSlice = createSlice({
   initialState: accountBookState,
   reducers: {
     getAccountBookRequest(state, { payload }: PayloadAction<{ userId: string; year: number; month: number }>) {
+      console.log(payload);
       state.loading = true;
       state.status = null;
       state.errMessage = null;
