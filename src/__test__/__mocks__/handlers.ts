@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { accountBook } from '../__feature__';
 
 export const handlers = [
-  rest.post('/ledger', (req, res, ctx) => {
+  rest.post('http://localhost:8080/ledger', (req, res, ctx) => {
     //1. 필요한 정보 다 안 들어오면 400 띄우기
     return res(
       ctx.status(201),
@@ -15,7 +15,7 @@ export const handlers = [
     );
   }),
 
-  rest.patch('/ledger', (req, res, ctx) => {
+  rest.patch('http://localhost:8080/ledger', (req, res, ctx) => {
     //1. 필요한 정보 다 안 들어오면 400 띄우기
     return res(
       ctx.status(200),
@@ -28,7 +28,7 @@ export const handlers = [
     );
   }),
 
-  rest.delete('/ledger', (req, res, ctx) => {
+  rest.delete('http://localhost:8080/ledger', (req, res, ctx) => {
     //1. 필요한 정보 다 안 들어오면 400 띄우기
     return res(
       ctx.status(200),
@@ -41,7 +41,8 @@ export const handlers = [
     );
   }),
 
-  rest.get('/ledger', (req, res, ctx) => {
+  rest.get('http://localhost:8080/ledger', (req, res, ctx) => {
+    //1. 필요한 정보 다 안 들어오면 400 띄우기
     return res(ctx.status(200), ctx.json(accountBook));
   }),
 ];
