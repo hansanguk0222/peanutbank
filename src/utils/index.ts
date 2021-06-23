@@ -24,7 +24,7 @@ export const findBeforeAndNextYearAndMonth: ({ year, month }: { year: number; mo
 };
 
 export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { date: number; day: number; thisMonth: boolean }[][] = ({ year, month }) => {
-  const datesWithDays: { date: number; day: number; thisMonth: boolean }[][] = [];
+  const datesWithDays: { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][] = [];
   const startDay = new Date(`${year}-${month}-01`).getDay();
   const lean = findLeanYear(year);
   const endDate = endOfMonth({ month, lean });
@@ -33,7 +33,7 @@ export const makeDatesWithDays: ({ year, month }: { year: number; month: number 
   for (let i = 0; i < 6; i++) {
     datesWithDays.push([]);
     for (let j = 0; j < 7; j++) {
-      datesWithDays[i].push({ date: 0, day: j, thisMonth: false });
+      datesWithDays[i].push({ yearAndMonth: '', date: 0, day: j, thisMonth: false });
     }
   }
 
@@ -43,7 +43,7 @@ export const makeDatesWithDays: ({ year, month }: { year: number; month: number 
   for (let i = 0; i < weekCnt; i++) {
     while (rotateDay < 7 && rotateDate <= endDate) {
       const { day } = datesWithDays[i][rotateDay];
-      datesWithDays[i][rotateDay] = { date: rotateDate, day, thisMonth: true };
+      datesWithDays[i][rotateDay] = { yearAndMonth: `${year}-${month}`, date: rotateDate, day, thisMonth: true };
       rotateDate += 1;
       rotateDay += 1;
     }
@@ -58,14 +58,14 @@ export const makeDatesWithDays: ({ year, month }: { year: number; month: number 
 
   for (let i = 6; i >= 0; i--) {
     if (datesWithDays[0][i].date === 0) {
-      datesWithDays[0][i] = { date: lastMonthEndOfDateRotate, day: i, thisMonth: false };
+      datesWithDays[0][i] = { yearAndMonth: `${lastYear}-${lastMonth}`, date: lastMonthEndOfDateRotate, day: i, thisMonth: false };
       lastMonthEndOfDateRotate -= 1;
     }
   }
   for (let i = weekCnt - 1; i < 6; i++) {
     for (let j = 0; j < 7; j++) {
       if (datesWithDays[i][j].date === 0) {
-        datesWithDays[i][j] = { date: nextMonthDayRotate, day: j, thisMonth: false };
+        datesWithDays[i][j] = { yearAndMonth: `${nextYear}-${nextMonth}`, date: nextMonthDayRotate, day: j, thisMonth: false };
         nextMonthDayRotate += 1;
       }
     }
@@ -114,4 +114,29 @@ const howManyWeeksInThisMonth: ({ endDate, startDay }: { endDate: number; startD
   }
 };
 
+const changeStringReverse: (original: string) => string = (original) => original.split('').reverse().join('');
+
 export const checkNotAvailableValue: (arr: any[]) => boolean = (arr: any[]) => arr.every((item) => item !== '' && item !== null && item !== undefined);
+
+export const changeNumberForm: (account: number) => string = (account) => {
+  const numberToString = changeStringReverse(String(account));
+  let res = '';
+  for (let i = 0; i < numberToString.length; i += 3) {
+    if (i !== 0) {
+      res = ',' + res;
+    }
+    const part = changeStringReverse(numberToString.substring(i, i + 3));
+    res = part + res;
+  }
+  return res;
+};
+
+export const addDateAmount: (dateValues: { id: string; discription: string; purpose: string; amount: number }[]) => number = (
+  dateValues: { id: string; discription: string; purpose: string; amount: number }[]
+) => {
+  let res = 0;
+  dateValues.map((dateValue) => {
+    res += dateValue.amount;
+  });
+  return res;
+};
