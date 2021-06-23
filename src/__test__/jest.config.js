@@ -7,10 +7,9 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
   transform: {
     '^.+\\.(ts|tsx)$': 'babel-jest',
-    '^.+\\.svg$': '<rootDir>/src/__test__/__mocks__/svgMock.js',
   },
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/src/$1',
-    '^.+\\.svg$': '<rootDir>/src/__test__/__mocks__/svgMock.js',
   },
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };
