@@ -9,7 +9,6 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import 'jest-styled-components';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@/src/styles/theme';
-import { Fuck } from './Fuck';
 import { CommonLayoutBox } from '@/src/components/container/CommonLayoutBox';
 
 configure({ adapter: new Adapter() });
