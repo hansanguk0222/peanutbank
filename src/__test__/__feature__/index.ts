@@ -1,39 +1,55 @@
-export const accountBook = {
-  '2021-6': {
-    userId: 'abc-1234',
-    dates: {
-      i: {
-        '15': {
-          ledgers: [{ id: 7, amount: 10000000, discription: '월급', purpose: 'o' }],
-        },
-      },
-      e: {
-        '1': {
-          ledgers: [
-            { id: 1, amount: 2000, discription: '쭈쭈바', purpose: 'a' },
-            { id: 2, amount: 1000, discription: '김밥', purpose: 'a' },
-            { id: 3, amount: 3000, discription: '탄산', purpose: 'a' },
-          ],
-        },
-        '3': {
-          ledgers: [
-            { id: 4, amount: 5000, discription: '국밥', purpose: 'a' },
-            { id: 5, amount: 3000, discription: '샴푸', purpose: 'f' },
-            { id: 6, amount: 4000, discription: '영화다운로드', purpose: 'c' },
-          ],
-        },
-        '10': {
-          ledgers: [{ id: 8, amount: 20000, discription: '피자', purpose: 'a' }],
-        },
-      },
+import { IAccountBook } from '@/src/type/store';
+
+export const maxIncome = 1000000;
+export const maxExpenditure = 5000;
+export const allIncome = 1250000;
+export const allExpenditure = 15000;
+
+export const accountBook: IAccountBook = {
+  '2021-5': {
+    expenditure: {
+      30: [{ id: 'abc124', discription: '햄버거', purpose: 'l', amount: 4500 }],
     },
+    income: {
+      30: [{ id: 'abc9', discription: '알바비', purpose: 'm', amount: 800000 }],
+    },
+    allExpenditure: 4500,
+    allIncome: 800000,
+    maxExpenditure: 4500,
+    maxIncome: 800000,
+  },
+  '2021-6': {
+    expenditure: {
+      1: [
+        { id: 'abc1', discription: '담배', purpose: 'l', amount: 4500 },
+        { id: 'abc3', discription: '청국장', purpose: 'a', amount: 5000 },
+      ],
+      2: [
+        { id: 'abc4', discription: '당구비', purpose: 'c', amount: 5000 },
+        { id: 'abc5', discription: '박카스', purpose: 'a', amount: 500 },
+      ],
+    },
+    income: {
+      15: [{ id: 'abc2', discription: '월급', purpose: 'm', amount: 1000000 }],
+      16: [{ id: 'abc6', discription: '보너스', purpose: 'm', amount: 250000 }],
+      30: [{ id: 'abc9', discription: '밀린 월급', purpose: 'm', amount: 1000000 }],
+    },
+    allExpenditure,
+    allIncome,
+    maxExpenditure,
+    maxIncome,
+  },
+  '2021-7': {
+    expenditure: {
+      1: [{ id: 'abc1', discription: '고기', purpose: 'a', amount: 30000 }],
+    },
+    income: {},
+    allExpenditure: 30000,
+    allIncome: 0,
+    maxExpenditure: 30000,
+    maxIncome: 0,
   },
 };
-
-export const maxIncome = 10000000;
-export const maxExpenditure = 20000;
-export const allIncome = 10000000;
-export const allExpenditure = 38000;
 
 export const purpose = [
   {
