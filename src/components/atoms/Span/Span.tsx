@@ -1,9 +1,11 @@
+import { calcRem } from '@/src/styles/theme';
 import styled, { css } from 'styled-components';
 
 interface StyleSpanProps {
-  spanType: 'calendarDate' | 'default';
+  spanType: 'calendarDate' | 'default' | 'showMonthIncomeAndExpenditure';
   day?: number;
   thisMonth?: boolean;
+  incomeOrExpenditure?: 'income' | 'expenditure';
 }
 
 export interface SpanProps extends StyleSpanProps {
@@ -40,11 +42,24 @@ const StyledSpan = styled.span<StyleSpanProps>`
           color: ${(props) => props.theme.color.black9};
         `};
     `}
+  ${(props) =>
+    props.spanType === 'showMonthIncomeAndExpenditure' &&
+    css<StyleSpanProps>`
+      font-size: ${(props) => props.theme.size.font.m};
+      ${(props) =>
+        props.incomeOrExpenditure === 'expenditure'
+          ? css`
+              color: ${(props) => props.theme.color.red1};
+            `
+          : css`
+              color: ${(props) => props.theme.color.blue1};
+            `}
+    `}
 `;
 
-export const Span: React.FC<SpanProps> = ({ spanType, children, day, onClick, thisMonth }) => {
+export const Span: React.FC<SpanProps> = ({ spanType, children, day, onClick, thisMonth, incomeOrExpenditure }) => {
   return (
-    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth}>
+    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth} incomeOrExpenditure={incomeOrExpenditure}>
       {children}
     </StyledSpan>
   );

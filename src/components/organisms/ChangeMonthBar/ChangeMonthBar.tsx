@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
 import { ButtonWithIcon, ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
 import { Input as DateInput, InputProps } from '@/src/components/atoms/Input';
+import { MonthIncomeAndExpenditure, MonthIncomeAndExpenditureProps } from '@/src/components/molecules/MonthIncomeAndExpenditure';
 import Link from 'next/link';
 
-export interface ChangeMonthBarProps extends Omit<ButtonWithIconProps, 'onClick' | 'src' | 'alt'>, Omit<InputProps, 'onChange'> {
+export interface ChangeMonthBarProps extends Omit<ButtonWithIconProps, 'onClick' | 'src' | 'alt'>, Omit<InputProps, 'onChange'>, MonthIncomeAndExpenditureProps {
   leftArrowOnClick: () => void;
   rightArrowOnClick: () => void;
   beforeCalendar: string;
@@ -11,6 +13,7 @@ export interface ChangeMonthBarProps extends Omit<ButtonWithIconProps, 'onClick'
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +21,18 @@ const Container = styled.div`
   height: 10%;
 `;
 
-export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({ buttonType, inputType, leftArrowOnClick, rightArrowOnClick, text, readOnly, beforeCalendar, nextCalendar }) => {
+export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
+  buttonType,
+  inputType,
+  leftArrowOnClick,
+  rightArrowOnClick,
+  text,
+  readOnly,
+  beforeCalendar,
+  nextCalendar,
+  expenditureLabel,
+  incomeLabel,
+}) => {
   return (
     <Container>
       <Link href={`/calendar/${beforeCalendar}`} data-testid="beforeMonthLink">
@@ -58,6 +72,7 @@ export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({ buttonType, inpu
           </ButtonWithIcon>
         </a>
       </Link>
+      <MonthIncomeAndExpenditure expenditureLabel={expenditureLabel} incomeLabel={incomeLabel} />
     </Container>
   );
 };
