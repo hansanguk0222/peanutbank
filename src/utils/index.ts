@@ -23,7 +23,7 @@ export const findBeforeAndNextYearAndMonth: ({ year, month }: { year: number; mo
   return { lastYear, lastMonth, nextYear, nextMonth };
 };
 
-export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { date: number; day: number; thisMonth: boolean }[][] = ({ year, month }) => {
+export const makeDatesWithDays: ({ year, month }: { year: number; month: number }) => { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][] = ({ year, month }) => {
   const datesWithDays: { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][] = [];
   const startDay = new Date(`${year}-${month}-01`).getDay();
   const lean = findLeanYear(year);

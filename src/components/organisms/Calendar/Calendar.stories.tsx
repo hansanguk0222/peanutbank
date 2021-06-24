@@ -12,7 +12,7 @@ export default {
 
 const Template: Story<CalendarProps> = () => {
   const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2021, month: 6 });
-  const [datesWithDays, setDatesWithDays] = useState<{ date: number; day: number; thisMonth: boolean }[][]>([]);
+  const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
   useEffect(() => {
     const { year, month } = yearAndMonth;
     setDatesWithDays(makeDatesWithDays({ year, month }));
@@ -46,9 +46,10 @@ const Template: Story<CalendarProps> = () => {
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
       beforeCalendar={''}
       nextCalendar={''}
-      incomeLabel={changeNumberForm(10000)}
-      expenditureLabel={changeNumberForm(500)}
+      incomeLabel={accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`] !== undefined ? changeNumberForm(accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`].allIncome) : '0'}
+      expenditureLabel={accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`] !== undefined ? changeNumberForm(accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`].allExpenditure) : '0'}
       accountBook={accountBook}
+      thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
     />
   );
 };

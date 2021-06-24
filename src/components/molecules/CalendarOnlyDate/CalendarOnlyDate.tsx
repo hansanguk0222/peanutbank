@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
-import { Span as DateItem, Span as DayItem, SpanProps } from '@/src/components/atoms/Span';
+import { Span as DateItem, Span as DayItem, Span as DateIncomeAndExpenditure, SpanProps } from '@/src/components/atoms/Span';
 import { calcRem } from '@/src/styles/theme';
 import { IAccountBook } from '@/src/type/store';
-import { addDateAmount } from '@/src/utils';
+import { addDateAmount, changeNumberForm } from '@/src/utils';
+
 export interface CalendarOnlyDateProps extends SpanProps {
   datesWithDays: { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][];
   accountBook: IAccountBook;
-  yearAndMonth: string;
+  thisYearAndMonth: string;
 }
 
 interface StyledTdType {
@@ -16,6 +17,7 @@ interface StyledTdType {
 const Container = styled.table`
   width: 100%;
   height: 90%;
+  table-layout: fixed;
 `;
 
 const StyledTd = styled.td<StyledTdType>`
@@ -28,9 +30,30 @@ const StyledTd = styled.td<StyledTdType>`
     `}
 `;
 
+const TdContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+`;
+
 const StyledTr = styled.tr``;
 
-export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ yearAndMonth, datesWithDays, onClick, accountBook }) => {
+const IncomeAndExependitureContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: ${calcRem(3)};
+  bottom: ${calcRem(3)};
+`;
+
+const DateContainer = styled.div`
+  position: absolute;
+  left: ${calcRem(3)};
+  top: ${calcRem(3)};
+`;
+
+export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ thisYearAndMonth, datesWithDays, onClick, accountBook }) => {
   return (
     <Container>
       <thead>
@@ -81,16 +104,16 @@ export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ yearAndMonth
               Object.keys(accountBook).map((yearAndMonthKey) => {
                 Object.keys(accountBook[yearAndMonthKey].expenditure).map((expenditureKey) => {
                   if (
-                    (item.date === Number(expenditureKey) && item.yearAndMonth === yearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                    (item.date === Number(expenditureKey) && item.yearAndMonth !== yearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                    (item.date === Number(expenditureKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                    (item.date === Number(expenditureKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
                   ) {
                     dateExpenditure = addDateAmount(accountBook[yearAndMonthKey].expenditure[expenditureKey]);
                   }
                 });
                 Object.keys(accountBook[yearAndMonthKey].income).map((incomeKey) => {
                   if (
-                    (item.date === Number(incomeKey) && item.yearAndMonth === yearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                    (item.date === Number(incomeKey) && item.yearAndMonth !== yearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                    (item.date === Number(incomeKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                    (item.date === Number(incomeKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
                   ) {
                     dateIncome = addDateAmount(accountBook[yearAndMonthKey].income[incomeKey]);
                   }
@@ -98,13 +121,25 @@ export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ yearAndMonth
               });
               return (
                 <StyledTd key={String(item.date) + String(item.day)}>
-                  <>
-                    <DateItem spanType="calendarDate" onClick={onClick} day={item.day} thisMonth={item.thisMonth}>
-                      {item.date}
-                    </DateItem>
-                    {dateExpenditure !== 0 && <div>{dateExpenditure}</div>}
-                    {dateIncome !== 0 && <div>{dateIncome}</div>}
-                  </>
+                  <TdContainer>
+                    <DateContainer>
+                      <DateItem spanType="calendarDate" onClick={onClick} day={item.day} thisMonth={item.thisMonth}>
+                        {item.date}
+                      </DateItem>
+                    </DateContainer>
+                    <IncomeAndExependitureContainer>
+                      {dateIncome !== 0 && (
+                        <DateIncomeAndExpenditure spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="income" notThisMonth={item.thisMonth}>
+                          {changeNumberForm(dateIncome)}
+                        </DateIncomeAndExpenditure>
+                      )}
+                      {dateExpenditure !== 0 && (
+                        <DateIncomeAndExpenditure spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="expenditure" notThisMonth={item.thisMonth}>
+                          {changeNumberForm(dateExpenditure)}
+                        </DateIncomeAndExpenditure>
+                      )}
+                    </IncomeAndExependitureContainer>
+                  </TdContainer>
                 </StyledTd>
               );
             })}
