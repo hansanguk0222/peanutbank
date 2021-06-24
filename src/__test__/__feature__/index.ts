@@ -2,7 +2,7 @@ import { IAccountBook } from '@/src/type/store';
 
 export const maxIncome = 1000000;
 export const maxExpenditure = 5000;
-export const allIncome = 1250000;
+export const allIncome = 1350000;
 export const allExpenditure = 15000;
 
 export const accountBook: IAccountBook = {
@@ -32,7 +32,7 @@ export const accountBook: IAccountBook = {
     income: {
       15: [{ id: 'abc2', discription: '월급', purpose: 'm', amount: 1000000 }],
       16: [{ id: 'abc6', discription: '보너스', purpose: 'm', amount: 250000 }],
-      30: [{ id: 'abc9', discription: '밀린 월급', purpose: 'm', amount: 1000000 }],
+      30: [{ id: 'abc9', discription: '밀린 월급', purpose: 'm', amount: 100000 }],
     },
     allExpenditure,
     allIncome,
