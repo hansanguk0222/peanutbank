@@ -19,10 +19,10 @@ const Container = styled.div`
 export const MonthIncomeAndExpenditure: React.FC<MonthIncomeAndExpenditureProps> = ({ expenditureLabel, incomeLabel }) => {
   return (
     <Container>
-      <Span spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="income">
+      <Span spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="income" notThisMonth>
         {MonthIncomeAndExpenditureText.INCOME}: {incomeLabel}
       </Span>
-      <Span spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="expenditure">
+      <Span spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="expenditure" notThisMonth>
         {MonthIncomeAndExpenditureText.EXPENDITURE}: {expenditureLabel}
       </Span>
     </Container>
