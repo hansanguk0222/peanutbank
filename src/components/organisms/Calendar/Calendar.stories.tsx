@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Calendar, CalendarProps } from './Calendar';
-import { makeDatesWithDays } from '@/src/utils/index';
+import { makeDatesWithDays, changeNumberForm } from '@/src/utils/index';
+import { accountBook } from '@/src/__test__/__feature__';
 
 export default {
   title: 'organisms/Calendar',
@@ -11,11 +12,10 @@ export default {
 
 const Template: Story<CalendarProps> = () => {
   const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2021, month: 6 });
-  const [datesWithDays, setDatesWithDays] = useState<{ date: number; day: number; thisMonth: boolean }[][]>([]);
+  const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
   useEffect(() => {
     const { year, month } = yearAndMonth;
     setDatesWithDays(makeDatesWithDays({ year, month }));
-    console.log(datesWithDays);
   }, [yearAndMonth]);
   const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
     const { year, month } = yearAndMonth;
@@ -39,15 +39,19 @@ const Template: Story<CalendarProps> = () => {
       datesWithDays={datesWithDays}
       inputType="dateInput"
       leftArrowOnClick={() => changeYearAndMonth({ upOrDown: 'down' })}
-      leftIconSrc="./leftarrow.png"
       onDateClick={() => {}}
       readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
-      rightIconSrc="./rightarrow.png"
       spanType="calendarDate"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      beforeCalendar={''}
+      nextCalendar={''}
+      incomeLabel={accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`] !== undefined ? changeNumberForm(accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`].allIncome) : '0'}
+      expenditureLabel={accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`] !== undefined ? changeNumberForm(accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`].allExpenditure) : '0'}
+      accountBook={accountBook}
+      thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
     />
   );
 };
 
-export const CalendarOnlyDateTest = Template.bind({});
+export const CalendarTest = Template.bind({});

@@ -5,6 +5,7 @@ import { calcRem } from '@/src/styles/theme';
 interface ButtonStyleProps {
   buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
   isSelected?: boolean;
+  testId?: string;
 }
 
 export interface ButtonProps extends ButtonStyleProps {
@@ -46,9 +47,9 @@ const StyledButton = styled.button<ButtonStyleProps>`
     `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children }) => {
+export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children, testId }) => {
   return (
-    <StyledButton isSelected={isSelected} onClick={onClick} buttonType={buttonType}>
+    <StyledButton data-testid={testId} isSelected={isSelected} onClick={onClick} buttonType={buttonType}>
       {children}
     </StyledButton>
   );

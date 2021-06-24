@@ -1,14 +1,14 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from '@reduxjs/toolkit';
-
-import testSlice, { TEST, TestState } from './test.slice';
+import { IAccountBookState } from '@/src/type/store';
+import accountBookSlice, { ACCOUNTBOOK } from './accountBook.slice';
 
 const rootReducer = combineReducers({
-  [TEST]: testSlice,
+  [ACCOUNTBOOK]: accountBookSlice,
 });
 
 export interface State {
-  test: TestState;
+  accountBook: IAccountBookState;
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

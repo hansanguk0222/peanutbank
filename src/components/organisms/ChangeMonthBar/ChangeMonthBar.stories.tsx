@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { ChangeMonthBar, ChangeMonthBarProps } from './ChangeMonthBar';
+import { LeftArrow, RightArrow } from '@/public';
+import { changeNumberForm } from '@/src/utils';
 
 export default {
   title: 'organisms/ChangeMonthBar',
@@ -32,10 +34,12 @@ const Template: Story<ChangeMonthBarProps> = () => {
       inputType="dateInput"
       leftArrowOnClick={() => changeYearAndMonth({ upOrDown: 'down' })}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
-      leftIconSrc="./leftarrow.png"
-      rightIconSrc="./rightarrow.png"
       text={`${yearAndMonth.year}-${yearAndMonth.month}`}
       readOnly
+      beforeCalendar={''}
+      nextCalendar={''}
+      expenditureLabel={changeNumberForm(50000)}
+      incomeLabel={changeNumberForm(1000000)}
     />
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { ButtonWithIcon, ButtonWithIconProps } from './IconWithButton';
+import { Img } from '@/src/components/atoms/Img';
+import { LeftArrow, RightArrow } from '@/public';
 
 export default {
   title: 'molecules/ButtonWithIcon',
@@ -33,9 +35,15 @@ const Template: Story<ButtonWithIconProps> = () => {
   };
   return (
     <>
-      <ButtonWithIcon buttonType="profileButton" onClick={toggleModalVisible} src="https://www.askbayou.com/wp-content/uploads/2021/02/square.jpg" />
-      <ButtonWithIcon buttonType="changeMonthButton" onClick={() => changeYearAndMonth({ upOrDown: 'down' })} src="./leftarrow.png" />
-      <ButtonWithIcon buttonType="changeMonthButton" onClick={() => changeYearAndMonth({ upOrDown: 'up' })} src="./rightarrow.png" />
+      <ButtonWithIcon buttonType="profileButton" onClick={toggleModalVisible}>
+        <Img alt="프로필" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
+      </ButtonWithIcon>
+      <ButtonWithIcon buttonType="changeMonthButton" onClick={() => changeYearAndMonth({ upOrDown: 'down' })}>
+        <LeftArrow />
+      </ButtonWithIcon>
+      <ButtonWithIcon buttonType="changeMonthButton" onClick={() => changeYearAndMonth({ upOrDown: 'up' })}>
+        <RightArrow />
+      </ButtonWithIcon>
     </>
   );
 };
