@@ -20,7 +20,6 @@ export function* getAccountBook(action: PayloadAction<{ userId: string; year: nu
       if (process.env.NODE_ENV === 'test') {
         if (userId === 'abc') {
           const { data, status } = yield call(accountBookService.getAccountBook, { userId, year, month });
-          console.log(data, status);
           yield put(getAccountBookSuccess({ status, accountBook: data }));
         }
       } else {
