@@ -6,6 +6,7 @@ interface StyleSpanProps {
   day?: number;
   thisMonth?: boolean;
   incomeOrExpenditure?: 'income' | 'expenditure';
+  notThisMonth?: boolean;
 }
 
 export interface SpanProps extends StyleSpanProps {
@@ -54,12 +55,17 @@ const StyledSpan = styled.span<StyleSpanProps>`
           : css`
               color: ${(props) => props.theme.color.blue1};
             `}
+      ${(props) =>
+        !props.notThisMonth &&
+        css`
+          opacity: 0.5;
+        `}
     `}
 `;
 
-export const Span: React.FC<SpanProps> = ({ spanType, children, day, onClick, thisMonth, incomeOrExpenditure }) => {
+export const Span: React.FC<SpanProps> = ({ spanType, children, day, onClick, thisMonth, incomeOrExpenditure, notThisMonth }) => {
   return (
-    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth} incomeOrExpenditure={incomeOrExpenditure}>
+    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth} incomeOrExpenditure={incomeOrExpenditure} notThisMonth={notThisMonth}>
       {children}
     </StyledSpan>
   );
