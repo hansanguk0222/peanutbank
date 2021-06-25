@@ -34,7 +34,7 @@ jest.mock(
       children
 );
 
-describe('수입 지출 화면 테스트', () => {
+describe('달력 컴포넌트 테스트', () => {
   let store;
 
   const thisMonthIncome = '1,350,000';
