@@ -3,7 +3,7 @@ import { Status } from '@/src/utils/constants';
 interface Iledge {
   id: string;
   discription: string;
-  purpose: string;
+  category: string;
   amount: number;
 }
 
