@@ -1,10 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { calcRem } from '@/src/styles/theme';
+import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
 
 interface ButtonStyleProps {
-  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton';
+  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton' | 'selectIncomeOrExpenditureButton';
   isSelected?: boolean;
+  whichButton?: string;
   testId?: string;
 }
 
@@ -45,11 +47,38 @@ const StyledButton = styled.button<ButtonStyleProps>`
       height: ${calcRem(25)};
       width: ${calcRem(15)};
     `}
+  ${(props) =>
+    props.buttonType === 'selectIncomeOrExpenditureButton' &&
+    css<ButtonProps>`
+      background: none;
+      border: ${calcRem(3)} dashed;
+      outline: none;
+      padding: ${calcRem(5)};
+      font-weight: ${(props) => props.theme.fontWeight.bold};
+      ${(props) =>
+        props.isSelected &&
+        props.whichButton === SelectIncomeOrExpenditureButtonText.EXPENDITURE &&
+        css`
+          border: ${calcRem(3)} dashed ${(props) => props.theme.color.red1};
+          color: ${(props) => props.theme.color.red1};
+          padding: ${calcRem(5)};
+          font-weight: ${(props) => props.theme.fontWeight.bold};
+        `}
+      ${(props) =>
+        props.isSelected &&
+        props.whichButton === SelectIncomeOrExpenditureButtonText.INCOME &&
+        css`
+          border: ${calcRem(3)} dashed ${(props) => props.theme.color.blue1};
+          color: ${(props) => props.theme.color.blue1};
+          padding: ${calcRem(5)};
+          font-weight: ${(props) => props.theme.fontWeight.bold};
+        `};
+    `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children, testId }) => {
+export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children, testId, whichButton }) => {
   return (
-    <StyledButton data-testid={testId} isSelected={isSelected} onClick={onClick} buttonType={buttonType}>
+    <StyledButton data-testid={testId} isSelected={isSelected} onClick={onClick} buttonType={buttonType} whichButton={whichButton}>
       {children}
     </StyledButton>
   );
