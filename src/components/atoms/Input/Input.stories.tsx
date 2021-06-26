@@ -15,7 +15,7 @@ const Template: Story<InputProps> = (args) => {
   };
   return (
     <>
-      {args.inputType === 'accountBookInput' && <Input inputType={args.inputType} label={args.label} onChange={onChangeInput} text={localValue} readOnly={args.readOnly} />}
+      {args.inputType === 'ledgerInput' && <Input inputType={args.inputType} label={args.label} onChange={onChangeInput} text={localValue} readOnly={args.readOnly} />}
       {args.inputType === 'dateInput' && <Input inputType={args.inputType} label={''} onChange={undefined} text={args.label} readOnly={args.readOnly} />}
     </>
   );
@@ -23,7 +23,7 @@ const Template: Story<InputProps> = (args) => {
 
 export const AccountInput: Story<InputProps> = Template.bind({});
 AccountInput.args = {
-  inputType: 'accountBookInput',
+  inputType: 'ledgerInput',
   label: '액수를 입력하세요',
   readOnly: false,
 };

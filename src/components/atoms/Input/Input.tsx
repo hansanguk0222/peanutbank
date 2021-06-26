@@ -3,7 +3,7 @@ import React, { ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputStyleProps {
-  inputType: 'accountBookInput' | 'dateInput' | 'defaultInput';
+  inputType: 'ledgerInput' | 'dateInput' | 'defaultInput';
 }
 
 export interface InputProps extends InputStyleProps {
@@ -15,7 +15,7 @@ export interface InputProps extends InputStyleProps {
 
 const StyledInput = styled.input<InputStyleProps>`
   ${(props) =>
-    props.inputType === 'accountBookInput' &&
+    props.inputType === 'ledgerInput' &&
     css`
       &:focus {
         box-shadow: 0 0 ${(props) => props.theme.size.shadow.blur} ${(props) => props.theme.size.shadow.spread} ${(props) => props.theme.color.coralBlue};
