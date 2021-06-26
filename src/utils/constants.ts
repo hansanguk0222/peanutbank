@@ -9,3 +9,8 @@ export const MonthIncomeAndExpenditureText = {
   INCOME: '이달의 수입',
   EXPENDITURE: '이달의 지출',
 };
+
+export const SelectIncomeOrExpenditureButtonText = {
+  INCOME: '수입',
+  EXPENDITURE: '지출',
+};
