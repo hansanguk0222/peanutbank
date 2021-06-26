@@ -5,6 +5,7 @@ declare module 'styled-components' {
     boxShadow: {
       skyblue: string;
       darkgray: string;
+      black: string;
     };
 
     color: {
@@ -100,6 +101,10 @@ declare module 'styled-components' {
         blur: string;
         spread: string;
       };
+    };
+
+    fontWeight: {
+      bold: number;
     };
   }
 }
