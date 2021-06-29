@@ -23,8 +23,8 @@ export interface ILedgerForm
     Omit<IDataList, 'optionList' | 'id' | 'onChange' | 'text' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType' | 'category'>,
     Omit<IButton, 'onClick' | 'buttonType' | 'testId' | 'discriptionInputTestId' | 'inputType' | 'text'>,
     Omit<IForm, 'type' | 'id' | 'discriptionInputTestId' | 'readOnly' | 'amount' | 'text'>,
-    Omit<ISelectIncomeOrExpenditure, 'onClick' | 'buttonType' | 'labelValue' | 'discriptionInputTestId' | 'text'>,
-    Omit<IDateSelectCalendar, 'buttonType' | 'inputType' | 'spanType' | 'text'> {
+    Omit<ISelectIncomeOrExpenditure, 'onClick' | 'buttonType' | 'labelValue' | 'discriptionInputTestId' | 'text' | 'selectedDate'>,
+    Omit<IDateSelectCalendar, 'buttonType' | 'inputType' | 'spanType' | 'text' | 'selectedDate' | 'thisYearAndMonth'> {
   onClickClearButton: (e: MouseEvent) => void;
   onClickSubmitButton: (e: MouseEvent) => void;
   onClickSelectIncomeOrExpenditure: (whichButton: string) => void;
@@ -61,7 +61,6 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
   beforeCalendar,
   nextCalendar,
   datesWithDays,
-  thisYearAndMonth,
   calendarVisible,
   monthIncomeAndExpenditureVisible,
   dateSelectCalendar,
@@ -94,7 +93,7 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
         datesWithDays={datesWithDays}
         spanType="calendarDate"
         onDateClick={onDateClick}
-        thisYearAndMonth={thisYearAndMonth}
+        thisYearAndMonth={yearAndMonthValue}
         selectedDate={selectDateValue}
         calendarVisible={calendarVisible}
         changeCalendarVisible={changeCalendarVisible}

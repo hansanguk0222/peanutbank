@@ -98,7 +98,7 @@ const Template: Story<ILedgerForm> = (args) => {
     setCalendarVisible(false);
   };
 
-  const { selectListOptionList, dataListOptionList, list } = args;
+  const { selectListOptionList, dataListOptionList } = args;
 
   return (
     <LedgerForm
@@ -111,7 +111,6 @@ const Template: Story<ILedgerForm> = (args) => {
       readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
       yearAndMonthValue={`${yearAndMonth.year}-${yearAndMonth.month}`}
-      thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
       beforeCalendar=""
       nextCalendar=""
       monthIncomeAndExpenditureVisible={false}
