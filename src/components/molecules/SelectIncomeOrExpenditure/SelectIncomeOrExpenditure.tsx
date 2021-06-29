@@ -2,10 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button, ButtonProps } from '@/src/components/atoms/Button';
 import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
+import { calcRem } from '@/src/styles/theme';
 
 const Container = styled.div`
   display: flex;
-  border: 1px solid;
+  width: ${calcRem(200)};
   justify-content: space-around;
 `;
 
@@ -14,7 +15,6 @@ export interface ISelectIncomeOrExpenditure extends ButtonProps {
 }
 
 export const SelectIncomeOrExpenditure: React.FC<ISelectIncomeOrExpenditure> = ({ buttonType, onClick, selectedButton }) => {
-  console.log(selectedButton === SelectIncomeOrExpenditureButtonText.INCOME);
   return (
     <Container>
       <Button
