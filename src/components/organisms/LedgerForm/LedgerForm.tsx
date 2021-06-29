@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import styled, { css } from 'styled-components';
-import { ISelectList, SelectList } from '@/src/components/molecules/SelectList';
+import styled from 'styled-components';
 import { DataList, IDataList } from '@/src/components/organisms/DataList';
 import { ILabelInput, LabelInput } from '@/src/components/molecules/LabelInput';
 import { Button, IButton } from '@/src/components/atoms/Button';
@@ -10,7 +9,8 @@ import { Icategory } from '@/src/type/store';
 import { LedgerInputLabelText, LabelText } from '@/src/utils/constants';
 import { calcRem } from '@/src/styles/theme';
 import { DateSelectCalendar, IDateSelectCalendar } from '@/src/components/organisms/DateSelectCalendar';
-import { makeDatesWithDays } from '@/src/utils';
+import { DataListIds } from '@/src/utils/constants';
+import { changeNumberForm, splitByCommaAndJoinAmount } from '@/src/utils';
 
 const Container = styled.div`
   display: flex;
@@ -20,12 +20,11 @@ const Container = styled.div`
 
 export interface ILedgerForm
   extends Omit<ILabelInput, 'text' | 'onChange' | 'inputType' | 'readOnly' | 'labelValue' | 'discriptionInputTestId' | 'labelType' | 'readOnly' | 'inputType' | 'labelType'>,
-    Omit<IDataList, 'optionList' | 'id' | 'onChange' | 'text' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType'>,
-    Omit<ISelectList, 'optionList' | 'id' | 'value' | 'onChange' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType'>,
-    Omit<IButton, 'onClick' | 'buttonType' | 'testId' | 'discriptionInputTestId' | 'inputType'>,
-    Omit<IForm, 'type' | 'id' | 'discriptionInputTestId' | 'readOnly'>,
-    Omit<ISelectIncomeOrExpenditure, 'onClick' | 'buttonType' | 'labelValue' | 'discriptionInputTestId'>,
-    Omit<IDateSelectCalendar, 'buttonType' | 'inputType' | 'spanType'> {
+    Omit<IDataList, 'optionList' | 'id' | 'onChange' | 'text' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType' | 'category'>,
+    Omit<IButton, 'onClick' | 'buttonType' | 'testId' | 'discriptionInputTestId' | 'inputType' | 'text'>,
+    Omit<IForm, 'type' | 'id' | 'discriptionInputTestId' | 'readOnly' | 'amount' | 'text'>,
+    Omit<ISelectIncomeOrExpenditure, 'onClick' | 'buttonType' | 'labelValue' | 'discriptionInputTestId' | 'text'>,
+    Omit<IDateSelectCalendar, 'buttonType' | 'inputType' | 'spanType' | 'text'> {
   onClickClearButton: (e: MouseEvent) => void;
   onClickSubmitButton: (e: MouseEvent) => void;
   onClickSelectIncomeOrExpenditure: (whichButton: string) => void;
@@ -39,50 +38,57 @@ export interface ILedgerForm
   dataListValue: string;
   amountValue: string;
   discriptionValue: string;
+  categoryValue: string;
+  yearAndMonthValue: string;
 }
 
 export const LedgerForm: React.FC<ILedgerForm> = ({
-  dataListOptionList,
   onClickClearButton,
   onClickSubmitButton,
-  list,
   onSubmitLedger,
-  amount,
-  category,
-  discription,
   onChangeDataList,
-  selectDateValue,
   onClickSelectIncomeOrExpenditure,
-  selectedButton,
-  dataListValue,
-  incomeOrExpenditure,
   onChangeAmountInput,
   onChangeDiscriptionInput,
-  amountValue,
-  discriptionValue,
+  onDateClick,
+  changeCalendarVisible,
   leftArrowOnClick,
   rightArrowOnClick,
-  text,
+  closeModal,
+  dataListOptionList,
+  selectedButton,
+  incomeOrExpenditure,
   beforeCalendar,
   nextCalendar,
   datesWithDays,
-  onDateClick,
   thisYearAndMonth,
   calendarVisible,
-  changeCalendarVisible,
   monthIncomeAndExpenditureVisible,
   dateSelectCalendar,
-  closeModal,
+  amountValue,
+  categoryValue,
+  selectDateValue,
+  discriptionValue,
+  dataListValue,
+  yearAndMonthValue,
 }) => {
   return (
-    <Form type="ledger" amount={amount} category={category} discription={discription} onSubmitLedger={onSubmitLedger}>
+    <Form
+      type="ledger"
+      amount={splitByCommaAndJoinAmount(amountValue)}
+      category={categoryValue}
+      discription={discriptionValue}
+      onSubmitLedger={onSubmitLedger}
+      incomeOrExpenditure={selectedButton}
+      selectedDate={selectDateValue}
+    >
       <DateSelectCalendar
         buttonType="changeMonthButton"
         inputType="dateInput"
         leftArrowOnClick={leftArrowOnClick}
         readOnly={true}
         rightArrowOnClick={rightArrowOnClick}
-        text={text}
+        text={yearAndMonthValue}
         beforeCalendar={beforeCalendar}
         nextCalendar={nextCalendar}
         datesWithDays={datesWithDays}
@@ -108,7 +114,7 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
         text={dataListValue}
         incomeOrExpenditure={incomeOrExpenditure}
         label={LedgerInputLabelText.CATEGORY}
-        list={list}
+        list={DataListIds.CATEGORY}
       />
       <LabelInput
         inputType="ledgerInput"
@@ -116,7 +122,7 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
         onChange={onChangeAmountInput}
         labelValue={LabelText.AMOUNT}
         readOnly={false}
-        text={amountValue}
+        text={changeNumberForm(splitByCommaAndJoinAmount(amountValue))}
         label={LedgerInputLabelText.AMOUNT}
         incomeOrExpenditure={incomeOrExpenditure}
       />

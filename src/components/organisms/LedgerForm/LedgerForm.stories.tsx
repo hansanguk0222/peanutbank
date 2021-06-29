@@ -2,8 +2,8 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { category } from '@/src/__test__/__feature__';
 import { ILedgerForm, LedgerForm } from './LedgerForm';
-import { LedgerInputLabelText, LabelText, SelectIncomeOrExpenditureButtonText, DataListIds } from '@/src/utils/constants';
-import { makeDatesWithDays } from '@/src/utils';
+import { SelectIncomeOrExpenditureButtonText, DataListIds } from '@/src/utils/constants';
+import { changeNumberForm, makeDatesWithDays, splitByCommaAndJoinAmount } from '@/src/utils';
 export default {
   title: 'organisms/LedgerForm',
   component: LedgerForm,
@@ -63,7 +63,6 @@ const Template: Story<ILedgerForm> = (args) => {
   };
 
   const onClickSelectIncomeOrExpenditure = (whichButton: '수입' | '지출') => {
-    console.log(whichButton);
     setSelectedButton(whichButton);
   };
 
@@ -72,7 +71,9 @@ const Template: Story<ILedgerForm> = (args) => {
   };
 
   const onChangeAmountInput = (e) => {
-    setAmountValue(e.target.value);
+    if ((e.target.value !== undefined && /^[0-9]+(,[0-9]+)*$/g.test(e.target.value)) || e.target.value === '') {
+      setAmountValue(changeNumberForm(splitByCommaAndJoinAmount(e.target.value)));
+    }
   };
 
   const onChangeDiscriptionInput = (e) => {
@@ -83,9 +84,7 @@ const Template: Story<ILedgerForm> = (args) => {
     setAmountValue('');
     setDataListValue('');
     setDiscriptionValue('');
-    setSelectDateValue('');
     setSelectedButton(SelectIncomeOrExpenditureButtonText.INCOME);
-    console.log('초기화');
   };
 
   const onClickSubmitButton = () => {
@@ -111,7 +110,7 @@ const Template: Story<ILedgerForm> = (args) => {
       onDateClick={onDateClick}
       readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
-      text={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      yearAndMonthValue={`${yearAndMonth.year}-${yearAndMonth.month}`}
       thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
       beforeCalendar=""
       nextCalendar=""
@@ -121,10 +120,8 @@ const Template: Story<ILedgerForm> = (args) => {
       onClickClearButton={onClickClearButton}
       onClickSubmitButton={onClickSubmitButton}
       selectListOptionList={selectListOptionList}
-      list={list}
-      amount={Number(amountValue)}
       onSubmitLedger={onSubmitLedger}
-      category={dataListValue}
+      categoryValue={dataListValue}
       discription={discriptionValue}
       onChangeSelectList={onChangeSelectList}
       onChangeDataList={onChangeDataList}
@@ -145,6 +142,5 @@ const Template: Story<ILedgerForm> = (args) => {
 export const LedgerFormTest = Template.bind({});
 LedgerFormTest.args = {
   selectListOptionList: ['2021-07', '2021-06', '2021-05', '2021-04'],
-  list: DataListIds.CATEGORY,
   dataListOptionList: category,
 };
