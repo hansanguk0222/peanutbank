@@ -26,8 +26,9 @@ const Container = styled.form<FormStyleProps>`
   box-shadow: ${(props) => props.theme.boxShadow.black};
   padding: ${calcRem(30)};
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-direction: column;
 `;
 
 export const Form: React.FC<IForm> = ({ type, onSubmitLedger, id, amount, category, discription, children }) => {
