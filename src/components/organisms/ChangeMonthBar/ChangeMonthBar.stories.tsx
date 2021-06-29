@@ -40,6 +40,7 @@ const Template: Story<ChangeMonthBarProps> = () => {
       nextCalendar={''}
       expenditureLabel={changeNumberForm(50000)}
       incomeLabel={changeNumberForm(1000000)}
+      monthIncomeAndExpenditureVisible={true}
     />
   );
 };

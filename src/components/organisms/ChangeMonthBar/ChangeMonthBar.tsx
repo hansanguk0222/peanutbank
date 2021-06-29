@@ -10,6 +10,7 @@ export interface ChangeMonthBarProps extends Omit<ButtonWithIconProps, 'onClick'
   rightArrowOnClick: () => void;
   beforeCalendar: string;
   nextCalendar: string;
+  monthIncomeAndExpenditureVisible: boolean;
 }
 
 const Container = styled.div`
@@ -19,6 +20,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 10%;
+  border: 1px solid black;
 `;
 
 export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
@@ -32,6 +34,8 @@ export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
   nextCalendar,
   expenditureLabel,
   incomeLabel,
+  monthIncomeAndExpenditureVisible,
+  dateSelectCalendar,
 }) => {
   return (
     <Container>
@@ -53,7 +57,7 @@ export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
           </ButtonWithIcon>
         </a>
       </Link>
-      <DateInput inputType={inputType} onChange={() => {}} readOnly={readOnly} text={text} />
+      <DateInput inputType={inputType} onChange={() => {}} readOnly={readOnly} text={text} dateSelectCalendar={dateSelectCalendar} />
       <Link href={`/calendar/${nextCalendar}`}>
         <a>
           <ButtonWithIcon buttonType={buttonType} onClick={rightArrowOnClick} testId="afterMonthButton">
@@ -72,7 +76,7 @@ export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
           </ButtonWithIcon>
         </a>
       </Link>
-      <MonthIncomeAndExpenditure expenditureLabel={expenditureLabel} incomeLabel={incomeLabel} />
+      {monthIncomeAndExpenditureVisible && <MonthIncomeAndExpenditure expenditureLabel={expenditureLabel} incomeLabel={incomeLabel} />}{' '}
     </Container>
   );
 };
