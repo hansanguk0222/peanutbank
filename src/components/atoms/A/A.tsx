@@ -6,7 +6,7 @@ interface AStyleProps {
   isSelected?: boolean;
 }
 
-export interface AProps extends AStyleProps {
+export interface IA extends AStyleProps {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   label: string;
 }
@@ -65,7 +65,7 @@ const StyledA = styled.a<AStyleProps>`
     `}
 `;
 
-export const A = React.forwardRef<HTMLAnchorElement, AProps>(({ onClick, aType, label, isSelected }, ref) => {
+export const A = React.forwardRef<HTMLAnchorElement, IA>(({ onClick, aType, label, isSelected }, ref) => {
   return (
     <StyledA ref={ref} isSelected={isSelected} onClick={onClick} aType={aType}>
       {label}

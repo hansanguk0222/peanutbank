@@ -1,7 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Button, ButtonProps } from './Button';
-import BackMonthButton from '@/public/left-arrow.svg';
+import { Button, IButton } from './Button';
 import { LeftArrow } from '@/public';
 
 export default {
@@ -10,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const Template: Story<IButton> = (args) => <Button {...args} />;
 
 export const profileButton = Template.bind({});
 profileButton.args = {

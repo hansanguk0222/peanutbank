@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
-import { Span as DateItem, Span as DayItem, Span as DateIncomeAndExpenditure, SpanProps } from '@/src/components/atoms/Span';
+import { Span as DateItem, Span as DayItem, Span as DateIncomeAndExpenditure, ISpan } from '@/src/components/atoms/Span';
 import { calcRem } from '@/src/styles/theme';
 import { IAccountBook } from '@/src/type/store';
 import { addDateAmount, changeNumberForm } from '@/src/utils';
 
-export interface CalendarOnlyDateProps extends SpanProps {
+export interface ICalendarOnlyDate extends ISpan {
   datesWithDays: { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][];
   accountBook?: IAccountBook;
   thisYearAndMonth: string;
@@ -53,7 +53,7 @@ const DateContainer = styled.div`
   top: ${calcRem(3)};
 `;
 
-export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ thisYearAndMonth, datesWithDays, onClick, accountBook }) => {
+export const CalendarOnlyDate: React.FC<ICalendarOnlyDate> = ({ thisYearAndMonth, datesWithDays, onClick, accountBook }) => {
   return (
     <Container>
       <thead>

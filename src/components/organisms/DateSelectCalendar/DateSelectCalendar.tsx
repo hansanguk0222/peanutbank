@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Calendar, CalendarProps } from '@/src/components/organisms/Calendar';
+import { Calendar, ICalendar } from '@/src/components/organisms/Calendar';
 import { Span } from '@/src/components/atoms/Span';
 import { calcRem } from '@/src/styles/theme';
 import Modal from 'react-modal';
 
-export interface IDateSelectCalendar extends CalendarProps {
+export interface IDateSelectCalendar extends ICalendar {
   selectedDate: string;
   calendarVisible: boolean;
   changeCalendarVisible: () => void;

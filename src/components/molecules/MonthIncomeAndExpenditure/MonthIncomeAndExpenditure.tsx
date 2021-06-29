@@ -3,7 +3,7 @@ import { Span } from '@/src/components/atoms/Span';
 import { MonthIncomeAndExpenditureText } from '@/src/utils/constants';
 import { calcRem } from '@/src/styles/theme';
 
-export interface MonthIncomeAndExpenditureProps {
+export interface IMonthIncomeAndExpenditure {
   incomeLabel?: string;
   expenditureLabel?: string;
 }
@@ -17,7 +17,7 @@ const Container = styled.div`
   border: 1px solid green;
 `;
 
-export const MonthIncomeAndExpenditure: React.FC<MonthIncomeAndExpenditureProps> = ({ expenditureLabel, incomeLabel }) => {
+export const MonthIncomeAndExpenditure: React.FC<IMonthIncomeAndExpenditure> = ({ expenditureLabel, incomeLabel }) => {
   return (
     <Container>
       <Span spanType="showMonthIncomeAndExpenditure" incomeOrExpenditure="income" notThisMonth>

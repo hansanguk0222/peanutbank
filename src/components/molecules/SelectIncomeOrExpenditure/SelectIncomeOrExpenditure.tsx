@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Button, ButtonProps } from '@/src/components/atoms/Button';
+import { Button, IButton } from '@/src/components/atoms/Button';
 import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
 import { calcRem } from '@/src/styles/theme';
 
@@ -10,7 +10,7 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
-export interface ISelectIncomeOrExpenditure extends ButtonProps {
+export interface ISelectIncomeOrExpenditure extends IButton {
   selectedButton: string;
 }
 

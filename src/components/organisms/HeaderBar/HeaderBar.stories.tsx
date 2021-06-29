@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { HeaderBar } from './HeaderBar';
-import { ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
+import { IButtonWithIcon } from '@/src/components/molecules/IconWithButton';
 export default {
   title: 'organisms/HeaderBar',
   component: HeaderBar,
   argTypes: {},
 } as Meta;
 
-const Template: Story<ButtonWithIconProps> = () => {
+const Template: Story<IButtonWithIcon> = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const onClick: () => void = () => {
     console.log(modalVisible);

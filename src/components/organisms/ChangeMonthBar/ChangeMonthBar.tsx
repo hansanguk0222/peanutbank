@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
-import { ButtonWithIcon, ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
-import { Input as DateInput, InputProps } from '@/src/components/atoms/Input';
-import { MonthIncomeAndExpenditure, MonthIncomeAndExpenditureProps } from '@/src/components/molecules/MonthIncomeAndExpenditure';
+import { ButtonWithIcon, IButtonWithIcon } from '@/src/components/molecules/IconWithButton';
+import { Input as DateInput, IInput } from '@/src/components/atoms/Input';
+import { MonthIncomeAndExpenditure, IMonthIncomeAndExpenditure } from '@/src/components/molecules/MonthIncomeAndExpenditure';
 import Link from 'next/link';
 
-export interface ChangeMonthBarProps extends Omit<ButtonWithIconProps, 'onClick' | 'src' | 'alt'>, Omit<InputProps, 'onChange'>, MonthIncomeAndExpenditureProps {
+export interface IChangeMonthBar extends Omit<IButtonWithIcon, 'onClick' | 'src' | 'alt'>, Omit<IInput, 'onChange'>, IMonthIncomeAndExpenditure {
   leftArrowOnClick: () => void;
   rightArrowOnClick: () => void;
   beforeCalendar: string;
@@ -23,7 +23,7 @@ const Container = styled.div`
   border: 1px solid black;
 `;
 
-export const ChangeMonthBar: React.FC<ChangeMonthBarProps> = ({
+export const ChangeMonthBar: React.FC<IChangeMonthBar> = ({
   buttonType,
   inputType,
   leftArrowOnClick,

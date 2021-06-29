@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ButtonWithIcon, ButtonWithIconProps } from '@/src/components/molecules/IconWithButton';
+import { ButtonWithIcon, IButtonWithIcon } from '@/src/components/molecules/IconWithButton';
 import { A as StyledA } from '@/src/components/atoms/A';
 import { calcRem } from '@/src/styles/theme';
 import { Img } from '@/src/components/atoms/Img';
 
-export interface HeaderBarProps extends ButtonWithIconProps {
+export interface IHeaderBar extends IButtonWithIcon {
   src: string;
 }
 
@@ -24,7 +24,7 @@ const RightSideContainer = styled.div`
   padding: ${calcRem(20)};
 `;
 
-export const HeaderBar: React.FC<HeaderBarProps> = ({ buttonType, onClick, src }) => (
+export const HeaderBar: React.FC<IHeaderBar> = ({ buttonType, onClick, src }) => (
   <Container>
     <StyledA aType="headerBarLink" label="PeanutBank" />
     <RightSideContainer>

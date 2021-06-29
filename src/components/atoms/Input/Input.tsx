@@ -10,7 +10,7 @@ interface InputStyleProps {
   dateSelectCalendar?: boolean;
 }
 
-export interface InputProps extends InputStyleProps {
+export interface IInput extends InputStyleProps {
   onChange: (e: ChangeEvent) => void | undefined;
   label?: string;
   text: string;
@@ -21,7 +21,7 @@ export interface InputProps extends InputStyleProps {
 const StyledInput = styled.input<InputStyleProps>`
   ${(props) =>
     props.inputType === 'ledgerInput' &&
-    css<InputProps>`
+    css<IInput>`
       width: ${calcRem(250)};
       border-left: 0;
       border-right: 0;
@@ -65,7 +65,7 @@ const StyledInput = styled.input<InputStyleProps>`
   outline: none;
 `;
 
-export const Input: React.FC<InputProps> = ({ inputType = 'defaultInput', label, text, onChange, readOnly, list, incomeOrExpenditure, dateSelectCalendar }) => {
+export const Input: React.FC<IInput> = ({ inputType = 'defaultInput', label, text, onChange, readOnly, list, incomeOrExpenditure, dateSelectCalendar }) => {
   return (
     <StyledInput
       data-testid={inputType}

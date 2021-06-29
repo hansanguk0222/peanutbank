@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { ButtonWithIcon, ButtonWithIconProps } from './IconWithButton';
+import { ButtonWithIcon, IButtonWithIcon } from './IconWithButton';
 import { Img } from '@/src/components/atoms/Img';
 import { LeftArrow, RightArrow } from '@/public';
 
@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ButtonWithIconProps> = () => {
+const Template: Story<IButtonWithIcon> = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const toggleModalVisible: () => void = () => {
     setModalVisible(!modalVisible);

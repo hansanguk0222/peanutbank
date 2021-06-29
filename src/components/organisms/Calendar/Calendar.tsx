@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { ChangeMonthBar, ChangeMonthBarProps } from '../ChangeMonthBar';
-import { CalendarOnlyDate, CalendarOnlyDateProps } from '@/src/components/molecules/CalendarOnlyDate';
+import { ChangeMonthBar, IChangeMonthBar } from '../ChangeMonthBar';
+import { CalendarOnlyDate, ICalendarOnlyDate } from '@/src/components/molecules/CalendarOnlyDate';
 
-export interface CalendarProps extends ChangeMonthBarProps, Omit<CalendarOnlyDateProps, 'onClick' | 'incomeOrExpenditure'> {
+export interface ICalendar extends IChangeMonthBar, Omit<ICalendarOnlyDate, 'onClick' | 'incomeOrExpenditure'> {
   onDateClick: (e) => void;
 }
 
@@ -12,7 +12,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export const Calendar: React.FC<CalendarProps> = ({
+export const Calendar: React.FC<ICalendar> = ({
   buttonType,
   datesWithDays,
   inputType,

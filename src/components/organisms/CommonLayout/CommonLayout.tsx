@@ -1,8 +1,8 @@
-import { LeftSideBar, LeftSideBarProps } from '@/src/components/molecules/LeftSideBar';
-import { HeaderBar, HeaderBarProps } from '@/src/components/organisms/HeaderBar';
+import { LeftSideBar, ILeftSideBar } from '@/src/components/molecules/LeftSideBar';
+import { HeaderBar, IHeaderBar } from '@/src/components/organisms/HeaderBar';
 import styled from 'styled-components';
 
-export interface CommonLayoutProps extends Omit<LeftSideBarProps, 'onClick'>, Omit<HeaderBarProps, 'onClick'> {
+export interface ICommonLayout extends Omit<ILeftSideBar, 'onClick'>, Omit<IHeaderBar, 'onClick'> {
   headerBarOnClick: () => void;
   leftSideBarOnClick: (menu: string) => void;
 }
@@ -22,7 +22,7 @@ const InnerContainer = styled.div`
   margin: 0;
 `;
 
-export const CommonLayout: React.FC<CommonLayoutProps> = ({ buttonType, headerBarOnClick, leftSideBarOnClick, src, linkURLAndButtonTypes, children }) => (
+export const CommonLayout: React.FC<ICommonLayout> = ({ buttonType, headerBarOnClick, leftSideBarOnClick, src, linkURLAndButtonTypes, children }) => (
   <Container>
     <HeaderBar buttonType={buttonType} onClick={headerBarOnClick} src={src} />
     <InnerContainer>

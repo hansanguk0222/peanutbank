@@ -10,7 +10,7 @@ interface ButtonStyleProps {
   testId?: string;
 }
 
-export interface ButtonProps extends ButtonStyleProps {
+export interface IButton extends ButtonStyleProps {
   onClick: (args: any) => void;
 }
 
@@ -49,7 +49,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
     `}
   ${(props) =>
     props.buttonType === 'selectIncomeOrExpenditureButton' &&
-    css<ButtonProps>`
+    css<IButton>`
       background: none;
       border: ${calcRem(3)} dashed;
       outline: none;
@@ -92,7 +92,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
     `}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ buttonType = 'defaultButton', onClick, isSelected, children, testId, whichButton }) => {
+export const Button: React.FC<IButton> = ({ buttonType = 'defaultButton', onClick, isSelected, children, testId, whichButton }) => {
   return (
     <StyledButton data-testid={testId} isSelected={isSelected} onClick={onClick} buttonType={buttonType} whichButton={whichButton}>
       {children}

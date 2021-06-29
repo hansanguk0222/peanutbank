@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { ISelectList, SelectList } from '@/src/components/molecules/SelectList';
 import { DataList, IDataList } from '@/src/components/organisms/DataList';
 import { ILabelInput, LabelInput } from '@/src/components/molecules/LabelInput';
-import { Button, ButtonProps } from '@/src/components/atoms/Button';
+import { Button, IButton } from '@/src/components/atoms/Button';
 import { Form, IForm } from '@/src/components/atoms/Form';
 import { ISelectIncomeOrExpenditure, SelectIncomeOrExpenditure } from '@/src/components/molecules/SelectIncomeOrExpenditure';
 import { Icategory } from '@/src/type/store';
@@ -22,7 +22,7 @@ export interface ILedgerForm
   extends Omit<ILabelInput, 'text' | 'onChange' | 'inputType' | 'readOnly' | 'labelValue' | 'discriptionInputTestId' | 'labelType' | 'readOnly' | 'inputType' | 'labelType'>,
     Omit<IDataList, 'optionList' | 'id' | 'onChange' | 'text' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType'>,
     Omit<ISelectList, 'optionList' | 'id' | 'value' | 'onChange' | 'labelValue' | 'discriptionInputTestId' | 'readOnly' | 'inputType' | 'labelType'>,
-    Omit<ButtonProps, 'onClick' | 'buttonType' | 'testId' | 'discriptionInputTestId' | 'inputType'>,
+    Omit<IButton, 'onClick' | 'buttonType' | 'testId' | 'discriptionInputTestId' | 'inputType'>,
     Omit<IForm, 'type' | 'id' | 'discriptionInputTestId' | 'readOnly'>,
     Omit<ISelectIncomeOrExpenditure, 'onClick' | 'buttonType' | 'labelValue' | 'discriptionInputTestId'>,
     Omit<IDateSelectCalendar, 'buttonType' | 'inputType' | 'spanType'> {

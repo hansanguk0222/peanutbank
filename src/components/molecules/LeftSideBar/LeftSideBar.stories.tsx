@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { LeftSideBar, LeftSideBarProps, LinkURLAndButtonType } from './LeftSideBar';
+import { LeftSideBar, ILeftSideBar, LinkURLAndButtonType } from './LeftSideBar';
 
 export default {
   title: 'molecules/LeftSideBar',
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<LeftSideBarProps> = () => {
+const Template: Story<ILeftSideBar> = () => {
   const [menu, setMenu] = useState<string>('incomeAndExpenditure');
   const onClick: (url: string) => void = (url: string) => {
     setMenu(url);
@@ -22,5 +22,5 @@ const Template: Story<LeftSideBarProps> = () => {
   return <LeftSideBar linkURLAndButtonTypes={linkURLAndButtonTypes} onClick={onClick} />;
 };
 
-export const LeftSideBarTest: Story<LeftSideBarProps> = Template.bind({});
+export const LeftSideBarTest: Story<ILeftSideBar> = Template.bind({});
 LeftSideBarTest.args = {};
