@@ -4,7 +4,7 @@ import { calcRem } from '@/src/styles/theme';
 import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
 
 interface ButtonStyleProps {
-  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton' | 'selectIncomeOrExpenditureButton';
+  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton' | 'selectIncomeOrExpenditureButton' | 'clearButton';
   isSelected?: boolean;
   whichButton?: string;
   testId?: string;
@@ -73,6 +73,22 @@ const StyledButton = styled.button<ButtonStyleProps>`
           padding: ${calcRem(5)};
           font-weight: ${(props) => props.theme.fontWeight.bold};
         `};
+    `}
+    ${(props) =>
+    props.buttonType === 'clearButton' &&
+    css`
+      color: ${(props) => props.theme.color.red1};
+      padding: ${calcRem(5)};
+      border: ${calcRem(1)} solid ${(props) => props.theme.color.red1};
+      margin-right: ${calcRem(20)};
+    `}
+    ${(props) =>
+    props.buttonType === 'submitButton' &&
+    css`
+      color: ${(props) => props.theme.color.gray5};
+      padding: ${calcRem(5)};
+      border: none;
+      background: ${(props) => props.theme.color.green3};
     `}
 `;
 
