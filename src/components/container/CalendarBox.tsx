@@ -57,6 +57,7 @@ const CalendarBox: React.FC<{
       expenditureLabel={changeNumberForm(expenditureLabel)}
       incomeLabel={changeNumberForm(incomeLabel)}
       thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      monthIncomeAndExpenditureVisible={true}
     />
   );
 };
