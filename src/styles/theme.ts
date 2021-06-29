@@ -7,6 +7,8 @@ export const theme: DefaultTheme = {
     skyblue: '0 0 0 1px rgba(18, 100, 163, 1), 0 0 0 5px rgba(29, 155, 209, 0.3)',
     darkgray: '0 0 4px 10px rgba(0, 0, 0, 0.03), 0 0 4px 10px rgba(0, 0, 0, 0.03)',
     black: '0 0 8px 8px rgba(0, 0, 0, 0.3), 0 0 8px 8px rgba(0, 0, 0, 0.3)',
+    bottomRed: '0 4px 2px -2px rgb(240, 115, 98)',
+    bottomSkyBlue: '0 4px 2px -2px rgb(0, 115, 198)',
   },
   color: {
     main: '#4a154b',
@@ -38,6 +40,8 @@ export const theme: DefaultTheme = {
 
     green1: '#007a5a',
     green2: '#008a6a',
+    green3: '#25D179',
+
     white: '#fff',
 
     red1: '#f07362',
@@ -45,6 +49,7 @@ export const theme: DefaultTheme = {
     blue1: '#0073c6',
     blue2: '#1164a3',
     blue3: '#0b4c8c',
+    blue4: '#337ab7',
     modalWhite: '#f9f9f9',
     semiWhite: '#fafbfc',
 
