@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { Span } from '@/src/components/atoms/Span';
 import { MonthIncomeAndExpenditureText } from '@/src/utils/constants';
 import { calcRem } from '@/src/styles/theme';
+
 export interface MonthIncomeAndExpenditureProps {
-  incomeLabel: string;
-  expenditureLabel: string;
+  incomeLabel?: string;
+  expenditureLabel?: string;
 }
 
 const Container = styled.div`
