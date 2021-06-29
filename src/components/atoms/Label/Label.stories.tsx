@@ -12,6 +12,6 @@ const Template: Story<ILabel> = (args) => <Label {...args} />;
 
 export const LedgerLabelTest = Template.bind({});
 LedgerLabelTest.args = {
-  type: 'ledgerLabel',
+  labelType: 'ledgerLabel',
   children: '분류',
 };

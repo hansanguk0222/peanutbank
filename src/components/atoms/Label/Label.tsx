@@ -3,19 +3,22 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface LabelStyleProps {
-  type: 'ledgerLabel' | 'default';
+  labelType: 'ledgerLabel' | 'default';
 }
 
 export interface ILabel extends LabelStyleProps {}
 
 const Conatiner = styled.label<LabelStyleProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${(props) =>
-    props.type === 'ledgerLabel' &&
+    props.labelType === 'ledgerLabel' &&
     css`
-      font-size: ${calcRem(25)};
-    `}
+      font-size: ${calcRem(20)};
+    `};
 `;
 
-export const Label: React.FC<ILabel> = ({ type, children }) => {
-  return <Conatiner type={type}>{children}</Conatiner>;
+export const Label: React.FC<ILabel> = ({ labelType, children }) => {
+  return <Conatiner labelType={labelType}>{children}</Conatiner>;
 };
