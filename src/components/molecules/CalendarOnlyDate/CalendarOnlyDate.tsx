@@ -6,7 +6,7 @@ import { addDateAmount, changeNumberForm } from '@/src/utils';
 
 export interface CalendarOnlyDateProps extends SpanProps {
   datesWithDays: { yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][];
-  accountBook: IAccountBook;
+  accountBook?: IAccountBook;
   thisYearAndMonth: string;
 }
 
@@ -101,29 +101,31 @@ export const CalendarOnlyDate: React.FC<CalendarOnlyDateProps> = ({ thisYearAndM
             {week.map((item) => {
               let dateExpenditure = 0;
               let dateIncome = 0;
-              Object.keys(accountBook).map((yearAndMonthKey) => {
-                Object.keys(accountBook[yearAndMonthKey].expenditure).map((expenditureKey) => {
-                  if (
-                    (item.date === Number(expenditureKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                    (item.date === Number(expenditureKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
-                  ) {
-                    dateExpenditure = addDateAmount(accountBook[yearAndMonthKey].expenditure[expenditureKey]);
-                  }
+              if (accountBook !== undefined) {
+                Object.keys(accountBook).map((yearAndMonthKey) => {
+                  Object.keys(accountBook[yearAndMonthKey].expenditure).map((expenditureKey) => {
+                    if (
+                      (item.date === Number(expenditureKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                      (item.date === Number(expenditureKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                    ) {
+                      dateExpenditure = addDateAmount(accountBook[yearAndMonthKey].expenditure[expenditureKey]);
+                    }
+                  });
+                  Object.keys(accountBook[yearAndMonthKey].income).map((incomeKey) => {
+                    if (
+                      (item.date === Number(incomeKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                      (item.date === Number(incomeKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                    ) {
+                      dateIncome = addDateAmount(accountBook[yearAndMonthKey].income[incomeKey]);
+                    }
+                  });
                 });
-                Object.keys(accountBook[yearAndMonthKey].income).map((incomeKey) => {
-                  if (
-                    (item.date === Number(incomeKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                    (item.date === Number(incomeKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
-                  ) {
-                    dateIncome = addDateAmount(accountBook[yearAndMonthKey].income[incomeKey]);
-                  }
-                });
-              });
+              }
               return (
-                <StyledTd key={String(item.date) + String(item.day)}>
+                <StyledTd key={String(item.date) + String(item.day)} onClick={() => onClick(item.yearAndMonth + '-' + item.date)}>
                   <TdContainer>
                     <DateContainer>
-                      <DateItem spanType="calendarDate" onClick={onClick} day={item.day} thisMonth={item.thisMonth}>
+                      <DateItem spanType="calendarDate" day={item.day} thisMonth={item.thisMonth}>
                         {item.date}
                       </DateItem>
                     </DateContainer>
