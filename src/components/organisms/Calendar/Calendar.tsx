@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ChangeMonthBar, ChangeMonthBarProps } from '../ChangeMonthBar';
 import { CalendarOnlyDate, CalendarOnlyDateProps } from '@/src/components/molecules/CalendarOnlyDate';
 
-export interface CalendarProps extends ChangeMonthBarProps, Omit<CalendarOnlyDateProps, 'onClick'> {
-  onDateClick: () => void;
+export interface CalendarProps extends ChangeMonthBarProps, Omit<CalendarOnlyDateProps, 'onClick' | 'incomeOrExpenditure'> {
+  onDateClick: (e) => void;
 }
 
 const Container = styled.div`
@@ -28,6 +28,8 @@ export const Calendar: React.FC<CalendarProps> = ({
   incomeLabel,
   accountBook,
   thisYearAndMonth,
+  monthIncomeAndExpenditureVisible,
+  dateSelectCalendar,
 }) => {
   return (
     <Container>
@@ -42,6 +44,8 @@ export const Calendar: React.FC<CalendarProps> = ({
         nextCalendar={nextCalendar}
         expenditureLabel={expenditureLabel}
         incomeLabel={incomeLabel}
+        monthIncomeAndExpenditureVisible={monthIncomeAndExpenditureVisible}
+        dateSelectCalendar={dateSelectCalendar}
       />
       <CalendarOnlyDate datesWithDays={datesWithDays} spanType={spanType} onClick={onDateClick} accountBook={accountBook} thisYearAndMonth={thisYearAndMonth} />
     </Container>
