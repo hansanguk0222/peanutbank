@@ -18,7 +18,4 @@ const Template: Story<ISelectIncomeOrExpenditure> = () => {
   return <SelectIncomeOrExpenditure buttonType="selectIncomeOrExpenditureButton" onClick={selectButton} selectedButton={selectedButton} />;
 };
 
-// export const LeftSideBarTest: Story<LeftSideBarProps> = Template.bind({});
-// LeftSideBarTest.args = {};
-
 export const SelectIncomeOrExpenditureTest: Story<ISelectIncomeOrExpenditure> = Template.bind({});
