@@ -10,7 +10,7 @@ interface StyleSpanProps {
 }
 
 export interface SpanProps extends StyleSpanProps {
-  onClick?: () => void;
+  onClick?: (e) => void;
 }
 
 const StyledSpan = styled.span<StyleSpanProps>`
