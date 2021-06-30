@@ -71,7 +71,7 @@ const accountBookSlice = createSlice({
       state.status = status;
     },
     createLedgerFailure(state, { payload }: PayloadAction<{ errMessage: string; status: typeof Status }>) {
-      //주석 테스트2
+      //주석 테스트3
       const { errMessage, status } = payload;
       state.status = status;
       state.errMessage = errMessage;
