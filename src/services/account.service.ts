@@ -1,20 +1,38 @@
 import axios from 'axios';
-
+import dotenv from 'dotenv';
+dotenv.config();
 interface IAccountService {
   getAccountBook: (any) => any;
-  updateJsonData: (any) => any;
-  getJsonData: () => any;
+  createLedger: (any) => any;
 }
 
 export const accountBookService: IAccountService = {
   getAccountBook({ userId, year, month }: { userId: string; year: number; month: number }) {
-    console.log(userId, year, month);
-    return axios.get(`http://localhost:8080/ledger`);
+    if (process.env.NODE_ENV === 'development') {
+      return axios.get(`${process.env.DEV_SERVER_URL}/accountbook?user=${userId}&year=${year}&month=${month}`);
+    } else {
+      return axios.get(`${process.env.PRO_SERVER_URL}/accountbook?user=${userId}&year=${year}&month=${month}`);
+    }
   },
-  updateJsonData({ id, userId, body, title }: { id: number; title: string; body: string; userId: number }) {
-    return axios.put(`https://jsonplaceholder.typicode.com/posts/11`, { id, userId, body, title });
-  },
-  getJsonData() {
-    return axios.get(`https://jsonplaceholder.typicode.com/posts/11`);
+  createLedger({
+    userId,
+    amount,
+    category,
+    date,
+    discription,
+    incomeOrExpenditure,
+  }: {
+    userId: string;
+    date: string;
+    incomeOrExpenditure: string;
+    amount: number;
+    category: string;
+    discription: string;
+  }) {
+    if (process.env.NODE_ENV === 'development') {
+      return axios.post(`${process.env.DEV_SERVER_URL}/ledger`, { userId, amount, category, date, discription, incomeOrExpenditure });
+    } else if (process.env.NODE_ENV === 'production') {
+      return axios.post(`${process.env.PRO_SERVER_URL}/ledger`, { userId, amount, category, date, discription, incomeOrExpenditure });
+    }
   },
 };
