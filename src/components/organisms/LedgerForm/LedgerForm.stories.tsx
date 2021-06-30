@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { category } from '@/src/__test__/__feature__';
 import { ILedgerForm, LedgerForm } from './LedgerForm';
@@ -53,17 +53,32 @@ const Template: Story<ILedgerForm> = (args) => {
     setCalendarVisible(!calnedarVisible);
   };
 
-  const onSubmitLedger: any = ({ id, amount, category, discription }) => {
-    console.log(id, amount, category, discription);
+  const onSubmitLedger: any = ({
+    e,
+    id,
+    userId,
+    amount,
+    selectedDate,
+    incomeOrExpenditure,
+    category,
+    discription,
+  }: {
+    e: FormEvent;
+    id: string;
+    userId: string;
+    amount: number;
+    selectedDate: string;
+    incomeOrExpenditure: string;
+    category: string;
+    discription: string;
+  }) => {
+    e.preventDefault();
+    console.log(id, userId, amount, selectedDate, incomeOrExpenditure, category, discription);
   };
 
-  const onChangeSelectList = (e) => {
-    console.log(e.target.value);
-    setSelectDateValue(e.target.value);
-  };
-
-  const onClickSelectIncomeOrExpenditure = (whichButton: '수입' | '지출') => {
-    setSelectedButton(whichButton);
+  const onClickSelectIncomeOrExpenditure = ({ e, incomeOrExpenditure }: { e: MouseEvent; incomeOrExpenditure: '수입' | '지출' }) => {
+    e.preventDefault();
+    setSelectedButton(incomeOrExpenditure);
   };
 
   const onChangeDataList = (e: ChangeEvent<HTMLInputElement>) => {
@@ -87,21 +102,15 @@ const Template: Story<ILedgerForm> = (args) => {
     setSelectedButton(SelectIncomeOrExpenditureButtonText.INCOME);
   };
 
-  const onClickSubmitButton = () => {
-    setAmountValue('');
-    setDataListValue('');
-    setDiscriptionValue('');
-    setSelectedButton(SelectIncomeOrExpenditureButtonText.INCOME);
-  };
-
   const closeModal = () => {
     setCalendarVisible(false);
   };
 
-  const { selectListOptionList, dataListOptionList } = args;
+  const { dataListOptionList } = args;
 
   return (
     <LedgerForm
+      userId="abc"
       calendarVisible={calnedarVisible}
       selectedDate={selectDateValue}
       changeCalendarVisible={changeCalendarVisible}
@@ -111,18 +120,13 @@ const Template: Story<ILedgerForm> = (args) => {
       readOnly={true}
       rightArrowOnClick={() => changeYearAndMonth({ upOrDown: 'up' })}
       yearAndMonthValue={`${yearAndMonth.year}-${yearAndMonth.month}`}
-      beforeCalendar=""
-      nextCalendar=""
       monthIncomeAndExpenditureVisible={false}
       dateSelectCalendar={true}
       dataListOptionList={dataListOptionList}
       onClickClearButton={onClickClearButton}
-      onClickSubmitButton={onClickSubmitButton}
-      selectListOptionList={selectListOptionList}
       onSubmitLedger={onSubmitLedger}
-      categoryValue={dataListValue}
+      category={dataListValue}
       discription={discriptionValue}
-      onChangeSelectList={onChangeSelectList}
       onChangeDataList={onChangeDataList}
       selectDateValue={selectDateValue}
       onClickSelectIncomeOrExpenditure={onClickSelectIncomeOrExpenditure}
@@ -140,6 +144,5 @@ const Template: Story<ILedgerForm> = (args) => {
 
 export const LedgerFormTest = Template.bind({});
 LedgerFormTest.args = {
-  selectListOptionList: ['2021-07', '2021-06', '2021-05', '2021-04'],
   dataListOptionList: category,
 };
