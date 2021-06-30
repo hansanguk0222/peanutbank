@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
 
 interface InputStyleProps {
-  inputType: 'ledgerInput' | 'dateInput' | 'defaultInput';
+  inputType: 'ledgerInput' | 'dateInput' | 'defaultInput' | 'submitInput';
   incomeOrExpenditure?: string;
   dateSelectCalendar?: boolean;
 }
@@ -16,9 +16,10 @@ export interface IInput extends InputStyleProps {
   text: string;
   readOnly: boolean;
   list?: string;
+  testId: string;
 }
 
-const StyledInput = styled.input<InputStyleProps>`
+export const StyledInput = styled.input<InputStyleProps>`
   ${(props) =>
     props.inputType === 'ledgerInput' &&
     css<IInput>`
@@ -61,14 +62,22 @@ const StyledInput = styled.input<InputStyleProps>`
               width: ${calcRem(100)};
             `}
     `}
+    ${(props) =>
+    props.inputType === 'submitInput' &&
+    css`
+      color: ${(props) => props.theme.color.gray5};
+      padding: ${calcRem(5)};
+      border: none;
+      background: ${(props) => props.theme.color.green3};
+    `}
   padding: ${calcRem(10)};
   outline: none;
 `;
 
-export const Input: React.FC<IInput> = ({ inputType = 'defaultInput', label, text, onChange, readOnly, list, incomeOrExpenditure, dateSelectCalendar }) => {
+export const Input: React.FC<IInput> = ({ inputType = 'defaultInput', label, text, onChange, readOnly, list, incomeOrExpenditure, dateSelectCalendar, testId }) => {
   return (
     <StyledInput
-      data-testid={inputType}
+      data-testid={testId}
       inputType={inputType}
       onChange={onChange}
       value={text}
@@ -78,6 +87,7 @@ export const Input: React.FC<IInput> = ({ inputType = 'defaultInput', label, tex
       incomeOrExpenditure={incomeOrExpenditure}
       required={list ? true : false}
       dateSelectCalendar={dateSelectCalendar}
+      type={inputType === 'submitInput' ? 'submit' : 'text'}
     />
   );
 };
