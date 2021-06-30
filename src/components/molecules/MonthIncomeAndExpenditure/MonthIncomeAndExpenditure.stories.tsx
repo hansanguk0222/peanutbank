@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { MonthIncomeAndExpenditureProps, MonthIncomeAndExpenditure } from './MonthIncomeAndExpenditure';
+import { IMonthIncomeAndExpenditure, MonthIncomeAndExpenditure } from './MonthIncomeAndExpenditure';
 import { changeNumberForm } from '@/src/utils';
 
 export default {
@@ -9,8 +9,8 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<MonthIncomeAndExpenditureProps> = () => {
+const Template: Story<IMonthIncomeAndExpenditure> = () => {
   return <MonthIncomeAndExpenditure expenditureLabel={changeNumberForm(500)} incomeLabel={changeNumberForm(5000)} />;
 };
-export const MonthIncomeAndExpenditureTest: Story<MonthIncomeAndExpenditureProps> = Template.bind({});
+export const MonthIncomeAndExpenditureTest: Story<IMonthIncomeAndExpenditure> = Template.bind({});
 MonthIncomeAndExpenditureTest.args = {};

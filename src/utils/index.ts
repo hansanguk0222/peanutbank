@@ -131,6 +131,11 @@ export const changeNumberForm: (account: number) => string = (account) => {
   return res;
 };
 
+export const splitByCommaAndJoinAmount = (str: string) => {
+  const amount = str.split(',').join('');
+  return Number(amount);
+};
+
 export const addDateAmount: (dateValues: { id: string; discription: string; purpose: string; amount: number }[]) => number = (
   dateValues: { id: string; discription: string; purpose: string; amount: number }[]
 ) => {

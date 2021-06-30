@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { CommonLayout, CommonLayoutProps } from './CommonLayout';
+import { CommonLayout, ICommonLayout } from './CommonLayout';
 import { LinkURLAndButtonType } from '@/src/components/molecules/LeftSideBar';
 
 export default {
@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CommonLayoutProps> = () => {
+const Template: Story<ICommonLayout> = () => {
   const [menu, setMenu] = useState<string>('incomeAndExpenditure');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const leftSideBarOnClick: (url: string) => void = (url: string) => {
@@ -37,5 +37,5 @@ const Template: Story<CommonLayoutProps> = () => {
   );
 };
 
-export const LeftSideBarTest: Story<CommonLayoutProps> = Template.bind({});
+export const LeftSideBarTest: Story<ICommonLayout> = Template.bind({});
 LeftSideBarTest.args = {};

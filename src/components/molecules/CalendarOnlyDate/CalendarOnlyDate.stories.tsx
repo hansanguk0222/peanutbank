@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { CalendarOnlyDateProps, CalendarOnlyDate } from './CalendarOnlyDate';
+import { ICalendarOnlyDate, CalendarOnlyDate } from './CalendarOnlyDate';
 import { makeDatesWithDays } from '@/src/utils/index';
 import { accountBook } from '@/src/__test__/__feature__';
 
@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CalendarOnlyDateProps> = (args) => <CalendarOnlyDate {...args} />;
+const Template: Story<ICalendarOnlyDate> = (args) => <CalendarOnlyDate {...args} />;
 
 export const CalendarOnlyDateTest = Template.bind({});
 CalendarOnlyDateTest.args = {

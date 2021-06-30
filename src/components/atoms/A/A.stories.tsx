@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { A, AProps } from './A';
+import { A, IA } from './A';
 
 export default {
   title: 'atoms/a',
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<AProps> = (args) => <A {...args} />;
+const Template: Story<IA> = (args) => <A {...args} />;
 
 export const leftSideBarLink = Template.bind({});
 leftSideBarLink.args = {

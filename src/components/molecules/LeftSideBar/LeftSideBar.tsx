@@ -11,7 +11,7 @@ export interface LinkURLAndButtonType {
   isSelected: boolean;
 }
 
-export interface LeftSideBarProps {
+export interface ILeftSideBar {
   linkURLAndButtonTypes: LinkURLAndButtonType[];
   onClick: (url: string) => void;
 }
@@ -34,7 +34,7 @@ const StyledLi = styled.li`
   margin: 0;
 `;
 
-export const LeftSideBar: React.FC<LeftSideBarProps> = ({ linkURLAndButtonTypes, onClick }) => {
+export const LeftSideBar: React.FC<ILeftSideBar> = ({ linkURLAndButtonTypes, onClick }) => {
   return (
     <StyledDiv>
       <StyledUl>

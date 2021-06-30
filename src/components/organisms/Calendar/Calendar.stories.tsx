@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Calendar, CalendarProps } from './Calendar';
+import { Calendar, ICalendar } from './Calendar';
 import { makeDatesWithDays, changeNumberForm } from '@/src/utils/index';
 import { accountBook } from '@/src/__test__/__feature__';
 
@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CalendarProps> = () => {
+const Template: Story<ICalendar> = () => {
   const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2021, month: 6 });
   const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
   useEffect(() => {
@@ -50,6 +50,7 @@ const Template: Story<CalendarProps> = () => {
       expenditureLabel={accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`] !== undefined ? changeNumberForm(accountBook[`${yearAndMonth.year}-${yearAndMonth.month}`].allExpenditure) : '0'}
       accountBook={accountBook}
       thisYearAndMonth={`${yearAndMonth.year}-${yearAndMonth.month}`}
+      monthIncomeAndExpenditureVisible={true}
     />
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { ChangeMonthBar, ChangeMonthBarProps } from './ChangeMonthBar';
-import { LeftArrow, RightArrow } from '@/public';
+import { ChangeMonthBar, IChangeMonthBar } from './ChangeMonthBar';
 import { changeNumberForm } from '@/src/utils';
 
 export default {
@@ -10,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ChangeMonthBarProps> = () => {
+const Template: Story<IChangeMonthBar> = () => {
   const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 2020, month: 1 });
   const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
     const { year, month } = yearAndMonth;
@@ -40,6 +39,7 @@ const Template: Story<ChangeMonthBarProps> = () => {
       nextCalendar={''}
       expenditureLabel={changeNumberForm(50000)}
       incomeLabel={changeNumberForm(1000000)}
+      monthIncomeAndExpenditureVisible={true}
     />
   );
 };

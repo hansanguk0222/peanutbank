@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Img, ImgProps } from './Img';
+import { Img, IImg } from './Img';
 
 export default {
   title: 'atoms/img',
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ImgProps> = (args) => <Img {...args} />;
+const Template: Story<IImg> = (args) => <Img {...args} />;
 
 export const ImgTest = Template.bind({});
 ImgTest.args = {
