@@ -1,19 +1,21 @@
 import { Status } from '@/src/utils/constants';
 
-interface Iledge {
-  id: string;
+export interface ILedger {
+  id?: string;
+  date?: string;
+  incomeOrExpenditure?: string;
   discription: string;
-  category: string;
+  categoryId: string;
   amount: number;
 }
 
 export interface IAccountBook {
   [yearAndMonth: string]: {
     income: {
-      [date: number]: Iledge[];
+      [date: number]: ILedger[];
     };
     expenditure: {
-      [date: number]: Iledge[];
+      [date: number]: ILedger[];
     };
     maxIncome: number;
     maxExpenditure: number;
