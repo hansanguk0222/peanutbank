@@ -7,11 +7,11 @@ export interface ILabelInput extends IInput, ILabel {
   labelValue: string;
 }
 
-export const LabelInput: React.FC<ILabelInput> = ({ inputType, labelValue, onChange, readOnly, text, labelType, label, list, incomeOrExpenditure }) => {
+export const LabelInput: React.FC<ILabelInput> = ({ inputType, labelValue, onChange, readOnly, text, labelType, label, list, incomeOrExpenditure, testId }) => {
   return (
     <Label labelType={labelType}>
       {labelValue}
-      <Input inputType={inputType} onChange={onChange} readOnly={readOnly} text={text} label={label} list={list} incomeOrExpenditure={incomeOrExpenditure} />
+      <Input inputType={inputType} onChange={onChange} readOnly={readOnly} text={text} label={label} list={list} incomeOrExpenditure={incomeOrExpenditure} testId={testId} />
     </Label>
   );
 };
