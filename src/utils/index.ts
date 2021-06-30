@@ -128,7 +128,6 @@ export const changeNumberForm: (account: number) => string = (account) => {
     const part = changeStringReverse(numberToString.substring(i, i + 3));
     res = part + res;
   }
-  console.log(res);
   return res;
 };
 

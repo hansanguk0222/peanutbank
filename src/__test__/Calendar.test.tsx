@@ -84,7 +84,6 @@ describe('달력 컴포넌트 테스트', () => {
         yearAndMonth = { ...yearAndMonth, month: yearAndMonth.month + 1 };
       }
     }
-    console.log(yearAndMonth);
   });
 
   beforeEach(() => {
@@ -124,6 +123,7 @@ describe('달력 컴포넌트 테스트', () => {
     expect(screen.getByText('30,000')).toBeInTheDocument();
     expect(DateInput.value).toBe(`${nowYear}-${nowMonth}`);
 
+    //달력 버튼 잘 동작하는지 테스트
     const { rerender } = Component;
 
     const BeforeDateInput = Component.getByTestId('dateInput') as HTMLInputElement;
