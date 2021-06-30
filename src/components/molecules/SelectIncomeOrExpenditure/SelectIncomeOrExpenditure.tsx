@@ -19,7 +19,7 @@ export const SelectIncomeOrExpenditure: React.FC<ISelectIncomeOrExpenditure> = (
     <Container>
       <Button
         buttonType={buttonType}
-        onClick={() => onClick(SelectIncomeOrExpenditureButtonText.INCOME)}
+        onClick={(e) => onClick({ e, incomeOrExpenditure: SelectIncomeOrExpenditureButtonText.INCOME })}
         whichButton={SelectIncomeOrExpenditureButtonText.INCOME}
         isSelected={selectedButton === SelectIncomeOrExpenditureButtonText.INCOME}
       >
@@ -27,7 +27,7 @@ export const SelectIncomeOrExpenditure: React.FC<ISelectIncomeOrExpenditure> = (
       </Button>
       <Button
         buttonType={buttonType}
-        onClick={() => onClick(SelectIncomeOrExpenditureButtonText.EXPENDITURE)}
+        onClick={(e) => onClick({ e, incomeOrExpenditure: SelectIncomeOrExpenditureButtonText.EXPENDITURE })}
         whichButton={SelectIncomeOrExpenditureButtonText.EXPENDITURE}
         isSelected={selectedButton === SelectIncomeOrExpenditureButtonText.EXPENDITURE}
       >
