@@ -1,7 +1,6 @@
 import { calcRem } from '@/src/styles/theme';
-import React from 'react';
+import React, { FormEvent } from 'react';
 import styled, { css } from 'styled-components';
-import SelectIncomeOrExpenditureStories from '../../molecules/SelectIncomeOrExpenditure/SelectIncomeOrExpenditure.stories';
 
 interface FormStyleProps {
   type: 'default' | 'ledger';
@@ -9,6 +8,8 @@ interface FormStyleProps {
 
 export interface IForm extends FormStyleProps {
   onSubmitLedger?: ({
+    e,
+    userId,
     id,
     selectedDate,
     incomeOrExpenditure,
@@ -16,14 +17,17 @@ export interface IForm extends FormStyleProps {
     amount,
     discription,
   }: {
+    e: FormEvent;
+    userId: string;
     id?: string;
     incomeOrExpenditure: string;
     selectedDate: string;
     category: string;
     amount: number;
     discription: string;
-  }) => {};
-  category?: string;
+  }) => void;
+  userId: string;
+  category: string;
   amount?: number;
   discription?: string;
   id?: string;
@@ -48,10 +52,9 @@ const Container = styled.form<FormStyleProps>`
   flex-direction: column;
 `;
 
-export const Form: React.FC<IForm> = ({ type, onSubmitLedger, id, selectedDate, amount, incomeOrExpenditure, category, discription, children }) => {
-  console.log(amount, category, discription);
+export const Form: React.FC<IForm> = ({ type, onSubmitLedger, id, selectedDate, amount, incomeOrExpenditure, category, discription, children, userId }) => {
   return (
-    <Container type={type} onSubmit={() => type === 'ledger' && onSubmitLedger({ id, amount, selectedDate, incomeOrExpenditure, category, discription })}>
+    <Container type={type} onSubmit={(e) => type === 'ledger' && onSubmitLedger({ e, id, userId, amount, selectedDate, incomeOrExpenditure, category, discription })}>
       {children}
     </Container>
   );
