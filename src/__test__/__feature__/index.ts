@@ -1,4 +1,4 @@
-import { IAccountBook } from '@/src/type/store';
+import { IAccountBook, ICategory } from '@/src/type/store';
 
 export const maxIncome = 1000000;
 export const maxExpenditure = 5000;
@@ -51,65 +51,80 @@ export const accountBook: IAccountBook = {
   },
 };
 
-export const categorys = [
+export const categorys: ICategory[] = [
   {
     id: 'a',
     name: '식비',
+    color: '#32a421',
   },
   {
     id: 'b',
     name: '교통/차량',
+    color: '#32a421',
   },
   {
     id: 'c',
     name: '문화생활',
+    color: '#32a421',
   },
   {
     id: 'd',
     name: '마트/편의점',
+    color: '#32a421',
   },
   {
     id: 'e',
     name: '패션/미용',
+    color: '#32a421',
   },
   {
     id: 'f',
     name: '생활용품',
+    color: '#32a421',
   },
   {
     id: 'g',
     name: '주거/통신',
+    color: '#32a421',
   },
   {
     id: 'h',
     name: '건강',
+    color: '#32a421',
   },
   {
     id: 'i',
     name: '교육',
+    color: '#32a421',
   },
   {
     id: 'j',
     name: '경조사/회비',
+    color: '#32a421',
   },
   {
     id: 'k',
     name: '부모님',
+    color: '#32a421',
   },
   {
     id: 'l',
     name: '기타',
+    color: '#32a421',
   },
   {
     id: 'm',
     name: '현금',
+    color: '#32a421',
   },
   {
     id: 'n',
     name: '은행',
+    color: '#32a421',
   },
   {
     id: 'o',
     name: '신한카드',
+    color: '#32a421',
   },
 ];
