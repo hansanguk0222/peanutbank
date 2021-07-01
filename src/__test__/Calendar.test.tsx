@@ -91,8 +91,8 @@ describe('달력 컴포넌트 테스트', () => {
   });
 
   it('처음 달력화면 진입시 달력이 제대로 나오는지 테스트', async () => {
-    const nowYear = new Date().getFullYear();
-    const nowMonth = new Date().getMonth() + 1;
+    const nowYear = 2021;
+    const nowMonth = 6;
     const datesWithDays = makeDatesWithDays({ year: nowYear, month: nowMonth });
 
     const iterator = getAccountBook(getAccountBookRequest({ userId: 'abc', year: 2021, month: 6 }));
