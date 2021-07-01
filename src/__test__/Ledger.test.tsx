@@ -86,7 +86,6 @@ describe('장부 컴포넌트 테스트', () => {
     store.dispatch(
       createLedgerSuccess({ status: 201, amount: 150000, categoryId: 'a', date: '2021-06-30', discription: '소고기 먹음', id: 'abcd-12345', incomeOrExpenditure: 'expenditure', userId: 'abc' })
     );
-    console.log(store);
     const { rerender } = Component;
 
     rerender;
