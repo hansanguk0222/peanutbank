@@ -65,7 +65,7 @@ export const categorys: ICategory[] = [
   {
     id: 'c',
     name: '문화생활',
-    color: '#32a421',
+    color: '#56cd2e',
   },
   {
     id: 'd',
