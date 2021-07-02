@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { category } from '@/src/__test__/__feature__';
+import { categorys } from '@/src/__test__/__feature__';
 import { ILedgerForm, LedgerForm } from './LedgerForm';
 import { SelectIncomeOrExpenditureButtonText, DataListIds } from '@/src/utils/constants';
 import { changeNumberForm, makeDatesWithDays, splitByCommaAndJoinAmount } from '@/src/utils';
@@ -144,5 +144,5 @@ const Template: Story<ILedgerForm> = (args) => {
 
 export const LedgerFormTest = Template.bind({});
 LedgerFormTest.args = {
-  dataListOptionList: category,
+  dataListOptionList: categorys,
 };
