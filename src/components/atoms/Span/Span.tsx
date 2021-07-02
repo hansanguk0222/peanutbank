@@ -2,11 +2,12 @@ import { calcRem } from '@/src/styles/theme';
 import styled, { css } from 'styled-components';
 
 interface StyleISpan {
-  spanType: 'calendarDate' | 'default' | 'showMonthIncomeAndExpenditure';
+  spanType: 'calendarDate' | 'default' | 'showMonthIncomeAndExpenditure' | 'selectedDateCardAmount' | 'selectedDatedCardCategory' | 'selectedDateCardDate' | 'selectedDateCardDiscription';
   day?: number;
   thisMonth?: boolean;
-  incomeOrExpenditure?: 'income' | 'expenditure';
+  incomeOrExpenditure?: string;
   notThisMonth?: boolean;
+  categoryBackground?: string;
 }
 
 export interface ISpan extends StyleISpan {
@@ -61,11 +62,52 @@ const StyledSpan = styled.span<StyleISpan>`
           opacity: 0.5;
         `}
     `}
+  ${(props) =>
+    props.spanType === 'selectedDatedCardCategory' &&
+    css<StyleISpan>`
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: ${(props) => props.theme.size.font.s};
+      background: ${(props) => props.categoryBackground};
+      padding: ${calcRem(3)};
+      border-radius: ${calcRem(5)};
+    `}
+  ${(props) =>
+    props.spanType === 'selectedDateCardAmount' &&
+    css<StyleISpan>`
+      width: 40%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: ${(props) => props.theme.size.font.s};
+      ${(props) =>
+        props.incomeOrExpenditure === 'expenditure'
+          ? css`
+              color: ${(props) => props.theme.color.red1};
+            `
+          : css`
+              color: ${(props) => props.theme.color.blue1};
+            `}
+    `}
+  ${(props) =>
+    props.spanType === 'selectedDateCardDate' &&
+    css`
+      font-size: ${(props) => props.theme.size.font.s};
+    `}
+  ${(props) =>
+    props.spanType === 'selectedDateCardDiscription' &&
+    css`
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: ${(props) => props.theme.size.font.s};
+    `}
 `;
 
-export const Span: React.FC<ISpan> = ({ spanType, children, day, onClick, thisMonth, incomeOrExpenditure, notThisMonth }) => {
+export const Span: React.FC<ISpan> = ({ spanType, children, day, onClick, thisMonth, incomeOrExpenditure, notThisMonth, categoryBackground }) => {
   return (
-    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth} incomeOrExpenditure={incomeOrExpenditure} notThisMonth={notThisMonth}>
+    <StyledSpan spanType={spanType} day={day} onClick={onClick} thisMonth={thisMonth} incomeOrExpenditure={incomeOrExpenditure} notThisMonth={notThisMonth} categoryBackground={categoryBackground}>
       {children}
     </StyledSpan>
   );
