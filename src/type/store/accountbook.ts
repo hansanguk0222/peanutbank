@@ -4,7 +4,7 @@ export interface ILedger {
   id?: string;
   date?: string;
   incomeOrExpenditure?: string;
-  discription: string;
+  description: string;
   categoryId: string;
   amount: number;
 }

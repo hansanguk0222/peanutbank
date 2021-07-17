@@ -12,13 +12,13 @@ export function* getCategory(action: PayloadAction<{ userId: string }>) {
       if (userId === 'abc') {
         const { data, status } = yield call(categoryService.getCategory, { userId });
         if (status === 200) {
-          yield put(getCategorySuccess({ status, categorys: data }));
+          yield put(getCategorySuccess({ status, categories: data }));
         }
       }
     } else {
       const { data, status } = yield call(categoryService.getCategory, { userId });
       if (status === 200) {
-        yield put(getCategorySuccess({ status, categorys: data }));
+        yield put(getCategorySuccess({ status, categories: data }));
       }
     }
   } catch (err) {

@@ -5,7 +5,7 @@ export interface ICategory {
 }
 
 export interface ICategoryState {
-  categorys: ICategory[] | null;
+  categories: ICategory[] | null;
   status: number | null;
   errMessage: string | null;
   loading: boolean;

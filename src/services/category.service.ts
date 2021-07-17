@@ -7,9 +7,9 @@ interface ICategoryService {
 export const categoryService: ICategoryService = {
   getCategory({ userId }: { userId: string }) {
     if (process.env.NODE_ENV === 'development') {
-      return axios.get(`${process.env.DEV_SERVER_URL}/category?user=${userId}`);
+      return axios.get(`${process.env.DEV_SERVER_URL}/categories?user=${userId}`);
     } else {
-      return axios.get(`${process.env.PRO_SERVER_URL}/category?user=${userId}`);
+      return axios.get(`${process.env.PRO_SERVER_URL}/categories?user=${userId}`);
     }
   },
 };

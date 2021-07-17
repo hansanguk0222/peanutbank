@@ -23,8 +23,8 @@ const Template: Story = (args) => {
         categorys={categorys}
         onClickCard={onClickCard}
         ledgers={[
-          { id: 'abc4', discription: '당구비ㅇㄹ라ㅓㅣ러ㅏㅓ리너라ㅣㅇ러ㅣ너래ㅑㅈㄷ랴ㅐ져ㅐㄹ져ㅑㅐㄱ', categoryId: 'c', amount: 500034245242434 },
-          { id: 'abc5', discription: '박카스', categoryId: 'a', amount: 500 },
+          { id: 'abc4', description: '당구비ㅇㄹ라ㅓㅣ러ㅏㅓ리너라ㅣㅇ러ㅣ너래ㅑㅈㄷ랴ㅐ져ㅐㄹ져ㅑㅐㄱ', categoryId: 'c', amount: 500034245242434 },
+          { id: 'abc5', description: '박카스', categoryId: 'a', amount: 500 },
         ]}
         onClickRemoveButton={onClickRemoveButton}
         selectedDate="2021-06-02"

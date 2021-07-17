@@ -15,7 +15,7 @@ export interface IForm extends FormStyleProps {
     incomeOrExpenditure,
     category,
     amount,
-    discription,
+    description,
   }: {
     e: FormEvent;
     userId: string;
@@ -24,12 +24,12 @@ export interface IForm extends FormStyleProps {
     selectedDate: string;
     category: string;
     amount: number;
-    discription: string;
+    description: string;
   }) => void;
   userId: string;
   category: string;
   amount?: number;
-  discription?: string;
+  description?: string;
   id?: string;
   selectedDate?: string;
   incomeOrExpenditure?: string;
@@ -52,9 +52,9 @@ const Container = styled.form<FormStyleProps>`
   flex-direction: column;
 `;
 
-export const Form: React.FC<IForm> = ({ type, onSubmitLedger, id, selectedDate, amount, incomeOrExpenditure, category, discription, children, userId }) => {
+export const Form: React.FC<IForm> = ({ type, onSubmitLedger, id, selectedDate, amount, incomeOrExpenditure, category, description, children, userId }) => {
   return (
-    <Container type={type} onSubmit={(e) => type === 'ledger' && onSubmitLedger({ e, id, userId, amount, selectedDate, incomeOrExpenditure, category, discription })}>
+    <Container type={type} onSubmit={(e) => type === 'ledger' && onSubmitLedger({ e, id, userId, amount, selectedDate, incomeOrExpenditure, category, description })}>
       {children}
     </Container>
   );

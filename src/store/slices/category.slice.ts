@@ -3,7 +3,7 @@ import { ICategoryState, ICategory } from '@/src/type/store';
 import { Status } from '@/src/utils/constants';
 
 export const categoryState: ICategoryState = {
-  categorys: null,
+  categories: null,
   errMessage: null,
   loading: false,
   status: null,
@@ -18,9 +18,9 @@ const categorySlice = createSlice({
       state.status = null;
       state.errMessage = null;
     },
-    getCategorySuccess(state, { payload }: PayloadAction<{ categorys: ICategory[]; status: number }>) {
-      const { categorys, status } = payload;
-      state.categorys = categorys;
+    getCategorySuccess(state, { payload }: PayloadAction<{ categories: ICategory[]; status: number }>) {
+      const { categories, status } = payload;
+      state.categories = categories;
       state.status = status;
       state.loading = false;
     },

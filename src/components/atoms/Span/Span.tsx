@@ -2,7 +2,7 @@ import { calcRem } from '@/src/styles/theme';
 import styled, { css } from 'styled-components';
 
 interface StyleISpan {
-  spanType: 'calendarDate' | 'default' | 'showMonthIncomeAndExpenditure' | 'selectedDateCardAmount' | 'selectedDatedCardCategory' | 'selectedDateCardDate' | 'selectedDateCardDiscription';
+  spanType: 'calendarDate' | 'default' | 'showMonthIncomeAndExpenditure' | 'selectedDateCardAmount' | 'selectedDatedCardCategory' | 'selectedDateCardDate' | 'selectedDateCardDescription';
   day?: number;
   thisMonth?: boolean;
   incomeOrExpenditure?: string;
@@ -96,7 +96,7 @@ const StyledSpan = styled.span<StyleISpan>`
       font-size: ${(props) => props.theme.size.font.s};
     `}
   ${(props) =>
-    props.spanType === 'selectedDateCardDiscription' &&
+    props.spanType === 'selectedDateCardDescription' &&
     css`
       white-space: nowrap;
       overflow: hidden;

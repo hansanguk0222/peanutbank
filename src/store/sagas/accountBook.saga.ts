@@ -37,13 +37,13 @@ function* watchGetAccountBook() {
   yield takeEvery(getAccountBookRequest, getAccountBook);
 }
 
-export function* createLedger(action: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; discription: string }>) {
-  const { userId, amount, category, date, discription, incomeOrExpenditure } = action.payload;
+export function* createLedger(action: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
+  const { userId, amount, category, date, description, incomeOrExpenditure } = action.payload;
   try {
-    if (checkNotAvailableValue([userId, amount, category, date, discription, incomeOrExpenditure])) {
+    if (checkNotAvailableValue([userId, amount, category, date, description, incomeOrExpenditure])) {
       if (process.env.NODE_ENV === 'test') {
         if (userId === 'abc') {
-          const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, discription, incomeOrExpenditure });
+          const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, description, incomeOrExpenditure });
           if (status === 201) {
             yield put(
               createLedgerSuccess({
@@ -51,7 +51,7 @@ export function* createLedger(action: PayloadAction<{ userId: string; date: stri
                 amount: data.amount,
                 categoryId: data.categoryId,
                 date: data.date,
-                discription: data.discription,
+                description: data.description,
                 id: data.id,
                 incomeOrExpenditure: data.incomeOrExpenditure,
                 userId: data.userId,
@@ -60,7 +60,7 @@ export function* createLedger(action: PayloadAction<{ userId: string; date: stri
           }
         }
       } else {
-        const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, discription, incomeOrExpenditure });
+        const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, description, incomeOrExpenditure });
         if (status === 201) {
           yield put(
             createLedgerSuccess({
@@ -68,7 +68,7 @@ export function* createLedger(action: PayloadAction<{ userId: string; date: stri
               amount: data.amount,
               categoryId: data.categoryId,
               date: data.date,
-              discription: data.discription,
+              description: data.description,
               id: data.id,
               incomeOrExpenditure: data.incomeOrExpenditure,
               userId: data.userId,

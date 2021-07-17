@@ -17,13 +17,13 @@ export const SelectIncomeOrExpenditureButtonText = {
 
 export const LedgerInputLabelText = {
   AMOUNT: '금액을 입력해주세요',
-  DISCRIPTION: '부가 설명을 해주세요(필수는 아님)',
+  DESCRIPTION: '부가 설명을 해주세요(필수는 아님)',
   CATEGORY: '원하는 항목을 선택해주세요',
 };
 
 export const LabelText = {
   AMOUNT: '금액',
-  DISCRIPTION: '내용',
+  DESCRIPTION: '내용',
   CATEGORY: '분류',
 };
 
