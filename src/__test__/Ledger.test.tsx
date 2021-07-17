@@ -18,34 +18,36 @@ import { put, call } from 'redux-saga/effects';
 import { categorys, accountBook } from './__feature__';
 import { createLedger, getAccountBook } from '../store/sagas/accountBook.saga';
 import { createLedgerRequest, createLedgerSuccess, getAccountBookSuccess } from '../store/slices/accountBook.slice';
+import { forceReRender } from '@storybook/react';
 
 configure({ adapter: new Adapter() });
 
 describe('장부 컴포넌트 테스트', () => {
   let store;
-  let calendarVisible = true;
+  let calendarVisible = false;
   const setCalendarVisible = () => {
     calendarVisible = !calendarVisible;
   };
+  let Component;
+
   beforeEach(() => {
     store = makeStore();
-  });
-
-  it('장부 새로 작성하기', () => {
     const iterator = getCategory(getCategoryRequest({ userId: 'abc' }));
     expect(iterator.next().value).toEqual(call(categoryService.getCategory, { userId: 'abc' }));
     expect(iterator.next({ status: 200, data: categorys }).value).toEqual(put(getCategorySuccess({ status: 200, categorys })));
     expect(iterator.next().done).toBeTruthy();
     store.dispatch(getCategorySuccess({ status: 200, categorys }));
 
-    const Component = render(
+    Component = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <LedgerFormBox calendarVisible={calendarVisible} yyyy="2021" mm="06" dd="30" setCalendarVisible={setCalendarVisible} />
         </Provider>
       </ThemeProvider>
     );
+  });
 
+  it('장부 새로 작성하기', () => {
     screen.getByText('지출').click();
     userEvent.type(screen.getByTestId('inputCategory'), '식비');
     userEvent.type(screen.getByTestId('inputAmount'), '150000');
@@ -86,12 +88,41 @@ describe('장부 컴포넌트 테스트', () => {
     store.dispatch(
       createLedgerSuccess({ status: 201, amount: 150000, categoryId: 'a', date: '2021-06-30', discription: '소고기 먹음', id: 'abcd-12345', incomeOrExpenditure: 'expenditure', userId: 'abc' })
     );
-    console.log(store);
     const { rerender } = Component;
 
     rerender;
 
     //이거는 모달 안에 이 날의 작성된 장부 목록 아이디인 ledgerList를 가지고 테스트하는 것
-    expect(screen.getByTestId('ledgerList').classList.length).toBe(2);
+    // expect(screen.getByTestId('ledgerList').classList.length).toBe(2);
+  });
+
+  it('장부 날짜 클릭해서 그 날짜에 수입 및 지출 목록보기', () => {
+    const { rerender } = Component;
+
+    userEvent.click(screen.getByText('2021-06-30'));
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <LedgerFormBox calendarVisible={calendarVisible} yyyy="2021" mm="06" dd="30" setCalendarVisible={setCalendarVisible} />
+        </Provider>
+      </ThemeProvider>
+    );
+
+    userEvent.click(screen.getByText('16'));
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <LedgerFormBox calendarVisible={calendarVisible} yyyy="2021" mm="06" dd="16" setCalendarVisible={setCalendarVisible} />
+        </Provider>
+      </ThemeProvider>
+    );
+    expect(calendarVisible).toBe(false);
+    expect(screen.getByText('2021-06-16')).toBeInTheDocument();
+
+    expect(screen.getByRole('div', { name: /selectedDateLedgers/i })).toBeInTheDocument();
+    expect(screen.getByText('월급')).toBeInTheDocument();
+    expect(screen.getByText('보너스')).toBeInTheDocument();
+    expect(screen.getByText('250,000')).toBeInTheDocument();
   });
 });

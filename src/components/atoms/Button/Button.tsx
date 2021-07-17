@@ -4,7 +4,7 @@ import { calcRem } from '@/src/styles/theme';
 import { SelectIncomeOrExpenditureButtonText } from '@/src/utils/constants';
 
 interface ButtonStyleProps {
-  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeModalButton' | 'removeItemButton' | 'defaultButton' | 'selectIncomeOrExpenditureButton' | 'clearButton';
+  buttonType: 'changeMonthButton' | 'profileButton' | 'submitButton' | 'cancelButton' | 'closeButton' | 'removeItemButton' | 'defaultButton' | 'selectIncomeOrExpenditureButton' | 'clearButton';
   isSelected?: boolean;
   whichButton?: string;
   testId?: string;

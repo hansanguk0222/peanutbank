@@ -9,6 +9,7 @@ export const theme: DefaultTheme = {
     black: '0 0 8px 8px rgba(0, 0, 0, 0.3), 0 0 8px 8px rgba(0, 0, 0, 0.3)',
     bottomRed: '0 4px 2px -2px rgb(240, 115, 98)',
     bottomSkyBlue: '0 4px 2px -2px rgb(0, 115, 198)',
+    thinDarkGray: '0 0 2px 2px rgba(0, 0, 0, 0.03)',
   },
   color: {
     main: '#4a154b',

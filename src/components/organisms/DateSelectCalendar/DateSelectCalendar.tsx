@@ -63,6 +63,7 @@ export const DateSelectCalendar: React.FC<IDateSelectCalendar> = ({
           overlay: { background: 'none', boxSizing: 'border-box', position: 'absolute', top: calcRem(20), left: calcRem(25) },
           content: { border: 'none ', width: calcRem(400), height: calcRem(400), background: 'none' },
         }}
+        testId="ModalSelectDateCalendar"
       >
         <CalendarContainer>
           <Calendar

@@ -39,30 +39,35 @@ const accountBookSlice = createSlice({
       { payload }: PayloadAction<{ userId: string; id: string; date: string; incomeOrExpenditure: string; amount: number; categoryId: string; discription: string; status: number }>
     ) {
       const { status, id, date, incomeOrExpenditure, amount, categoryId, discription } = payload;
+
       const splitByDash = date.split('-');
       const yyyy = splitByDash[0];
       const mm = splitByDash[1];
       const dd = splitByDash[2];
+
       if (state.accountBook === null) {
         state.accountBook = {};
       }
       if (state.accountBook[`${yyyy}-${mm}`] === undefined) {
         state.accountBook[`${yyyy}-${mm}`] = { expenditure: {}, income: {}, allExpenditure: 0, allIncome: 0, maxExpenditure: 0, maxIncome: 0 };
-        if (state.accountBook[`${yyyy}-${mm}`]['income'][dd] === undefined) {
-          state.accountBook[`${yyyy}-${mm}`]['income'][dd] = [];
-        }
-        if (state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] === undefined) {
-          state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] = [];
-        }
       }
+      if (state.accountBook[`${yyyy}-${mm}`]['income'][dd] === undefined) {
+        state.accountBook[`${yyyy}-${mm}`]['income'][dd] = [];
+      }
+      if (state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] === undefined) {
+        state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] = [];
+      }
+
       state.accountBook[`${yyyy}-${mm}`][incomeOrExpenditure][dd].push({ id, discription, categoryId, amount });
 
       const nowAllIncome = state.accountBook[`${yyyy}-${mm}`]['income'][dd].reduce((acc, cur) => {
         return acc + cur.amount;
       }, 0);
+
       const nowAllExpenditure = state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd].reduce((acc, cur) => {
         return acc + cur.amount;
       }, 0);
+
       state.accountBook[`${yyyy}-${mm}`].allExpenditure += nowAllExpenditure;
       state.accountBook[`${yyyy}-${mm}`].allIncome += nowAllIncome;
       state.accountBook[`${yyyy}-${mm}`].maxExpenditure = Math.max(state.accountBook[`${yyyy}-${mm}`].maxExpenditure, nowAllExpenditure);
@@ -71,7 +76,6 @@ const accountBookSlice = createSlice({
       state.status = status;
     },
     createLedgerFailure(state, { payload }: PayloadAction<{ errMessage: string; status: typeof Status }>) {
-      //주석 테스트234
       const { errMessage, status } = payload;
       state.status = status;
       state.errMessage = errMessage;
