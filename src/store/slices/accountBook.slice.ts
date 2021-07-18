@@ -29,16 +29,16 @@ const accountBookSlice = createSlice({
       state.status = status;
       state.errMessage = errMessage;
     },
-    createLedgerRequest(state, { payload }: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; discription: string }>) {
+    createLedgerRequest(state, { payload }: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
       state.loading = true;
       state.status = null;
       state.errMessage = null;
     },
     createLedgerSuccess(
       state,
-      { payload }: PayloadAction<{ userId: string; id: string; date: string; incomeOrExpenditure: string; amount: number; categoryId: string; discription: string; status: number }>
+      { payload }: PayloadAction<{ userId: string; id: string; date: string; incomeOrExpenditure: string; amount: number; categoryId: string; description: string; status: number }>
     ) {
-      const { status, id, date, incomeOrExpenditure, amount, categoryId, discription } = payload;
+      const { status, id, date, incomeOrExpenditure, amount, categoryId, description } = payload;
 
       const splitByDash = date.split('-');
       const yyyy = splitByDash[0];
@@ -58,7 +58,7 @@ const accountBookSlice = createSlice({
         state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] = [];
       }
 
-      state.accountBook[`${yyyy}-${mm}`][incomeOrExpenditure][dd].push({ id, discription, categoryId, amount });
+      state.accountBook[`${yyyy}-${mm}`][incomeOrExpenditure][dd].push({ id, description, categoryId, amount });
 
       const nowAllIncome = state.accountBook[`${yyyy}-${mm}`]['income'][dd].reduce((acc, cur) => {
         return acc + cur.amount;

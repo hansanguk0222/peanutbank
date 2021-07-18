@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { categorys } from '@/src/__test__/__feature__';
+import { categories } from '@/src/__test__/__feature__';
 import { ILedgerForm, LedgerForm } from './LedgerForm';
 import { SelectIncomeOrExpenditureButtonText, DataListIds } from '@/src/utils/constants';
 import { changeNumberForm, makeDatesWithDays, splitByCommaAndJoinAmount } from '@/src/utils';
@@ -12,7 +12,7 @@ export default {
 
 const Template: Story<ILedgerForm> = (args) => {
   const [amountValue, setAmountValue] = useState<string>('');
-  const [discriptionValue, setDiscriptionValue] = useState<string>('');
+  const [descriptionValue, setdescriptionValue] = useState<string>('');
   const [selectDateValue, setSelectDateValue] = useState<string>('2021-06-30');
   const [selectedButton, setSelectedButton] = useState<string>(SelectIncomeOrExpenditureButtonText.INCOME);
   const [dataListValue, setDataListValue] = useState<string>('');
@@ -61,7 +61,7 @@ const Template: Story<ILedgerForm> = (args) => {
     selectedDate,
     incomeOrExpenditure,
     category,
-    discription,
+    description,
   }: {
     e: FormEvent;
     id: string;
@@ -70,10 +70,10 @@ const Template: Story<ILedgerForm> = (args) => {
     selectedDate: string;
     incomeOrExpenditure: string;
     category: string;
-    discription: string;
+    description: string;
   }) => {
     e.preventDefault();
-    console.log(id, userId, amount, selectedDate, incomeOrExpenditure, category, discription);
+    console.log(id, userId, amount, selectedDate, incomeOrExpenditure, category, description);
   };
 
   const onClickSelectIncomeOrExpenditure = ({ e, incomeOrExpenditure }: { e: MouseEvent; incomeOrExpenditure: '수입' | '지출' }) => {
@@ -91,14 +91,14 @@ const Template: Story<ILedgerForm> = (args) => {
     }
   };
 
-  const onChangeDiscriptionInput = (e) => {
-    setDiscriptionValue(e.target.value);
+  const onChangeDescriptionInput = (e) => {
+    setdescriptionValue(e.target.value);
   };
 
   const onClickClearButton = () => {
     setAmountValue('');
     setDataListValue('');
-    setDiscriptionValue('');
+    setdescriptionValue('');
     setSelectedButton(SelectIncomeOrExpenditureButtonText.INCOME);
   };
 
@@ -126,7 +126,7 @@ const Template: Story<ILedgerForm> = (args) => {
       onClickClearButton={onClickClearButton}
       onSubmitLedger={onSubmitLedger}
       category={dataListValue}
-      discription={discriptionValue}
+      description={descriptionValue}
       onChangeDataList={onChangeDataList}
       selectDateValue={selectDateValue}
       onClickSelectIncomeOrExpenditure={onClickSelectIncomeOrExpenditure}
@@ -134,9 +134,9 @@ const Template: Story<ILedgerForm> = (args) => {
       dataListValue={dataListValue}
       incomeOrExpenditure={selectedButton}
       onChangeAmountInput={onChangeAmountInput}
-      onChangeDiscriptionInput={onChangeDiscriptionInput}
+      onChangeDescriptionInput={onChangeDescriptionInput}
       amountValue={amountValue}
-      discriptionValue={discriptionValue}
+      descriptionValue={descriptionValue}
       closeModal={closeModal}
     />
   );
@@ -144,5 +144,5 @@ const Template: Story<ILedgerForm> = (args) => {
 
 export const LedgerFormTest = Template.bind({});
 LedgerFormTest.args = {
-  dataListOptionList: categorys,
+  dataListOptionList: categories,
 };

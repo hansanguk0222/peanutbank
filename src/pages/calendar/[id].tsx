@@ -35,7 +35,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({ store, que
   const thisYear = Number(query.id.slice(0, 4));
   const thisMonth = Number(query.id.slice(5));
   //여기서는 유저 아이디 받아서 넣는 작업 필요
-  // store.dispatch(getAccountBookRequest({ userId: 'abc', year: 2021, month: 6 }));
+  store.dispatch(getAccountBookRequest({ userId: 'peanut2016', year: 2021, month: 6 }));
   store.dispatch(END);
 
   await (store as SagaStore).sagaTask.toPromise();

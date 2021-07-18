@@ -15,9 +15,9 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
 }) => {
   const dispatch = useDispatch();
 
-  const { categorys } = useCategoryState();
+  const { categories } = useCategoryState();
   const [amountValue, setAmountValue] = useState<string>('');
-  const [discriptionValue, setDiscriptionValue] = useState<string>('');
+  const [descriptionValue, setDescriptionValue] = useState<string>('');
   const [selectDateValue, setSelectDateValue] = useState<string>(`${yyyy}-${mm}-${dd}`);
   const [selectedButton, setSelectedButton] = useState<string>(SelectIncomeOrExpenditureButtonText.INCOME);
   const [dataListValue, setDataListValue] = useState<string>('');
@@ -67,7 +67,7 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
     selectedDate,
     incomeOrExpenditure,
     category,
-    discription,
+    description,
   }: {
     e: FormEvent;
     id: string;
@@ -76,11 +76,11 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
     selectedDate: string;
     incomeOrExpenditure: string;
     category: string;
-    discription: string;
+    description: string;
   }) => {
     e.preventDefault();
     if (!id) {
-      dispatch(createLedgerRequest({ amount, category, date: selectedDate, discription, incomeOrExpenditure, userId: process.env.NODE_ENV === 'test' ? 'abc' : '' }));
+      dispatch(createLedgerRequest({ amount, category, date: selectedDate, description, incomeOrExpenditure, userId: process.env.NODE_ENV === 'test' ? 'abc' : '' }));
     }
   };
 
@@ -98,14 +98,14 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
     }
   };
 
-  const onChangeDiscriptionInput = (e) => {
-    setDiscriptionValue(e.target.value);
+  const onChangeDescriptionInput = (e) => {
+    setDescriptionValue(e.target.value);
   };
 
   const onClickClearButton = () => {
     setAmountValue('');
     setDataListValue('');
-    setDiscriptionValue('');
+    setDescriptionValue('');
     setSelectedButton(SelectIncomeOrExpenditureButtonText.INCOME);
   };
 
@@ -127,11 +127,11 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
       yearAndMonthValue={`${yearAndMonth.year}-${yearAndMonth.month}`}
       monthIncomeAndExpenditureVisible={false}
       dateSelectCalendar={true}
-      dataListOptionList={categorys}
+      dataListOptionList={categories}
       onClickClearButton={onClickClearButton}
       onSubmitLedger={onSubmitLedger}
       category={dataListValue}
-      discription={discriptionValue}
+      description={descriptionValue}
       onChangeDataList={onChangeDataList}
       selectDateValue={selectDateValue}
       onClickSelectIncomeOrExpenditure={onClickSelectIncomeOrExpenditure}
@@ -139,9 +139,9 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
       dataListValue={dataListValue}
       incomeOrExpenditure={selectedButton}
       onChangeAmountInput={onChangeAmountInput}
-      onChangeDiscriptionInput={onChangeDiscriptionInput}
+      onChangeDescriptionInput={onChangeDescriptionInput}
       amountValue={amountValue}
-      discriptionValue={discriptionValue}
+      descriptionValue={descriptionValue}
       closeModal={closeModal}
     />
   );

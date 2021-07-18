@@ -47,17 +47,17 @@ const CardTags = styled.div`
 
 export interface ISelectedDateLedgers {
   ledgers: ILedger[];
-  categorys: ICategory[];
+  categories: ICategory[];
   onClickCard: (e) => void;
   selectedDate: string;
   onClickRemoveButton: (e) => void;
 }
 
-export const SelectedDateLedgers: React.FC<ISelectedDateLedgers> = ({ ledgers, categorys, onClickCard, onClickRemoveButton, selectedDate }) => {
+export const SelectedDateLedgers: React.FC<ISelectedDateLedgers> = ({ ledgers, categories, onClickCard, onClickRemoveButton, selectedDate }) => {
   return (
     <Container aria-label="selectedDateLedgers">
       {ledgers.map((ledger) => {
-        const [category] = categorys.filter((category) => category.id === ledger.categoryId);
+        const [category] = categories.filter((category) => category.id === ledger.categoryId);
         return (
           <Card key={ledger.id} onClick={onClickCard}>
             <CardHeader>
@@ -74,7 +74,7 @@ export const SelectedDateLedgers: React.FC<ISelectedDateLedgers> = ({ ledgers, c
                 <X width={10} height={10} />
               </ButtonWithIcon>
             </CardHeader>
-            <Span spanType="selectedDateCardDiscription">{ledger.discription}</Span>
+            <Span spanType="selectedDateCardDescription">{ledger.description}</Span>
           </Card>
         );
       })}

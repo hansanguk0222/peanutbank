@@ -136,8 +136,8 @@ export const splitByCommaAndJoinAmount = (str: string) => {
   return Number(amount);
 };
 
-export const addDateAmount: (dateValues: { id: string; discription: string; purpose: string; amount: number }[]) => number = (
-  dateValues: { id: string; discription: string; purpose: string; amount: number }[]
+export const addDateAmount: (dateValues: { id: string; description: string; purpose: string; amount: number }[]) => number = (
+  dateValues: { id: string; description: string; purpose: string; amount: number }[]
 ) => {
   let res = 0;
   dateValues.map((dateValue) => {
