@@ -8,7 +8,6 @@ const Calendar: React.FC<{ nowYearAndMonth: { year: number; month: number } }> =
   const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 0, month: 0 });
   const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
   useEffect(() => {
-    console.log(nowYearAndMonth);
     setYearAndMonth(nowYearAndMonth);
   }, [nowYearAndMonth]);
 
