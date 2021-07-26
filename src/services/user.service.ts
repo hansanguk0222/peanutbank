@@ -1,11 +1,12 @@
 import axios from 'axios';
+import API from './API';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers = { crossDomain: true, 'Content-Type': 'application/json' };
 
 interface IUserService {
   getUserInformByGoogleLogin: ({ idToken, oauthType, googleId }: { idToken: string; oauthType: string; googleId: string }) => void;
-  getUserInformByToken: ({ token, tokenType }: { token: string; tokenType: string }) => void;
+  getUserInformByToken: ({ nickname }: { nickname: string }) => void;
 }
 
 export const userService: IUserService = {
@@ -36,19 +37,11 @@ export const userService: IUserService = {
       );
     }
   },
-  getUserInformByToken({ token, tokenType }: { token: string; tokenType: string }) {
+  getUserInformByToken({ nickname }: { nickname: string }) {
     if (process.env.NODE_ENV === 'development') {
-      return axios.get(`${process.env.NEXT_PUBLIC_DEV_SERVER_URL}/users/auth/token/${tokenType}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
+      return API.get(`${process.env.NEXT_PUBLIC_DEV_SERVER_URL}/users/${nickname}`);
     } else {
-      return axios.get(`${process.env.NEXT_PUBLIC_PRO_SERVER_URL}/users/auth/token/${tokenType}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
+      return API.get(`${process.env.NEXT_PUBLIC_PRO_SERVER_URL}/users/${nickname}`);
     }
   },
 };
