@@ -13,7 +13,7 @@ const accountBookSlice = createSlice({
   name: 'accountBook',
   initialState: accountBookState,
   reducers: {
-    getAccountBookRequest(state, { payload }: PayloadAction<{ userId: string; year: number; month: number }>) {
+    getAccountBookRequest(state, { payload }: PayloadAction<{ nicname: string; year: number; month: number }>) {
       state.loading = true;
       state.status = null;
       state.errMessage = null;

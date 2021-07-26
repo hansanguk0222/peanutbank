@@ -1,3 +1,6 @@
+import { verify } from 'jsonwebtoken';
+import { TokenInterface } from '@/src/type/token';
+
 export const findBeforeAndNextYearAndMonth: ({ year, month }: { year: number; month: number }) => { lastYear: number; lastMonth: number; nextYear: number; nextMonth: number } = ({
   year,
   month,
@@ -145,3 +148,22 @@ export const addDateAmount: (dateValues: { id: string; description: string; purp
   });
   return res;
 };
+
+export const isVerifiedToken = ({ token, type }: { token: string; type: 'accessToken' | 'refreshToken' }): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    verify(token, type === 'accessToken' ? process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY : process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY, (err, decoded) => {
+      if (err) {
+        console.log('불통과합니다.');
+        reject(err);
+        return;
+      }
+      console.log('통과합니다.');
+      resolve(decoded);
+    });
+  });
+};
+
+export const verifyRequestData = (arr: any[]): boolean =>
+  arr.every((e) => {
+    return e !== undefined && e !== null;
+  });
