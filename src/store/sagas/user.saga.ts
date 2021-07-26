@@ -28,11 +28,11 @@ function* watchGetUserInformByGoogleLogin() {
   yield takeEvery(getUserInformByGoogleLoginRequest, getUserInformByGoogleLogin);
 }
 
-function* getUserInfo(action: PayloadAction<{ token: string; tokenType: string }>) {
+function* getUserInfo(action: PayloadAction<{ nickname: string }>) {
   try {
-    const { token, tokenType } = action.payload;
+    const { nickname } = action.payload;
 
-    const { data, status } = yield call(userService.getUserInformByToken, { token, tokenType });
+    const { data, status } = yield call(userService.getUserInformByToken, { nickname });
     if (status === 200) {
       yield put(getUserInfoSuccess({ status, userInfo: data }));
     }

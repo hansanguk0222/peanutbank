@@ -31,13 +31,14 @@ const userSlice = createSlice({
       state.errMessage = errMessage;
       state.loading = false;
     },
-    getUserInfoRequest(state) {
+    getUserInfoRequest(state, { payload }: PayloadAction<{ nickname: string }>) {
       state.loading = true;
       state.status = null;
       state.errMessage = null;
     },
     getUserInfoSuccess(state, { payload }: PayloadAction<{ status: typeof Status; userInfo: IUserInfo }>) {
       const { status, userInfo } = payload;
+      console.log(userInfo);
       state.userInfo = userInfo;
       state.status = status;
       state.errMessage = null;
