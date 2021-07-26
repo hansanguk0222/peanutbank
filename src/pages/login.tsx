@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { SagaStore, wrapper } from '@/src/store';
-import { END } from '@redux-saga/core';
+import { wrapper } from '@/src/store';
 import { isVerifiedToken } from '@/src/utils';
 import LoginBox from '@/src/components/container/LoginBox';
-import { verify } from 'jsonwebtoken';
+import { useUserState } from '@/src/hooks';
+import { useRouter } from 'next/router';
+import { verifyRequestData } from '@/src/utils';
 
 const Login: React.FC = () => {
+  const { userInfo } = useUserState();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push('/');
+    }
+  }, [userInfo]);
+
   return <LoginBox />;
 };
 

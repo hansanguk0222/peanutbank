@@ -7,17 +7,29 @@ import { LeftSideBar, LinkURLAndButtonType } from '@/src/components/molecules/Le
 import React, { useState } from 'react';
 import { Router } from 'next/dist/client/router';
 import { CommonLayout } from '@/src/components/organisms/CommonLayout';
+import { getUserInfoRequest } from '../store/slices/user.slice';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  return <div>hi</div>;
+  return <></>;
 };
 
-export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-  store.dispatch(getAccountBookRequest({ userId: 'abc', year: 2021, month: 6 }));
-  store.dispatch(END);
-
-  await (store as SagaStore).sagaTask.toPromise();
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, res }) => {
+  try {
+    const cookieStr = req.headers.cookie as string;
+    const cookies = cookieStr.split(' ');
+    let nickname;
+    cookies.map((cookie) => {
+      if (cookie.startsWith('nickname=')) {
+        nickname = cookie.slice(9).replace(/;$/, '');
+      }
+    });
+    store.dispatch(getUserInfoRequest({ nickname }));
+    res.statusCode = 302;
+    res.setHeader('Location', '/income-and-expenditure');
+    return {};
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 export default Home;
