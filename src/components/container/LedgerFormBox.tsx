@@ -5,11 +5,10 @@ import { changeNumberForm, makeDatesWithDays, splitByCommaAndJoinAmount } from '
 import { useCategoryState } from '@/src/hooks';
 import { createLedgerRequest } from '@/src/store/slices/accountBook.slice';
 import { useDispatch } from 'react-redux';
+import { Cookies } from 'react-cookie';
 
-const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVisible: boolean; setCalendarVisible: (calendarVisible: boolean) => void }> = ({
-  yyyy,
-  mm,
-  dd,
+const LedgerFormBox: React.FC<{ yyyymmdd: { yyyy: string; mm: string; dd: string }; calendarVisible: boolean; setCalendarVisible: (calendarVisible: boolean) => void }> = ({
+  yyyymmdd,
   calendarVisible,
   setCalendarVisible,
 }) => {
@@ -18,11 +17,12 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
   const { categories } = useCategoryState();
   const [amountValue, setAmountValue] = useState<string>('');
   const [descriptionValue, setDescriptionValue] = useState<string>('');
-  const [selectDateValue, setSelectDateValue] = useState<string>(`${yyyy}-${mm}-${dd}`);
+  const [selectDateValue, setSelectDateValue] = useState<string>(`${yyyymmdd.yyyy}-${yyyymmdd.mm}-${yyyymmdd.dd}`);
   const [selectedButton, setSelectedButton] = useState<string>(SelectIncomeOrExpenditureButtonText.INCOME);
   const [dataListValue, setDataListValue] = useState<string>('');
-  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: Number(yyyy), month: Number(mm) });
+  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: Number(yyyymmdd.yyyy), month: Number(yyyymmdd.mm) });
   const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
+  const cookies = new Cookies();
 
   useEffect(() => {
     const { year, month } = yearAndMonth;
@@ -62,7 +62,6 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
   const onSubmitLedger: any = ({
     e,
     id,
-    userId,
     amount,
     selectedDate,
     incomeOrExpenditure,
@@ -71,7 +70,7 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
   }: {
     e: FormEvent;
     id: string;
-    userId: string;
+    nickname: string;
     amount: number;
     selectedDate: string;
     incomeOrExpenditure: string;
@@ -80,7 +79,16 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
   }) => {
     e.preventDefault();
     if (!id) {
-      dispatch(createLedgerRequest({ amount, category, date: selectedDate, description, incomeOrExpenditure, userId: process.env.NODE_ENV === 'test' ? 'abc' : '' }));
+      dispatch(
+        createLedgerRequest({
+          amount,
+          category,
+          date: selectedDate,
+          description,
+          incomeOrExpenditure: '수입' === incomeOrExpenditure ? 'income' : 'expenditure',
+          nickname: process.env.NODE_ENV === 'test' ? 'abc' : cookies.get('nickname'),
+        })
+      );
     }
   };
 
@@ -115,7 +123,7 @@ const LedgerFormBox: React.FC<{ yyyy: string; mm: string; dd: string; calendarVi
 
   return (
     <LedgerForm
-      userId={process.env.NODE_ENV === 'test' ? 'abc' : ''} //임시로 넣어서 나중에 무조건 고쳐야 됨, 로그인 회원 가입 얼른 구현합시다~
+      nickname={process.env.NODE_ENV === 'test' ? 'abc' : cookies.get('nickname')}
       calendarVisible={calendarVisible}
       selectedDate={selectDateValue}
       changeCalendarVisible={changeCalendarVisible}
