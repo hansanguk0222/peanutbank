@@ -39,9 +39,9 @@ export const userService: IUserService = {
   },
   getUserInformByToken({ nickname }: { nickname: string }) {
     if (process.env.NODE_ENV === 'development') {
-      return API.get(`${process.env.NEXT_PUBLIC_DEV_SERVER_URL}/users/${nickname}`);
+      return API.get(`${process.env.NEXT_PUBLIC_DEV_SERVER_URL}/users/${nickname}/profile`);
     } else {
-      return API.get(`${process.env.NEXT_PUBLIC_PRO_SERVER_URL}/users/${nickname}`);
+      return API.get(`${process.env.NEXT_PUBLIC_PRO_SERVER_URL}/users/${nickname}/profile`);
     }
   },
 };
