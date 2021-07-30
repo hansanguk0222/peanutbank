@@ -3,7 +3,7 @@ import { IAccountBookState, IAccountBook } from '@/src/type/store';
 import { Status } from '@/src/utils/constants';
 
 export const accountBookState: IAccountBookState = {
-  accountBook: null,
+  accountBookInfo: null,
   errMessage: null,
   loading: false,
   status: null,
@@ -13,7 +13,7 @@ const accountBookSlice = createSlice({
   name: 'accountBook',
   initialState: accountBookState,
   reducers: {
-    getAccountBookRequest(state, { payload }: PayloadAction<{ nicname: string; year: number; month: number }>) {
+    getAccountBookRequest(state, { payload }: PayloadAction<{ nickname: string; yyyy: number; mm: number }>) {
       state.loading = true;
       state.status = null;
       state.errMessage = null;
@@ -21,7 +21,7 @@ const accountBookSlice = createSlice({
     getAccountBookSuccess(state, { payload }: PayloadAction<{ accountBook: IAccountBook; status: typeof Status }>) {
       const { accountBook, status } = payload;
       state.loading = false;
-      state.accountBook = accountBook;
+      state.accountBookInfo = accountBook;
       state.status = status;
     },
     getAccountBookFailure(state, { payload }: PayloadAction<{ errMessage: string; status: typeof Status }>) {
@@ -29,7 +29,7 @@ const accountBookSlice = createSlice({
       state.status = status;
       state.errMessage = errMessage;
     },
-    createLedgerRequest(state, { payload }: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
+    createLedgerRequest(state, { payload }: PayloadAction<{ id?: string; nickname: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
       state.loading = true;
       state.status = null;
       state.errMessage = null;
@@ -45,33 +45,33 @@ const accountBookSlice = createSlice({
       const mm = splitByDash[1];
       const dd = splitByDash[2];
 
-      if (state.accountBook === null) {
-        state.accountBook = {};
+      if (state.accountBookInfo === null) {
+        state.accountBookInfo = {};
       }
-      if (state.accountBook[`${yyyy}-${mm}`] === undefined) {
-        state.accountBook[`${yyyy}-${mm}`] = { expenditure: {}, income: {}, allExpenditure: 0, allIncome: 0, maxExpenditure: 0, maxIncome: 0 };
+      if (state.accountBookInfo[`${yyyy}-${mm}`] === undefined) {
+        state.accountBookInfo[`${yyyy}-${mm}`] = { expenditure: {}, income: {}, allExpenditure: 0, allIncome: 0, maxExpenditure: 0, maxIncome: 0 };
       }
-      if (state.accountBook[`${yyyy}-${mm}`]['income'][dd] === undefined) {
-        state.accountBook[`${yyyy}-${mm}`]['income'][dd] = [];
+      if (state.accountBookInfo[`${yyyy}-${mm}`]['income'][dd] === undefined) {
+        state.accountBookInfo[`${yyyy}-${mm}`]['income'][dd] = [];
       }
-      if (state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] === undefined) {
-        state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd] = [];
+      if (state.accountBookInfo[`${yyyy}-${mm}`]['expenditure'][dd] === undefined) {
+        state.accountBookInfo[`${yyyy}-${mm}`]['expenditure'][dd] = [];
       }
 
-      state.accountBook[`${yyyy}-${mm}`][incomeOrExpenditure][dd].push({ id, description, categoryId, amount });
+      state.accountBookInfo[`${yyyy}-${mm}`][incomeOrExpenditure][dd].push({ id, description, categoryId, amount });
 
-      const nowAllIncome = state.accountBook[`${yyyy}-${mm}`]['income'][dd].reduce((acc, cur) => {
+      const nowAllIncome = state.accountBookInfo[`${yyyy}-${mm}`]['income'][dd].reduce((acc, cur) => {
         return acc + cur.amount;
       }, 0);
 
-      const nowAllExpenditure = state.accountBook[`${yyyy}-${mm}`]['expenditure'][dd].reduce((acc, cur) => {
+      const nowAllExpenditure = state.accountBookInfo[`${yyyy}-${mm}`]['expenditure'][dd].reduce((acc, cur) => {
         return acc + cur.amount;
       }, 0);
 
-      state.accountBook[`${yyyy}-${mm}`].allExpenditure += nowAllExpenditure;
-      state.accountBook[`${yyyy}-${mm}`].allIncome += nowAllIncome;
-      state.accountBook[`${yyyy}-${mm}`].maxExpenditure = Math.max(state.accountBook[`${yyyy}-${mm}`].maxExpenditure, nowAllExpenditure);
-      state.accountBook[`${yyyy}-${mm}`].maxIncome = Math.max(state.accountBook[`${yyyy}-${mm}`].maxIncome, nowAllIncome);
+      state.accountBookInfo[`${yyyy}-${mm}`].allExpenditure += nowAllExpenditure;
+      state.accountBookInfo[`${yyyy}-${mm}`].allIncome += nowAllIncome;
+      state.accountBookInfo[`${yyyy}-${mm}`].maxExpenditure = Math.max(state.accountBookInfo[`${yyyy}-${mm}`].maxExpenditure, nowAllExpenditure);
+      state.accountBookInfo[`${yyyy}-${mm}`].maxIncome = Math.max(state.accountBookInfo[`${yyyy}-${mm}`].maxIncome, nowAllIncome);
       state.loading = false;
       state.status = status;
     },
