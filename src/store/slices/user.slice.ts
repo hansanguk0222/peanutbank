@@ -38,7 +38,6 @@ const userSlice = createSlice({
     },
     getUserInfoSuccess(state, { payload }: PayloadAction<{ status: typeof Status; userInfo: IUserInfo }>) {
       const { status, userInfo } = payload;
-      console.log(userInfo);
       state.userInfo = userInfo;
       state.status = status;
       state.errMessage = null;

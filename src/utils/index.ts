@@ -1,5 +1,4 @@
 import { verify } from 'jsonwebtoken';
-import { TokenInterface } from '@/src/type/token';
 
 export const findBeforeAndNextYearAndMonth: ({ year, month }: { year: number; month: number }) => { lastYear: number; lastMonth: number; nextYear: number; nextMonth: number } = ({
   year,
