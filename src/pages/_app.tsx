@@ -7,6 +7,7 @@ import { wrapper } from '@/src/store';
 import { CommonLayout } from '@/src/components/organisms/CommonLayout';
 import { CommonLayoutBox } from '@/src/components/container/CommonLayoutBox';
 import { useRouter } from 'next/router';
+import API from '@/src/services/API';
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -45,6 +46,10 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Compo
 MyApp.getInitialProps = async (context) => {
   const { ctx, Component } = context;
   let pageProps = {};
+
+  const cookie = ctx.req.headers.cookie;
+
+  API.defaults.headers.cookie = cookie;
 
   if (Component.getInitialProps) {
     pageProps = (await Component.getInitialProps(ctx)) || {};
