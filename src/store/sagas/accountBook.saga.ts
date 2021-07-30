@@ -1,28 +1,28 @@
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import { getAccountBookRequest, getAccountBookSuccess, getAccountBookFailure, createLedgerRequest, createLedgerSuccess, createLedgerFailure } from '../slices/accountBook.slice';
 import { PayloadAction } from '@reduxjs/toolkit';
-// import { accountBook } from '@/src/__test__/__feature__';
 import { checkNotAvailableValue } from '@/src/utils';
 import { ErrorMessage } from '@/src/utils/constants';
 import { accountBookService } from '@/src/services';
+import Cookies from 'universal-cookie';
 
-export function* getAccountBook(action: PayloadAction<{ userId: string; year: number; month: number }>) {
-  const { userId, year, month } = action.payload;
+export function* getAccountBook(action: PayloadAction<{ nickname: string; yyyy: number; mm: number }>) {
+  const { nickname, yyyy, mm } = action.payload;
   try {
-    if (checkNotAvailableValue([userId, year, month])) {
+    if (checkNotAvailableValue([nickname, yyyy, mm])) {
       if (process.env.NODE_ENV === 'test') {
-        if (userId === 'abc') {
-          const { data, status } = yield call(accountBookService.getAccountBook, { userId, year, month });
-          yield put(getAccountBookSuccess({ status, accountBook: data }));
+        if (nickname === 'abc') {
+          const { data, status } = yield call(accountBookService.getAccountBook, { nickname, yyyy, mm });
+          yield put(getAccountBookSuccess({ status, accountBook: data.accountbooks }));
         }
       } else {
-        const { data, status } = yield call(accountBookService.getAccountBook, { userId, year, month });
-        yield put(getAccountBookSuccess({ status, accountBook: data }));
+        const { data, status } = yield call(accountBookService.getAccountBook, { nickname, yyyy, mm });
+        yield put(getAccountBookSuccess({ status, accountBook: data.accountbooks }));
       }
     }
   } catch (err) {
     if (process.env.NODE_ENV === 'test') {
-      if (userId !== 'abc') {
+      if (nickname !== 'abc') {
         yield put(getAccountBookFailure({ status: 400, errMessage: ErrorMessage.INVALID_USER }));
       } else {
         yield put(getAccountBookFailure({ status: 400, errMessage: ErrorMessage.NOT_ALL_VALUES_ARE_PASSED }));
@@ -37,13 +37,17 @@ function* watchGetAccountBook() {
   yield takeEvery(getAccountBookRequest, getAccountBook);
 }
 
-export function* createLedger(action: PayloadAction<{ userId: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
-  const { userId, amount, category, date, description, incomeOrExpenditure } = action.payload;
+export function* createLedger(action: PayloadAction<{ id?: string; nickname: string; date: string; incomeOrExpenditure: string; amount: number; category: string; description: string }>) {
+  const { id, nickname, amount, category, date, description, incomeOrExpenditure } = action.payload;
   try {
-    if (checkNotAvailableValue([userId, amount, category, date, description, incomeOrExpenditure])) {
+    if (checkNotAvailableValue([nickname, amount, category, date, description, incomeOrExpenditure])) {
+      const tempDate = date.split('-');
+      const yyyy = tempDate[0];
+      const mm = tempDate[1];
+      const dd = tempDate[2];
       if (process.env.NODE_ENV === 'test') {
-        if (userId === 'abc') {
-          const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, description, incomeOrExpenditure });
+        if (nickname === 'abc') {
+          const { data, status } = yield call(accountBookService.createLedger, { amount, category, dd, description, incomeOrExpenditure, mm, nickname, yyyy });
           if (status === 201) {
             yield put(
               createLedgerSuccess({
@@ -60,7 +64,7 @@ export function* createLedger(action: PayloadAction<{ userId: string; date: stri
           }
         }
       } else {
-        const { data, status } = yield call(accountBookService.createLedger, { userId, amount, category, date, description, incomeOrExpenditure });
+        const { data, status } = yield call(accountBookService.createLedger, { amount, category, dd, description, incomeOrExpenditure, mm, nickname, yyyy });
         if (status === 201) {
           yield put(
             createLedgerSuccess({
@@ -79,7 +83,7 @@ export function* createLedger(action: PayloadAction<{ userId: string; date: stri
     }
   } catch (err) {
     if (process.env.NODE_ENV === 'test') {
-      if (userId !== 'abc') {
+      if (nickname !== 'abc') {
         yield put(createLedgerFailure({ status: 400, errMessage: ErrorMessage.INVALID_USER }));
       } else {
         yield put(createLedgerFailure({ status: 400, errMessage: ErrorMessage.NOT_ALL_VALUES_ARE_PASSED }));

@@ -103,22 +103,24 @@ export const CalendarOnlyDate: React.FC<ICalendarOnlyDate> = ({ thisYearAndMonth
               let dateIncome = 0;
               if (accountBook !== undefined) {
                 Object.keys(accountBook).map((yearAndMonthKey) => {
-                  Object.keys(accountBook[yearAndMonthKey].expenditure).map((expenditureKey) => {
-                    if (
-                      (item.date === Number(expenditureKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                      (item.date === Number(expenditureKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
-                    ) {
-                      dateExpenditure = addDateAmount(accountBook[yearAndMonthKey].expenditure[expenditureKey]);
-                    }
-                  });
-                  Object.keys(accountBook[yearAndMonthKey].income).map((incomeKey) => {
-                    if (
-                      (item.date === Number(incomeKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
-                      (item.date === Number(incomeKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
-                    ) {
-                      dateIncome = addDateAmount(accountBook[yearAndMonthKey].income[incomeKey]);
-                    }
-                  });
+                  if (yearAndMonthKey) {
+                    Object.keys(accountBook[yearAndMonthKey].expenditure).map((expenditureKey) => {
+                      if (
+                        (item.date === Number(expenditureKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                        (item.date === Number(expenditureKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                      ) {
+                        dateExpenditure = addDateAmount(accountBook[yearAndMonthKey].expenditure[expenditureKey]);
+                      }
+                    });
+                    Object.keys(accountBook[yearAndMonthKey].income).map((incomeKey) => {
+                      if (
+                        (item.date === Number(incomeKey) && item.yearAndMonth === thisYearAndMonth && yearAndMonthKey === item.yearAndMonth) ||
+                        (item.date === Number(incomeKey) && item.yearAndMonth !== thisYearAndMonth && yearAndMonthKey === item.yearAndMonth)
+                      ) {
+                        dateIncome = addDateAmount(accountBook[yearAndMonthKey].income[incomeKey]);
+                      }
+                    });
+                  }
                 });
               }
               return (

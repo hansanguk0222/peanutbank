@@ -110,7 +110,7 @@ const Template: Story<ILedgerForm> = (args) => {
 
   return (
     <LedgerForm
-      userId="abc"
+      nickname="abc"
       calendarVisible={calnedarVisible}
       selectedDate={selectDateValue}
       changeCalendarVisible={changeCalendarVisible}

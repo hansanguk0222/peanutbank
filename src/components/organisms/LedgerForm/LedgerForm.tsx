@@ -65,7 +65,7 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
   calendarVisible,
   monthIncomeAndExpenditureVisible,
   dateSelectCalendar,
-  userId,
+  nickname,
   amountValue,
   category,
   selectDateValue,
@@ -77,7 +77,7 @@ export const LedgerForm: React.FC<ILedgerForm> = ({
     <Form
       type="ledger"
       amount={splitByCommaAndJoinAmount(amountValue)}
-      userId={userId}
+      nickname={nickname}
       category={category}
       description={descriptionValue}
       onSubmitLedger={onSubmitLedger}

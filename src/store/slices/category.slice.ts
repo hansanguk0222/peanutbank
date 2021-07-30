@@ -13,7 +13,8 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: categoryState,
   reducers: {
-    getCategoryRequest(state, { payload }: PayloadAction<{ userId: string }>) {
+    getCategoryRequest(state, { payload }: PayloadAction<{ nickname: string }>) {
+      console.log(payload);
       state.loading = true;
       state.status = null;
       state.errMessage = null;

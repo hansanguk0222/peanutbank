@@ -24,7 +24,7 @@ export interface IAccountBook {
   };
 }
 export interface IAccountBookState {
-  accountBook: IAccountBook | null;
+  accountBookInfo: IAccountBook | null;
   loading: boolean;
   errMessage: null | string;
   status: typeof Status | null;

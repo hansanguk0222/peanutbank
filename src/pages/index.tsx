@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { Router } from 'next/dist/client/router';
 import { CommonLayout } from '@/src/components/organisms/CommonLayout';
 import { getUserInfoRequest } from '../store/slices/user.slice';
-
+import axios from 'axios';
 const Home: React.FC = () => {
   return <></>;
 };

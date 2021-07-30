@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SagaStore, wrapper } from '@/src/store';
 import { getAccountBookRequest } from '@/src/store/slices/accountBook.slice';
 import CalendarBox from '@/src/components/container/CalendarBox';
 import { END } from '@redux-saga/core';
+import { getCategoryRequest } from '@/src/store/slices/category.slice';
 
 const Calendar: React.FC<{ nowYearAndMonth: { year: number; month: number } }> = ({ nowYearAndMonth }) => {
-  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: 0, month: 0 });
+  const [yearAndMonth, setYearAndMonth] = useState<{ year: number; month: number }>({ year: nowYearAndMonth.year, month: nowYearAndMonth.month });
   const [datesWithDays, setDatesWithDays] = useState<{ yearAndMonth: string; date: number; day: number; thisMonth: boolean }[][]>([]);
-  useEffect(() => {
-    setYearAndMonth(nowYearAndMonth);
-  }, [nowYearAndMonth]);
 
   const changeYearAndMonth: ({ upOrDown }: { upOrDown: 'up' | 'down' }) => void = ({ upOrDown }: { upOrDown: 'up' | 'down' }) => {
     const { year, month } = yearAndMonth;
@@ -30,11 +28,19 @@ const Calendar: React.FC<{ nowYearAndMonth: { year: number; month: number } }> =
   return <CalendarBox changeYearAndMonth={changeYearAndMonth} datesWithDays={datesWithDays} setDatesWithDays={setDatesWithDays} yearAndMonth={yearAndMonth} />;
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async ({ store, query }) => {
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store, req, query }) => {
   const thisYear = Number(query.id.slice(0, 4));
   const thisMonth = Number(query.id.slice(5));
-  //여기서는 유저 아이디 받아서 넣는 작업 필요
-  store.dispatch(getAccountBookRequest({ userId: 'peanut2016', year: 2021, month: 6 }));
+  const cookieStr = req.headers.cookie as string;
+  const cookies = cookieStr.split(' ');
+  let nickname;
+  cookies.map((cookie) => {
+    if (cookie.startsWith('nickname=')) {
+      nickname = cookie.slice(9).replace(/;$/, '');
+    }
+  });
+  store.dispatch(getCategoryRequest({ nickname }));
+  store.dispatch(getAccountBookRequest({ nickname, yyyy: thisYear, mm: thisMonth }));
   store.dispatch(END);
 
   await (store as SagaStore).sagaTask.toPromise();
